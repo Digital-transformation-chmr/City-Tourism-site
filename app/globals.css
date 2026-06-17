@@ -1,26 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@import "leaflet/dist/leaflet.css";
 @import "tailwindcss";
 
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --font-heading: "Poppins", sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-gradient: linear-gradient(
+    135deg,
+    #d8e1ff 0%,
+    #e5ddff 35%,
+    #ffdede 70%,
+    #d8e1ff 100%
+  );
+  --text: rgb(37, 34, 34);
+  --text-light: rgb(247, 240, 240);
+  --accent: rgb(148, 14, 14);
+  --gray-text: rgb(81, 78, 78);
+  
+}
+html.dark {
+  --bg-gradient: linear-gradient(
+    135deg,
+    #04164a 0%,
+    #3c1451 35%,
+    #0e0c37 70%,
+    #1c2541 100%
+  );
+  --text:rgb(247, 240, 240);
+  --accent: rgb(240, 29, 29);
+  --gray-text: rgba(194, 184, 184, 0.962);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*{
+  text-decoration: none;
+  font-family: "Playfair Display", serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+
+  background: var(--bg-gradient);
+  background-attachment: fixed;
+
+  background-size: 1000% 1000%;
+
+  animation: bgMove 90s ease infinite;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+html {
+  scrollbar-width: none; /* Для Firefox */
+  -ms-overflow-style: none; /* Для Internet Explorer та Edge */
+}
+
+/* Для Chrome, Safari, Edge */
+html::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+
+.custom-pin {
+  background: transparent;
+  border: none;
+}
+
+.pin {
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* внутрішня точка */
+.pin-dot {
+  width: 8px;
+  height: 8px;
+  background: #111;
+  border-radius: 50%;
+  position: absolute;
+  top: 7px;
+  left: 7px;
+}
+
+/* легка тінь під булавкою */
+.pin::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 50%;
+  bottom: -6px;
+  left: 2px;
+  filter: blur(2px);
 }
