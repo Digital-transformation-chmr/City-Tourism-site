@@ -24,7 +24,7 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [{ href: "/", label: "Домашня сторінка" }];
+  const navItems = [{ href: "/Attractions", label: "Пам'ятки" }];
 
   return (
     <header
@@ -45,7 +45,7 @@ const Header = () => {
             <Link
               key={item.href}
               href={item.href}
-              className="text-white/90 hover:underline"
+              className="text-white/90 hover:!underline"
             >
               {item.label}
             </Link>

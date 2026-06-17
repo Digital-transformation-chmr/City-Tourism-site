@@ -1,51 +1,25 @@
 import Image from "next/image";
 
-interface Place{
+export interface Place{
     name:string,
     description:string,
     photoURL:string,
     type:string
 }
-
+export interface PlaceGrid{
+    Places: Place[];
+}
 interface PlaceCardProps{
     item:Place
 }
 
-const Places:Place[] = [
-    {name:"Парк Сосновий Бір", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-]
+
 {/*Список популярних місць */}
 export function PlaceCard({item}:PlaceCardProps){
     return(
             <a
             href="/PlacePage"
-            className="flex flex-col 
-            backdrop-blur-md bg-black/50
-                border-white/10
-            rounded-2xl overflow-hidden shadow-lg"
+            className="flex flex-col backdrop-blur-md bg-black/50 border-white/10 rounded-2xl overflow-hidden shadow-lg"
             >
                 <p className="absolute top-2 left-2  backdrop-blur-md bg-black/30
                 border-white/10 rounded-2xl overflow-hidden shadow-lg text-white px-2 py-1 text-sm">{item.type}</p>
@@ -67,7 +41,7 @@ export function PlaceCard({item}:PlaceCardProps){
     )
 }
 
-export default function PopPlaceGrid(){
+export default function PopPlaceGrid({Places}:PlaceGrid){
     return(
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
             {Places.map((item, index) => (

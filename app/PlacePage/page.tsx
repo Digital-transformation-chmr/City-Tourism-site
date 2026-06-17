@@ -3,11 +3,37 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import Map from "../components/UI/map";
+import { strict } from "assert";
+
+interface monument{
+  title:string,
+  subtitle:string,
+  description:string,
+  images:string[],
+  mainInfo:{
+    yearBuilt: number,
+    status: string,
+    type: string,
+    visiting: string,
+  }
+   location: {
+    address: string,
+    lat: number,
+    lng: number,
+  },
+
+    openingHours: string;
+
+    contacts: {
+      phone: string|any,
+      website: string|any,
+    },
+
+    tags: string[],
+}
 
 
-
-export const monumentMock = {
-  id: "hill-of-glory-cherkasy",
+export const monument:monument = {
   title: "Пагорб Слави",
   subtitle: "Одна з найвідоміших історичних пам’яток Черкас",
   description:
@@ -28,24 +54,19 @@ export const monumentMock = {
 
   // 🗺️ координати (для карти)
   location: {
-    city: "Черкаси",
-    country: "Україна",
     address: "Пагорб Слави, Черкаси",
     lat: 49.4444,
     lng: 32.0598,
   },
 
-    openingHours: {
-      alwaysOpen: true,
-      note: "Відкрто 24/7",
-    },
+  openingHours: "Відкрто 24/7",
 
-    contacts: {
-      phone: null,
-      website: null,
-    },
+  contacts: {
+    phone: null,
+    website: null,
+  },
 
-    tags: ["історія", "меморіал", "панорама", "туризм"],
+  tags: ["історія", "меморіал", "панорама", "туризм"],
 };
 
 export default function Page() {
@@ -53,7 +74,7 @@ export default function Page() {
     useEffect(() => {
     const interval = setInterval(() => {
         setActiveImage((prev) =>
-        prev === monumentMock.images.length - 1 ? 0 : prev + 1
+        prev === monument.images.length - 1 ? 0 : prev + 1
         );
     }, 30000); // 5 хв
 
@@ -64,7 +85,7 @@ export default function Page() {
 
       {/* 🖼️ HERO SLIDER */}
         <div className="relative h-[85vh] w-full overflow-hidden">
-        {monumentMock.images.map((img, i) => (
+        {monument.images.map((img, i) => (
             <Image
             key={img}
             src={img}
@@ -82,7 +103,7 @@ export default function Page() {
 
         {/* thumbnails */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            {monumentMock.images.map((img, i) => (
+            {monument.images.map((img, i) => (
             <div
                 key={i}
                 onClick={() => setActiveImage(i)}
@@ -101,16 +122,16 @@ export default function Page() {
 
         {/* center */}
         <div className="lg:col-span-2 space-y-6 border border-white/30 p-5 rounded-2xl bg-black/40">
-          <h1 className="text-4xl font-bold text-[var(--text-light)]">{monumentMock.title}</h1>
+          <h1 className="text-4xl font-bold text-[var(--text-light)]">{monument.title}</h1>
 
           <p className="text-[var(--text-light)]">
-            {monumentMock.description}
+            {monument.description}
           </p>
 
           <div className="grid grid-cols-2 gap-4 text-sm text-[var(--text-light)]">
-            <div>📅 Рік: {monumentMock.mainInfo.yearBuilt}</div>
-            <div>📍 {monumentMock.location.address}</div>
-            <div>🏛 {monumentMock.mainInfo.status}</div>
+            <div>📅 Рік: {monument.mainInfo.yearBuilt}</div>
+            <div>📍 {monument.location.address}</div>
+            <div>🏛 {monument.mainInfo.status}</div>
           </div>
         </div>
 
@@ -122,10 +143,10 @@ export default function Page() {
             </h3>
 
             <p className="text-[var(--text-light)] text-sm">
-              {monumentMock.subtitle}
-              <br/>Години праці: {monumentMock.openingHours.note}
-              <br/>{monumentMock.contacts.phone ? `Телефон: ${monumentMock.contacts.phone}`: ""}
-              <br/>{monumentMock.contacts.website ? `Вебсайт : ${monumentMock.contacts.website}`: ""}
+              {monument.subtitle}
+              <br/>Години праці: {monument.openingHours}
+              <br/>{monument.contacts.phone ? `Телефон: ${monument.contacts.phone}`: ""}
+              <br/>{monument.contacts.website ? `Вебсайт : ${monument.contacts.website}`: ""}
             </p>
 
             </aside>
