@@ -7,7 +7,7 @@ import { X, MapPin, Clock, Phone, Globe } from 'lucide-react'
 const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false })
 const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false })
 const Marker = dynamic(() => import('react-leaflet').then(m => m.Marker), { ssr: false })
-const [pinIcon, setPinIcon] = useState<any>(null)
+
  
 
 interface Monument {
@@ -107,7 +107,7 @@ const MONUMENTS: Monument[] = [
 export default function MapPage() {
   const [activeType, setActiveType] = useState('Всі')
   const [selected, setSelected] = useState<Monument | null>(null)
-
+  const [pinIcon, setPinIcon] = useState<any>(null)
   // Унікальні типи з mainInfo.type
   const types = ['Всі', ...Array.from(new Set(MONUMENTS.map(m => m.mainInfo.type)))]
 
