@@ -56,7 +56,7 @@ export default function Home() {
 
       </div>
       {/* ////////////////////////////////////////////////////////////////// */}
-      <div className=" relative overflow-hidden bg-black/10">
+      <div className=" relative overflow-hidden bg-black/20">
         {/* Декоративна лінія зліва */}
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] opacity-80" />
 

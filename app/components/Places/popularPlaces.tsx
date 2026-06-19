@@ -89,9 +89,9 @@ export function PlaceCard({ item }: PlaceCardProps) {
                             gap-2
                             text-sm
                             font-medium
-                            text-blue-400
+                            text-[var(--accent)]
                             transition-colors
-                            group-hover:text-blue-300
+                            
                         "
                     >
                         Детальніше
