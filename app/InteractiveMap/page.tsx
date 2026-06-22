@@ -1,14 +1,12 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState, useEffect  } from 'react'
+import { useState, useEffect } from 'react'
 import { X, MapPin, Clock, Phone, Globe } from 'lucide-react'
 
 const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false })
 const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false })
 const Marker = dynamic(() => import('react-leaflet').then(m => m.Marker), { ssr: false })
-const [pinIcon, setPinIcon] = useState<any>(null)
- 
 
 interface Monument {
   title: string
@@ -34,7 +32,18 @@ interface Monument {
   tags: string[]
 }
 
-// --- Заглушки ---
+const TYPE_COLORS: Record<string, string> = {
+  'Музей':     '#a855f7',
+  'Парк':      '#22c55e',
+  'Церква':    '#eab308',
+  'Театр':     '#3b82f6',
+  'Галерея':   '#ec4899',
+  "Пам'ятник": '#f97316',
+}
+const DEFAULT_COLOR = '#94a3b8'
+
+const getColor = (type: string) => TYPE_COLORS[type] ?? DEFAULT_COLOR
+
 const MONUMENTS: Monument[] = [
   {
     title: 'Черкаський краєзнавчий музей',
@@ -107,48 +116,60 @@ const MONUMENTS: Monument[] = [
 export default function MapPage() {
   const [activeType, setActiveType] = useState('Всі')
   const [selected, setSelected] = useState<Monument | null>(null)
+  const [leaflet, setLeaflet] = useState<any>(null)
 
-  // Унікальні типи з mainInfo.type
+  useEffect(() => {
+    import('leaflet').then(L => setLeaflet(L))
+  }, [])
+
+  const createIcon = (type: string) => {
+    if (!leaflet) return undefined
+    const color = getColor(type)
+    return leaflet.divIcon({
+      className: 'custom-pin',
+      html: `<div class="pin" style="background:${color}"><div class="pin-dot"></div></div>`,
+      iconSize: [30, 42],
+      iconAnchor: [10, 30],
+    })
+  }
+
   const types = ['Всі', ...Array.from(new Set(MONUMENTS.map(m => m.mainInfo.type)))]
-
   const filtered = activeType === 'Всі'
     ? MONUMENTS
     : MONUMENTS.filter(m => m.mainInfo.type === activeType)
-
-    // Кастомна іконка — useMemo щоб не створювати на кожен рендер
-    useEffect(() => {
-    import('leaflet').then(L => {
-        setPinIcon(L.divIcon({
-        className: 'custom-pin',
-        html: `
-            <div class="pin">
-            <div class="pin-dot"></div>
-            </div>
-        `,
-        iconSize: [30, 42],
-        iconAnchor: [10, 30],
-        }))
-    })
-    }, [])
 
   return (
     <div className="relative w-full h-screen flex flex-col pt-12">
 
       {/* Фільтри */}
       <div className="relative z-10 flex gap-2 flex-wrap px-6 py-3 backdrop-blur-md bg-black/30 border-b border-white/10">
-        {types.map(type => (
-          <button
-            key={type}
-            onClick={() => setActiveType(type)}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200
-              ${activeType === type
-                ? 'bg-[var(--accent)] border-[var(--accent)] text-white'
-                : 'bg-black/30 border-white/20 text-white/70 hover:border-white/50 hover:text-white'
-              }`}
-          >
-            {type}
-          </button>
-        ))}
+        {types.map(type => {
+          const color = type === 'Всі' ? null : getColor(type)
+          const isActive = activeType === type
+          return (
+            <button
+              key={type}
+              onClick={() => setActiveType(type)}
+              style={isActive && color ? { backgroundColor: color, borderColor: color } : {}}
+              className={`px-4 py-1.5 rounded-full text-sm font-semibold border transition-all duration-200
+                ${isActive
+                  ? 'text-white'
+                  : 'bg-black/30 border-white/20 text-white/70 hover:border-white/50 hover:text-white'
+                }
+                ${isActive && !color ? 'bg-[var(--accent)] border-[var(--accent)]' : ''}
+              `}
+            >
+              {/* Кольорова крапка на неактивних кнопках */}
+              {!isActive && color && (
+                <span
+                  className="inline-block w-2 h-2 rounded-full mr-1.5 align-middle"
+                  style={{ backgroundColor: color }}
+                />
+              )}
+              {type}
+            </button>
+          )
+        })}
       </div>
 
       {/* Карта */}
@@ -163,10 +184,10 @@ export default function MapPage() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution="© OpenStreetMap"
           />
-          {filtered.map((monument, index) => (
+          {leaflet && filtered.map((monument, index) => (
             <Marker
               key={index}
-              icon={pinIcon}
+              icon={createIcon(monument.mainInfo.type)}
               position={[monument.location.lat, monument.location.lng]}
               eventHandlers={{ click: () => setSelected(monument) }}
             />
@@ -176,7 +197,6 @@ export default function MapPage() {
         {/* Бокова панель */}
         {selected && (
           <div className="absolute top-0 right-0 h-full w-80 z-10 backdrop-blur-md bg-black/60 border-l border-white/10 overflow-y-auto">
-
             <button
               onClick={() => setSelected(null)}
               className="absolute top-3 right-3 text-white/60 hover:text-white transition-colors"
@@ -184,28 +204,26 @@ export default function MapPage() {
               <X size={20} />
             </button>
 
-            {/* Фото-заглушка */}
             <div className="w-full h-44 bg-white/5 flex items-center justify-center">
               <MapPin size={40} className="text-white/20" />
             </div>
 
             <div className="p-5 flex flex-col gap-4">
-
-              {/* Тип + назва */}
               <div>
-                <span className="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded-full text-white bg-[var(--accent)]/70">
+                <span
+                  className="text-xs font-bold uppercase tracking-widest px-2 py-0.5 rounded-full text-white"
+                  style={{ backgroundColor: getColor(selected.mainInfo.type) }}
+                >
                   {selected.mainInfo.type}
                 </span>
                 <h2 className="mt-2 text-xl font-bold text-[var(--text-light)]">{selected.title}</h2>
-                <p className="text-sm text-[var(--accent)] italic">{selected.subtitle}</p>
+                <p className="text-sm italic text-[var(--text-light)]" style={{ color: getColor(selected.mainInfo.type) }}>
+                  {selected.subtitle}
+                </p>
               </div>
 
-              {/* Опис */}
-              <p className="text-sm text-[var(--gray-text)] leading-relaxed">
-                {selected.description}
-              </p>
+              <p className="text-sm text-[var(--text-light)] leading-relaxed">{selected.description}</p>
 
-              {/* Основна інфо */}
               <div className="grid grid-cols-2 gap-2">
                 {[
                   { label: 'Рік', value: selected.mainInfo.yearBuilt },
@@ -214,41 +232,38 @@ export default function MapPage() {
                   { label: 'Вхід', value: selected.mainInfo.visiting },
                 ].map(({ label, value }) => (
                   <div key={label} className="bg-white/5 rounded-xl p-3">
-                    <p className="text-xs text-[var(--gray-text)] uppercase tracking-wide">{label}</p>
+                    <p className="text-xs text-[var(--text-light)] uppercase tracking-wide">{label}</p>
                     <p className="text-sm font-semibold text-[var(--text-light)]">{value}</p>
                   </div>
                 ))}
               </div>
 
-              {/* Адреса */}
-              <div className="flex items-start gap-2 text-sm text-[var(--gray-text)]">
-                <MapPin size={16} className="text-[var(--accent)] mt-0.5 shrink-0" />
+              <div className="flex items-start gap-2 text-sm text-[var(--text-light)]">
+                <MapPin size={16} className="mt-0.5 shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                 {selected.location.address}
               </div>
 
-              {/* Години */}
-              <div className="flex items-start gap-2 text-sm text-[var(--gray-text)]">
-                <Clock size={16} className="text-[var(--accent)] mt-0.5 shrink-0" />
+              <div className="flex items-start gap-2 text-sm text-(--text-light)">
+                <Clock size={16} className="mt-0.5 shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                 {selected.openingHours}
               </div>
 
-              {/* Контакти */}
               {selected.contacts.phone && (
-                <div className="flex items-center gap-2 text-sm text-[var(--gray-text)]">
-                  <Phone size={16} className="text-[var(--accent)] shrink-0" />
+                <div className="flex items-center gap-2 text-sm text-[var(--text-light)]">
+                  <Phone size={16} className="shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                   {selected.contacts.phone}
                 </div>
               )}
+
               {selected.contacts.website && (
-                <div className="flex items-center gap-2 text-sm text-[var(--gray-text)]">
-                  <Globe size={16} className="text-[var(--accent)] shrink-0" />
+                <div className="flex items-center gap-2 text-sm text-[var(--text-light)]">
+                  <Globe size={16} className="shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                   <a href={`https://${selected.contacts.website}`} className="hover:text-white underline underline-offset-2">
                     {selected.contacts.website}
                   </a>
                 </div>
               )}
 
-              {/* Теги */}
               <div className="flex flex-wrap gap-2 pt-1">
                 {selected.tags.map(tag => (
                   <span key={tag} className="text-xs px-2 py-1 rounded-full bg-white/10 text-white/60 border border-white/10">
@@ -256,7 +271,6 @@ export default function MapPage() {
                   </span>
                 ))}
               </div>
-
             </div>
           </div>
         )}

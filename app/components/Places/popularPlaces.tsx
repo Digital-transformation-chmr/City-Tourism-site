@@ -19,7 +19,7 @@ export function PlaceCard({item}:PlaceCardProps){
     return(
             <a
             href="/PlacePage"
-            className="flex flex-col backdrop-blur-md bg-black/50 border-white/10 rounded-2xl overflow-hidden shadow-lg"
+            className="flex flex-col backdrop-blur-md bg-black/50 rounded-2xl overflow-hidden shadow-lg"
             >
                 <p className="absolute top-2 left-2  backdrop-blur-md bg-black/30
                 border-white/10 rounded-2xl overflow-hidden shadow-lg text-white px-2 py-1 text-sm">{item.type}</p>

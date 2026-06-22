@@ -10,26 +10,22 @@ interface monument{
   subtitle:string,
   description:string,
   images:string[],
-  mainInfo:{
-    yearBuilt: number,
-    status: string,
-    type: string,
-    visiting: string,
-  }
-   location: {
-    address: string,
-    lat: number,
-    lng: number,
-  },
 
-    openingHours: string;
+  yearBuilt: number,
+  status: string,
+  type: string,
+  visiting: string,
 
-    contacts: {
-      phone: string|any,
-      website: string|any,
-    },
+  address: string,
+  lat: number,
+  lng: number,
 
-    tags: string[],
+  openingHours: string;
+
+  phone: string|any,
+  website: string|any,
+
+  tags: string[],
 }
 
 
@@ -44,27 +40,20 @@ export const monument:monument = {
     "/PlacesPhoto/sosnovyj-bir.jpg",
     "/PlacesPhoto/sosnovyj-bir.jpg",
   ],
-  // 📍 основна інформація (центр сторінки)
-  mainInfo: {
-    yearBuilt: 1977,
-    status: "Історична пам’ятка",
-    type: "Меморіальний комплекс",
-    visiting: "Вільний доступ",
-  },
+  yearBuilt: 1977,
+  status: "Історична пам’ятка",
+  type: "Меморіальний комплекс",
+  visiting: "Вільний доступ",
 
   // 🗺️ координати (для карти)
-  location: {
     address: "Пагорб Слави, Черкаси",
     lat: 49.4444,
     lng: 32.0598,
-  },
 
   openingHours: "Відкрто 24/7",
 
-  contacts: {
     phone: null,
     website: null,
-  },
 
   tags: ["історія", "меморіал", "панорама", "туризм"],
 };
@@ -129,9 +118,9 @@ export default function Page() {
           </p>
 
           <div className="grid grid-cols-2 gap-4 text-sm text-[var(--text-light)]">
-            <div>📅 Рік: {monument.mainInfo.yearBuilt}</div>
-            <div>📍 {monument.location.address}</div>
-            <div>🏛 {monument.mainInfo.status}</div>
+            <div>📅 Рік: {monument.yearBuilt}</div>
+            <div>📍 {monument.address}</div>
+            <div>🏛 {monument.status}</div>
           </div>
         </div>
 
@@ -145,8 +134,8 @@ export default function Page() {
             <p className="text-[var(--text-light)] text-sm">
               {monument.subtitle}
               <br/>Години праці: {monument.openingHours}
-              <br/>{monument.contacts.phone ? `Телефон: ${monument.contacts.phone}`: ""}
-              <br/>{monument.contacts.website ? `Вебсайт : ${monument.contacts.website}`: ""}
+              <br/>{monument.phone ? `Телефон: ${monument.phone}`: ""}
+              <br/>{monument.website ? `Вебсайт : ${monument.website}`: ""}
             </p>
 
             </aside>

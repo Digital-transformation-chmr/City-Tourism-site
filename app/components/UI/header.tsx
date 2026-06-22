@@ -24,7 +24,10 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [{ href: "/Attractions", label: "Пам'ятки" }];
+  const navItems = [
+    { href: "/Attractions", label: "Пам'ятки" },
+    { href: "/InteractiveMap", label: "Карта" },
+  ];
 
   return (
     <header
@@ -40,7 +43,7 @@ const Header = () => {
           <Logo />
         </Link>
 
-        <nav className="flex gap-6 font-bold font-heading text-white items-center">
+        <nav className="flex gap-6 font-bold font-heading items-center">
           {navItems.map((item) => (
             <Link
               key={item.href}

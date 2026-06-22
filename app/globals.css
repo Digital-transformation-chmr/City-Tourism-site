@@ -20,8 +20,8 @@
   --text-light: rgb(247, 240, 240);
   --accent: rgb(148, 14, 14);
   --gray-text: rgb(81, 78, 78);
-  
 }
+
 html.dark {
   --bg-gradient: linear-gradient(
     135deg,
