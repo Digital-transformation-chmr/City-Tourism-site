@@ -132,7 +132,7 @@ export default function MapPage() {
       iconAnchor: [10, 30],
     })
   }
-
+  const [pinIcon, setPinIcon] = useState<any>(null)
   const types = ['Всі', ...Array.from(new Set(MONUMENTS.map(m => m.mainInfo.type)))]
   const filtered = activeType === 'Всі'
     ? MONUMENTS

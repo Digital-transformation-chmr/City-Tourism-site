@@ -24,9 +24,11 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { href: "/Attractions", label: "Пам'ятки" },
-    { href: "/InteractiveMap", label: "Карта" },
+  const navItems = [{ href: "/Attractions", label: "Пам'ятки" },
+    { href: "/WhereToEat", label: "Де поїсти?" },
+    { href: "/Hotels", label: "Готелі" },
+    { href: "/InteractiveMap", label: "Інтерактивна карта" },
+  
   ];
 
   return (

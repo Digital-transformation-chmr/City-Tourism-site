@@ -1,88 +1,59 @@
-import Image from "next/image";
-import PopPlaceGrid from "./components/Places/popularPlaces";
-import WeatherCity from "./components/UI/weather";
+'use client'
 
-import { Place } from "./components/Places/popularPlaces";
+import PopPlaceGrid  from "../components/Places/popularPlaces"
+import { Place } from "../components/Places/popularPlaces"
 
 
 const Places:Place[] = [
-    {name:"Парк Сосновий Бір", 
+    {name:"Ресторан", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
      photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     type:"Ресторан"},
+     {name:"Кафе", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
      photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     type:"Кафе"},
+     {name:"Ресторан", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
      photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     type:"Ресторан"},
+     {name:"Ресторан", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
      photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     type:"Ресторан"},
+     {name:"Кафе", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
      photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     type:"Кафе"},
+     {name:"Ресторан", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
      photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
+     type:"Ресторан"},
+     {name:"Кафе", 
+     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
+     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
+     type:"Кафе"},
 ]
-export default function Home() {
+
+export default function Attraction() {
   return (
-    <div>
-      {/*Перший банер на головній сторінці*/}
-      <div className="h-screen w-full flex items-center justify-center relative bg-black/50 text-white">
-        <Image alt="Hero"
-               src="/Banners/banner1.jpg"
-               fill
-               className="object-cover -z-10"
-               priority
-               />
-        <p className="text-6xl text-center">Відчуйте магію<br/><span className="bg-gradient-to-r from-blue-300 to-red-300 bg-clip-text text-transparent">живого міста</span></p>
+    <div className="min-h-screen">
 
-        <div className="absolute bottom-6 flex justify-center w-full">
-          <div className="animate-bounce text-white/30 text-sm">
-            ▼
-          </div>
-        </div>
-
-        <div className="absolute top-16 right-6 z-10">
-         <WeatherCity />
-        </div>
-
-      </div>
-      {/* ////////////////////////////////////////////////////////////////// */}
-      <div className=" relative overflow-hidden bg-black/20">
+      {/* Hero-банер */}
+      <div className=" relative overflow-hidden bg-black/10">
         {/* Декоративна лінія зліва */}
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] opacity-80" />
 
-        <div className="py-16 px-12 flex flex-col items-start">
+        <div className="py-20 px-12 flex flex-col items-start">
           {/* Eyebrow */}
-          <span className="
-            text-sm tracking-[0.25em] uppercase font-bold text-[var(--accent)]
-            flex items-center gap-3 mb-4
-          ">
-            <span className="inline-block w-8 h-px bg-[var(--accent)]" />
-            ТОП
-          </span>
 
           {/* Заголовок */}
           <h1 className="
             text-5xl sm:text-6xl font-bold text-[var(--text-light)]
             leading-tight max-w-xl
           ">
-            Пам'ятки 
-            <span className="italic text-[var(--accent)]"> міста</span>
+            <span className="italic text-[var(--accent)]">Де поїсти?</span>
           </h1>
-
-          {/* Підзаголовок */}
-          <p className="mt-4 text-[var(--gray-text)] text-base max-w-md leading-relaxed">
-            Відкрийте найкращі місця, що зберігають дух і душу міста
-          </p>
 
           {/* Декоративний розподільник */}
           <div className="mt-8 flex items-center gap-3">
@@ -92,20 +63,33 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="my-8 mx-2 px-10 py-4">
-        <PopPlaceGrid Places={Places}/>
-      </div>
-      {/*//////////////////////////////////////////  */}
 
-      <div className="h-screen w-full flex items-center relative justify-center bg-black/50 text-white">
-        <Image alt="Hero2"
-               src="/Banners/banner2.jpg"
-               fill
-               className="object-cover -z-10"
-               />
-        <p className="text-6xl text-center">Відчуйте магію<br/><span className="bg-gradient-to-r from-blue-300 to-red-300 bg-clip-text text-transparent">живого міста</span></p>
+      {/* Секція з гріді */}
+      <div className="mx-2 px-6 sm:px-10 py-8">
+
+        {/* Лічильник/фільтр рядок */}
+        <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
+          <p className="text-[var(--gray-text)] text-sm tracking-wide uppercase">
+            Ресторани
+          </p>
+          <div className="w-8 h-px bg-[var(--accent)] opacity-50" />
+        </div>
+
+        <PopPlaceGrid Places={Places.filter(place => place.type === "Ресторан")} />
       </div>
-      
+
+      <div className="mx-2 px-6 sm:px-10 py-8">
+
+        {/* Лічильник/фільтр рядок */}
+        <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
+          <p className="text-[var(--gray-text)] text-sm tracking-wide uppercase">
+            Кафе
+          </p>
+          <div className="w-8 h-px bg-[var(--accent)] opacity-50" />
+        </div>
+
+        <PopPlaceGrid Places={Places.filter(place => place.type === "Кафе")} />
+      </div>
     </div>
-  );
+  )
 }
