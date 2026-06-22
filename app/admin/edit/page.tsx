@@ -57,6 +57,8 @@ export default function AdminEditPage() {
       console.error("Помилка зв'язку з API роутом:", err);
     });
 }, []);
+
+
   const [place, setPlace] = useState<Place>(emptyPlace);
   const [activeImage, setActiveImage] = useState(0);
   
