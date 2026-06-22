@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Header from "./components/UI/header";
-import Footer from "./components/UI/footer";
+
 
 export const metadata: Metadata = {
   title: "Туристичний сайт",
@@ -28,13 +27,8 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
-      
       <body className=" flex flex-col">
-        <Header/>
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer/>
+        {children}
       </body>
 
     </html>

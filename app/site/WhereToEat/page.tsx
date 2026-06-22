@@ -1,38 +1,34 @@
 'use client'
 
-import PopPlaceGrid  from "../components/Places/popularPlaces"
-import { Place } from "../components/Places/popularPlaces"
+import PopPlaceGrid  from "../../components/Places/placeCard"
+import { Place } from "../../components/Places/placeCard"
 
 
 const Places:Place[] = [
-    {name:"Ресторан", 
+    {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Ресторан"},
-     {name:"Кафе", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Кафе"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Кафе"},
-     {name:"Ресторан", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Ресторан"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Ресторан"},
-     {name:"Ресторан", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Кафе"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Ресторан"},
-     {name:"Кафе", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Ресторан"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Кафе"},
-     {name:"Ресторан", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Кафе"]},
+     {title:"Парк Сосновий Бір123123", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Ресторан"},
-     {name:"Кафе", 
-     description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Кафе"},
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Кафе", "Ресторан"]},
 ]
 
 export default function Attraction() {
@@ -75,7 +71,7 @@ export default function Attraction() {
           <div className="w-8 h-px bg-[var(--accent)] opacity-50" />
         </div>
 
-        <PopPlaceGrid Places={Places.filter(place => place.type === "Ресторан")} />
+        <PopPlaceGrid Places={Places.filter(place => place.tags?.includes("Ресторан"))} />
       </div>
 
       <div className="mx-2 px-6 sm:px-10 py-8">
@@ -88,7 +84,7 @@ export default function Attraction() {
           <div className="w-8 h-px bg-[var(--accent)] opacity-50" />
         </div>
 
-        <PopPlaceGrid Places={Places.filter(place => place.type === "Кафе")} />
+        <PopPlaceGrid Places={Places.filter(place => place.tags?.includes("Кафе"))} />
       </div>
     </div>
   )

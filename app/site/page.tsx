@@ -1,35 +1,35 @@
 import Image from "next/image";
-import PopPlaceGrid from "./components/Places/popularPlaces";
-import WeatherCity from "./components/UI/weather";
+import PopPlaceGrid from "../components/Places/placeCard";
+import WeatherCity from "../components/UI/weather";
 
-import { Place } from "./components/Places/popularPlaces";
+import { Place } from "../components/Places/placeCard";
 
 
 const Places:Place[] = [
-    {name:"Парк Сосновий Бір", 
+    {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Парк"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Парк"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Парк"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Парк"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
-     {name:"Парк Сосновий Бір", 
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Парк"]},
+     {title:"Парк Сосновий Бір", 
      description:"Парк «Сосновий бір» є найбільшою рекреаційною зоною міста, що поєднує природні ландшафти соснового лісу із сучасною парковою інфраструктурою. Територія парку використовується для активного відпочинку, прогулянок, проведення культурно-масових та спортивних заходів.",
-     photoURL:"/PlacesPhoto/sosnovyj-bir.jpg",
-     type:"Парк"},
+     images:["/PlacesPhoto/sosnovyj-bir.jpg"],
+     tags:["Парк"]},
 ]
 export default function Home() {
   return (

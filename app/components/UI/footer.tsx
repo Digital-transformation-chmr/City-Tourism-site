@@ -6,16 +6,16 @@ export default function Footer() {
     <footer className="
       w-full
       backdrop-blur-md
-      border-t border-[var(--text)]
+      border-t border-(--text)
     ">
       <div className="  mx-2 px-10 py-4 flex items-center justify-between">
         
         <Link href="#" className="flex items-center gap-3">
             <Logo/>
-            <p className="text-[var(--text)]">CheTour</p>
+            <p className="text-(--text)">CheTour</p>
         </Link>
 
-        <div className="flex gap-6 text-base text-[var(--text)]">
+        <div className="flex gap-6 text-base text-(--text)">
           <a href="#">Privacy</a>
           <a href="#">Terms</a>
           <a href="#">Contact</a>

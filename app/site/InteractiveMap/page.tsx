@@ -156,7 +156,7 @@ export default function MapPage() {
                   ? 'text-white'
                   : 'bg-black/30 border-white/20 text-white/70 hover:border-white/50 hover:text-white'
                 }
-                ${isActive && !color ? 'bg-[var(--accent)] border-[var(--accent)]' : ''}
+                ${isActive && !color ? 'bg-(--accent) border-(--accent)' : ''}
               `}
             >
               {/* Кольорова крапка на неактивних кнопках */}
@@ -216,13 +216,13 @@ export default function MapPage() {
                 >
                   {selected.mainInfo.type}
                 </span>
-                <h2 className="mt-2 text-xl font-bold text-[var(--text-light)]">{selected.title}</h2>
-                <p className="text-sm italic text-[var(--text-light)]" style={{ color: getColor(selected.mainInfo.type) }}>
+                <h2 className="mt-2 text-xl font-bold text-(--text-light)">{selected.title}</h2>
+                <p className="text-sm italic text-(--text-light)" style={{ color: getColor(selected.mainInfo.type) }}>
                   {selected.subtitle}
                 </p>
               </div>
 
-              <p className="text-sm text-[var(--text-light)] leading-relaxed">{selected.description}</p>
+              <p className="text-sm text-(--text-light) leading-relaxed">{selected.description}</p>
 
               <div className="grid grid-cols-2 gap-2">
                 {[
@@ -232,13 +232,13 @@ export default function MapPage() {
                   { label: 'Вхід', value: selected.mainInfo.visiting },
                 ].map(({ label, value }) => (
                   <div key={label} className="bg-white/5 rounded-xl p-3">
-                    <p className="text-xs text-[var(--text-light)] uppercase tracking-wide">{label}</p>
-                    <p className="text-sm font-semibold text-[var(--text-light)]">{value}</p>
+                    <p className="text-xs text-(--text-light) uppercase tracking-wide">{label}</p>
+                    <p className="text-sm font-semibold text-(--text-light)">{value}</p>
                   </div>
                 ))}
               </div>
 
-              <div className="flex items-start gap-2 text-sm text-[var(--text-light)]">
+              <div className="flex items-start gap-2 text-sm text-(--text-light)">
                 <MapPin size={16} className="mt-0.5 shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                 {selected.location.address}
               </div>
@@ -249,14 +249,14 @@ export default function MapPage() {
               </div>
 
               {selected.contacts.phone && (
-                <div className="flex items-center gap-2 text-sm text-[var(--text-light)]">
+                <div className="flex items-center gap-2 text-sm text-(--text-light)">
                   <Phone size={16} className="shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                   {selected.contacts.phone}
                 </div>
               )}
 
               {selected.contacts.website && (
-                <div className="flex items-center gap-2 text-sm text-[var(--text-light)]">
+                <div className="flex items-center gap-2 text-sm text-(--text-light)">
                   <Globe size={16} className="shrink-0" style={{ color: getColor(selected.mainInfo.type) }} />
                   <a href={`https://${selected.contacts.website}`} className="hover:text-white underline underline-offset-2">
                     {selected.contacts.website}

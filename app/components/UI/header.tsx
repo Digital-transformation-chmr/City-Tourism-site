@@ -49,8 +49,8 @@ const Header = () => {
           {navItems.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
-              className="text-white/90 hover:!underline"
+              href={"/site/"+item.href}
+              className="text-white/90 hover:underline!"
             >
               {item.label}
             </Link>

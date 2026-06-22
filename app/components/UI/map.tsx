@@ -64,7 +64,7 @@ export default function Map({
   return (
     <div
       id="map"
-      className="w-full h-[300px] z-10 rounded-xl border border-white/10"
+      className="w-full h-75 z-10 rounded-xl border border-white/10"
     />
   );
 }

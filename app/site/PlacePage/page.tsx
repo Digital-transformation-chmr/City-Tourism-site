@@ -2,34 +2,13 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import Map from "../components/UI/map";
+import Map from "../../components/UI/map";
 import { strict } from "assert";
-
-interface monument{
-  title:string,
-  subtitle:string,
-  description:string,
-  images:string[],
-
-  yearBuilt: number,
-  status: string,
-  type: string,
-  visiting: string,
-
-  address: string,
-  lat: number,
-  lng: number,
-
-  openingHours: string;
-
-  phone: string|any,
-  website: string|any,
-
-  tags: string[],
-}
+import { Place } from "../../components/Places/placeCard";
 
 
-export const monument:monument = {
+
+export const monument:Place  = {
   title: "Пагорб Слави",
   subtitle: "Одна з найвідоміших історичних пам’яток Черкас",
   description:
@@ -88,7 +67,7 @@ export default function Page() {
         ))}
 
         {/* fade overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/10 to-transparent" />
 
         {/* thumbnails */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
@@ -111,13 +90,13 @@ export default function Page() {
 
         {/* center */}
         <div className="lg:col-span-2 space-y-6 border border-white/30 p-5 rounded-2xl bg-black/40">
-          <h1 className="text-4xl font-bold text-[var(--text-light)]">{monument.title}</h1>
+          <h1 className="text-4xl font-bold text-(--text-light)">{monument.title}</h1>
 
-          <p className="text-[var(--text-light)]">
+          <p className="text-(--text-light)">
             {monument.description}
           </p>
 
-          <div className="grid grid-cols-2 gap-4 text-sm text-[var(--text-light)]">
+          <div className="grid grid-cols-2 gap-4 text-sm text-(--text-light)">
             <div>📅 Рік: {monument.yearBuilt}</div>
             <div>📍 {monument.address}</div>
             <div>🏛 {monument.status}</div>
@@ -131,7 +110,7 @@ export default function Page() {
                 Додаткова інформація
             </h3>
 
-            <p className="text-[var(--text-light)] text-sm">
+            <p className="text-(--text-light) text-sm">
               {monument.subtitle}
               <br/>Години праці: {monument.openingHours}
               <br/>{monument.phone ? `Телефон: ${monument.phone}`: ""}
@@ -144,7 +123,7 @@ export default function Page() {
       {/* 🗺️ MAP PLACEHOLDER */}
       <div className="px-12 pb-10 z-5">
         <div className="mx-auto">
-          <div className="h-[300px] rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40">
+          <div className="h-75 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white/40">
                    <Map 
                     lat={49.4444}
                     lng={32.0598}

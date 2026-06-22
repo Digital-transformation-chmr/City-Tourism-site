@@ -1,11 +1,28 @@
 import Image from "next/image";
 
 export interface Place{
-    name:string,
-    description:string,
-    photoURL:string,
-    type:string
+  title:string,
+  subtitle?:string,
+  description?:string,
+  images:string[],
+
+  yearBuilt?: number,
+  status?: string,
+  type?: string,
+  visiting?: string,
+
+  address?: string,
+  lat?: number,
+  lng?: number,
+
+  openingHours?: string;
+
+  phone?: string|any,
+  website?: string|any,
+
+  tags?: string[],
 }
+
 export interface PlaceGrid{
     Places: Place[];
 }
@@ -38,8 +55,8 @@ export function PlaceCard({ item }: PlaceCardProps) {
         >
             <div className="relative">
                 <Image
-                    alt={item.name}
-                    src={item.photoURL}
+                    alt={item.title}
+                    src={item.images[0]}
                     width={400}
                     height={300}
                     className="
@@ -64,7 +81,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
                         px-3
                         py-1
                         text-sm
-                        text-[var(--text-light)]
+                        text-(--text-light)
                         backdrop-blur-md
                     "
                 >
@@ -73,11 +90,11 @@ export function PlaceCard({ item }: PlaceCardProps) {
             </div>
 
             <div className="flex flex-1 flex-col p-4">
-                <h3 className="mb-2 text-lg font-semibold text-[var(--text-light)]">
-                    {item.name}
+                <h3 className="mb-2 text-lg font-semibold text-(--text-light)">
+                    {item.title}
                 </h3>
 
-                <p className="line-clamp-3 text-sm text-[var(--text-light)]">
+                <p className="line-clamp-3 text-sm text-(--text-light)">
                     {item.description}
                 </p>
 
@@ -89,7 +106,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
                             gap-2
                             text-sm
                             font-medium
-                            text-[var(--accent)]
+                            text-(--accent)
                             transition-colors
                             
                         "
