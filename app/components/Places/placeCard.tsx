@@ -20,7 +20,7 @@ export interface Place{
   phone?: string|any,
   website?: string|any,
 
-  tags?: string[],
+  tags: string[],
 }
 
 export interface PlaceGrid{
