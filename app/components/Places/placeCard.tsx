@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export interface Place{
+  id: string,  
   title:string,
   subtitle?:string,
   description?:string,
@@ -35,7 +36,7 @@ interface PlaceCardProps{
 export function PlaceCard({ item }: PlaceCardProps) {
     return (
         <a
-            href="/PlacePage"
+            href={"/site/PlacePage/"+item.id}
             className="
                 group
                 relative

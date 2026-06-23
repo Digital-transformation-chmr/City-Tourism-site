@@ -81,27 +81,30 @@ export default function AdminEditPage({
   }, [place.images]);
 
   // 📤 upload image
-  const uploadImage = async (file: File) => {
-    const form = new FormData();
-    form.append("file", file);
+const uploadImages = async (files: File[]) => {
+  const form = new FormData();
 
-    const res = await fetch("/api/upload", {
-      method: "POST",
-      body: form,
-    });
+  files.forEach((file) => {
+    form.append("files", file);
+  });
 
-    if (!res.ok) {
-      console.error(await res.text());
-      return;
-    }
+  const res = await fetch("/api/upload", {
+    method: "POST",
+    body: form,
+  });
 
-    const data = await res.json();
+  if (!res.ok) {
+    console.error(await res.text());
+    return;
+  }
 
-    setPlace((prev) => ({
-      ...prev,
-      images: [...prev.images, data.url],
-    }));
-  };
+  const data = await res.json();
+
+  setPlace((prev) => ({
+    ...prev,
+    images: [...prev.images, ...data.urls],
+  }));
+};
 
   // 💾 save place
   const handleSave = async () => {
@@ -192,7 +195,7 @@ export default function AdminEditPage({
             className="text-sm"
             onChange={(e) => {
               if (!e.target.files) return;
-              Array.from(e.target.files).forEach(uploadImage);
+              uploadImages(Array.from(e.target.files));
             }}
           />
         </div>
