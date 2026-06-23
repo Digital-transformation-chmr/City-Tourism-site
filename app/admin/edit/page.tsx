@@ -49,7 +49,7 @@ export default function AdminEditPage() {
   console.log("📡 Спроба «прокинути» сервер для перевірки бази даних...");
   
   // Робимо запит до API, щоб змусити Next.js завантажити файл з Prisma Client
-  fetch("/api/places?limit=1")
+  fetch("/api/places")
     .then(() => {
       console.log("🛰 Сервер відповів. Перевірте чорний терминал VS Code (npm run dev)!");
     })

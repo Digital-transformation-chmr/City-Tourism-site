@@ -12,6 +12,7 @@ export function middleware(req: NextRequest) {
   if (path === "/") {
     return NextResponse.redirect(new URL("/site", req.url));
   }
+  
 
   // protect admin
 //   if (isAdmin && !token) {
