@@ -44,7 +44,11 @@ const emptyPlace: Place = {
   tags: [],
 };
 
-export default function AdminEditPage() {
+export default function AdminEditPage({
+  initialData,
+}: {
+  initialData?: Place;
+}) {
   useEffect(() => {
   console.log("📡 Спроба «прокинути» сервер для перевірки бази даних...");
   
@@ -59,7 +63,9 @@ export default function AdminEditPage() {
 }, []);
 
 
-  const [place, setPlace] = useState<Place>(emptyPlace);
+ const [place, setPlace] = useState<Place>(
+  initialData ?? emptyPlace
+);
   const [activeImage, setActiveImage] = useState(0);
   
   // Тимчасовий стейт для тегів, щоб уникнути стрибків курсору при введенні кожної літери
