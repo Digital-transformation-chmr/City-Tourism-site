@@ -16,7 +16,7 @@ export default function Attraction() {
 
       // 🏨 тільки готелі
       const hotels = data.filter((p: Place) =>
-        p.tags?.includes("Готель")
+        p.type.includes("Готель")
       );
 
       setPlaces(hotels);

@@ -22,6 +22,8 @@
   --gray-text: rgb(81, 78, 78);
 }
 
+
+
 html.dark {
   --bg-gradient: linear-gradient(
     135deg,
@@ -116,4 +118,30 @@ html::-webkit-scrollbar {
   bottom: -6px;
   left: 2px;
   filter: blur(2px);
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE та Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

@@ -95,19 +95,14 @@ export default function Page() {
       </div>
 
       {/* MAP (з перевіркою) */}
-      <div className="px-12 pb-10">
-        {place.lat && place.lng ? (
-          <Map
-            lat={place.lat}
-            lng={place.lng}
-            title={place.title}
-          />
-        ) : (
-          <div className="h-75 flex items-center justify-center text-white/40 border border-white/10 rounded-xl">
-            Карта недоступна
-          </div>
-        )}
-      </div>
+      <div className="h-75 rounded-xl bg-white/5 border border-white/10 overflow-hidden">
+        <Map
+          id={`map-page-${place.id}`} // 🔥 Ось він, рятівний унікальний ID!
+          lat={place.lat!}
+          lng={place.lng!}
+          title={place.title || "Cherkasy"}
+        />
+    </div>
     </div>
   );
 }

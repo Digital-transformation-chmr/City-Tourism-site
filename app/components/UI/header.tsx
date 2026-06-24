@@ -3,10 +3,12 @@
 import Link from "next/link";
 import { Logo } from "./logo";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
@@ -24,19 +26,19 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [{ href: "/Attractions", label: "Пам'ятки" },
+  const navItems = [
+    { href: "/Attractions", label: "Пам'ятки" },
     { href: "/WhereToEat", label: "Де поїсти?" },
     { href: "/Hotels", label: "Готелі" },
     { href: "/InteractiveMap", label: "Інтерактивна карта" },
-  
   ];
 
   return (
     <header
       className={`fixed z-50 backdrop-blur-md bg-black/40 border border-white/20 shadow-lg transition-all duration-300 ease-in-out
         ${scrolled
-          ? "top-4 left-4 right-4 rounded-2xl"        // острівець
-          : "top-0 left-0 right-0 rounded-none"        // на весь екран
+          ? "top-4 left-4 right-4 rounded-2xl"
+          : "top-0 left-0 right-0 rounded-none"
         }
       `}
     >
@@ -46,15 +48,23 @@ const Header = () => {
         </Link>
 
         <nav className="flex gap-6 font-bold font-heading items-center">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={"/site/"+item.href}
-              className="text-white/90 hover:underline!"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const isActive = pathname === "/site" + item.href;
+            return (
+              <Link
+                key={item.href}
+                href={"/site" + item.href}
+                className={`relative text-white/90 transition 
+                  ${isActive ? "text-red-400" : "hover:text-red-200"}
+                `}
+              >
+                {item.label}
+                {isActive && (
+                  <span className="absolute -bottom-2 left-0 w-full h-[3px] bg-[var(--accent)] rounded-full animate-pulse"></span>
+                )}
+              </Link>
+            );
+          })}
         </nav>
       </div>
     </header>

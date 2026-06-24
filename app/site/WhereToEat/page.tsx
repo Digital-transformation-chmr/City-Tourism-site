@@ -31,14 +31,14 @@ export default function Attraction() {
   // 🍽 ресторани (6 шт)
   const restaurants = useMemo(() => {
     return filtered
-      .filter((p) => p.tags?.includes("Ресторан"))
+      .filter((p) => p.type.includes("Ресторан"))
       .slice(0, 6);
   }, [filtered]);
 
   // ☕ кафе (6 шт)
   const cafes = useMemo(() => {
     return filtered
-      .filter((p) => p.tags?.includes("Кафе"))
+      .filter((p) => p.type.includes("Кафе"))
       .slice(0, 6);
   }, [filtered]);
 

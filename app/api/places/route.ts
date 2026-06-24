@@ -1,43 +1,48 @@
 import  prisma  from "@/app/lib/prisma";
-
-export async function GET(req: Request) {
-  try {
+//GET
+  export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
 
-    const tagsParam = searchParams.get("tags");
+    const search = searchParams.get("search") ?? "";
+    const exclude = searchParams.get("exclude")?.split(",") ?? [];
 
-    // /api/places?tags=парк,музей
-    if (tagsParam) {
-      const tags = tagsParam
-        .split(",")
-        .map((t) => t.trim())
-        .filter(Boolean);
-
-      const places = await prisma.place.findMany({
-        where: {
-          tags: {
-            hasSome: tags, // 👈 ключовий момент Prisma (PostgreSQL array)
-          },
-        },
-      });
-
-      return Response.json(places);
-    }
-
-    // якщо нічого не передали — повертаємо все
-    const places = await prisma.place.findMany();
+    const places = await prisma.place.findMany({
+      where: {
+        AND: [
+          exclude.length
+            ? {
+                NOT: {
+                  type: {
+                    in: exclude,
+                  },
+                },
+              }
+            : {},
+          search
+            ? {
+                OR: [
+                  {
+                    title: {
+                      contains: search,
+                      mode: "insensitive",
+                    },
+                  },
+                  {
+                    tags: {
+                      has: search,
+                    },
+                  },
+                ],
+              }
+            : {},
+        ],
+      },
+    });
 
     return Response.json(places);
-  } catch (error) {
-    console.error(error);
-
-    return Response.json(
-      { error: "Failed to fetch places" },
-      { status: 500 }
-    );
   }
-}
 
+//////////////////////////////////////////////////////////////
 
 export async function POST(req: Request) {
   const body = await req.json();

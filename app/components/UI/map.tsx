@@ -1,41 +1,49 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 type MapProps = {
   lat: number;
   lng: number;
   title?: string;
   zoom?: number;
+  id?: string; // Використовуємо цей ID
+  onLocationSelect?: (lat: number, lng: number) => void;
 };
 
 export default function Map({
   lat,
   lng,
   title = "Місце",
+  id = "map", // Значення за замовчуванням, якщо id не передано
   zoom = 15,
+  onLocationSelect,
 }: MapProps) {
+  const mapRef = useRef<any>(null);
+  const markerRef = useRef<any>(null);
+
+  // ✅ Ініціалізація карти та правильне очищення
   useEffect(() => {
-    let map: any;
+    let mapInstance: any = null;
 
     const initMap = async () => {
       const L = await import("leaflet");
 
-      const container = L.DomUtil.get("map");
-
-      if (container && (container as any)._leaflet_id) {
-        (container as any)._leaflet_id = null;
-      }
-
-      map = L.map("map", {
-        zoomControl: false,
+      // Ініціалізуємо карту саме на динамічному ID
+      mapInstance = L.map(id, {
+        zoomControl: true, // Можна увімкнути для зручності, як у Google Maps
         attributionControl: false,
+        dragging: true,
+        touchZoom: true,
+        doubleClickZoom: true,
+        scrollWheelZoom: true,
       }).setView([lat, lng], zoom);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap",
-      }).addTo(map);
+      }).addTo(mapInstance);
 
+      // Створюємо маркер
       const pinIcon = L.divIcon({
         className: "custom-pin",
         html: `
@@ -44,27 +52,53 @@ export default function Map({
           </div>
         `,
         iconSize: [30, 42],
-        iconAnchor: [10, 30],
+        iconAnchor: [15, 42], // Центруємо низ маркера по точці
       });
 
-      L.marker([lat, lng], { icon: pinIcon })
-        .addTo(map)
+      const marker = L.marker([lat, lng], { icon: pinIcon })
+        .addTo(mapInstance)
         .bindPopup(title);
+
+      markerRef.current = marker;
+      mapRef.current = mapInstance;
+
+      // Обробляємо клік
+      mapInstance.on("click", (e: any) => {
+        onLocationSelect?.(e.latlng.lat, e.latlng.lng);
+      });
     };
 
     initMap();
 
+    // ✅ Очищення: коли компонент видаляється (або змінюється id), повністю видаляємо карту
     return () => {
-      if (map) {
-        map.remove();
+      if (mapInstance) {
+        mapInstance.remove();
       }
     };
-  }, [lat, lng, title, zoom]);
+  }, [id]); // Перестворюємо карту ТІЛЬКИ якщо змінився ID контейнера
+
+  // ✅ Оновлюємо маркер та позицію при змінах lat/lng без перестворення всієї карти
+  useEffect(() => {
+    if (!mapRef.current || !markerRef.current) return;
+
+    markerRef.current.setLatLng([lat, lng]);
+    mapRef.current.panTo([lat, lng]); // Плавно рухає карту до нової точки
+  }, [lat, lng]);
+
+  // ✅ Оновлюємо текст попапу
+  useEffect(() => {
+    if (!markerRef.current) return;
+    markerRef.current.setPopupContent(title || "Місце");
+  }, [title]);
 
   return (
     <div
-      id="map"
-      className="w-full h-75 z-10 rounded-xl border border-white/10"
+      id={id} // 🔥 Передаємо динамічний ID в HTML!
+      className="w-full h-full"
+      style={{
+        pointerEvents: "auto",
+      }}
     />
   );
 }

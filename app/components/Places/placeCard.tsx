@@ -9,7 +9,7 @@ export interface Place{
 
   yearBuilt?: number,
   status?: string,
-  type?: string,
+  type: string,
   visiting?: string,
 
   address?: string,

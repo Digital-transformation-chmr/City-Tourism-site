@@ -16,6 +16,11 @@ export default function Attraction() {
     const load = async () => {
       const params = new URLSearchParams();
 
+    params.append(
+      "exclude",
+      "Готель,Кафе,Ресторан"
+    );
+
       if (search.trim()) {
         params.append("search", search);
       }
