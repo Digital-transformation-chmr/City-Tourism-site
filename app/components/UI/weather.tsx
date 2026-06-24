@@ -1,23 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { SunMedium, CloudSun, Cloud, CloudFog, CloudRain, Snowflake, CloudDrizzle, CloudLightning } from "lucide-react";
 
 type Weather = {
   temperature: number;
   weathercode: number;
 };
 
-function getWeatherText(code: number) {
-  if (code === 0) return "☀️";
-  if (code === 1 || code === 2) return "🌤";
-  if (code === 3) return "☁️";
-  if (code >= 45 && code <= 48) return "🌫";
-  if (code >= 51 && code <= 67) return "🌧";
-  if (code >= 71 && code <= 77) return "❄️";
-  if (code >= 80 && code <= 82) return "🌦";
-  if (code >= 95) return "⛈";
+function getWeatherIcon(code: number) {
+  if (code === 0) return <SunMedium className="w-8 h-8 text-yellow-300" />;
+  if (code === 1 || code === 2) return <CloudSun className="w-8 h-8 text-yellow-200" />;
+  if (code === 3) return <Cloud className="w-8 h-8 text-gray-300" />;
+  if (code >= 45 && code <= 48) return <CloudFog className="w-8 h-8 text-gray-400" />;
+  if (code >= 51 && code <= 67) return <CloudRain className="w-8 h-8 text-blue-400" />;
+  if (code >= 71 && code <= 77) return <Snowflake className="w-8 h-8 text-cyan-300" />;
+  if (code >= 80 && code <= 82) return <CloudDrizzle className="w-8 h-8 text-blue-300" />;
+  if (code >= 95) return <CloudLightning className="w-8 h-8 text-purple-400" />;
 
-  return "❓ Невідомо";
+  return <Cloud className="w-8 h-8 text-white/60" />;
 }
 
 export default function WeatherCherkasy() {
@@ -58,10 +59,9 @@ export default function WeatherCherkasy() {
             {weather.temperature}°C
         </div>    
         
-        <div className="text-3xl">
-        {getWeatherText(weather.weathercode)}
+        <div className="text-3xl flex items-center justify-center">
+          {getWeatherIcon(weather.weathercode)}
         </div>
-
     </div>
   );
 }

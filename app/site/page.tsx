@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import PopPlaceGrid from "../components/Places/placeCard";
 import WeatherCity from "../components/UI/weather";
+import { Utensils, Drama,TreePine } from "lucide-react";
 
 import { Place } from "../components/Places/placeCard";
 
@@ -99,23 +100,84 @@ export default function Home() {
         <PopPlaceGrid Places={places} />
       </div>
 
-      {/* Другий банер */}
-      <div className="h-screen w-full flex items-center relative justify-center bg-black/50 text-white">
-        <Image
-          alt="Hero2"
-          src="/Banners/banner2.jpg"
-          fill
-          className="object-cover -z-10"
-        />
+     {/* Другий hero — інший стиль */}
+    <div className="h-screen w-full flex flex-col items-center justify-center relative bg-black/60 text-white px-8">
+      <Image
+        alt="Hero2"
+        src="/Banners/banner2.jpg"
+        fill
+        className="object-cover -z-10"
+      />
 
-        <p className="text-6xl text-center">
-          Відчуйте магію
-          <br />
-          <span className="bg-gradient-to-r from-blue-300 to-red-300 bg-clip-text text-transparent">
-            живого міста
-          </span>
-        </p>
+      <h2 className="text-5xl font-bold mb-6 text-center">
+        Відкрийте <span className="text-[var(--accent)]">атмосферу</span> міста
+      </h2>
+      <p className="text-lg max-w-2xl text-center text-white/80 leading-relaxed">
+        Тут кожна вулиця має свою історію, кожна пам’ятка — свою легенду.
+        Досліджуйте, відкривайте і закохуйтесь у місто знову і знову.
+      </p>
+    </div>
+
+    {/* Нова секція після другого hero */}
+<div className="bg-white/10 py-20 px-12 text-center">
+  <h2 className="text-4xl font-bold text-[var(--accent)] mb-12">
+    Що вас чекає?
+  </h2>
+  <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-6xl mx-auto">
+    {/* Гастрономія */}
+    <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 transform hover:-translate-y-2 transition duration-300">
+      <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-red-400 shadow-lg">
+        <Utensils color="#fff"/>
       </div>
+      <h3 className="text-2xl font-semibold mb-4 text-[var(--accent)]">Гастрономія</h3>
+      <p className="text-white/80 leading-relaxed">
+        Скуштуйте найкращі страви місцевої кухні.
+      </p>
+    </div>
+
+    {/* Культура */}
+    <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 transform hover:-translate-y-2 transition duration-300">
+      <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-indigo-400 shadow-lg">
+        <Drama color="#fff"/>
+      </div>
+      <h3 className="text-2xl font-semibold mb-4 text-[var(--accent)]">Культура</h3>
+      <p className="text-white/80 leading-relaxed">
+        Виставки, театри та фестивалі для кожного.
+      </p>
+    </div>
+
+    {/* Природа */}
+    <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 transform hover:-translate-y-2 transition duration-300">
+      <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-teal-400 shadow-lg">
+        <TreePine color="#fff"/>
+      </div>
+      <h3 className="text-2xl font-semibold mb-4 text-[var(--accent)]">Природа</h3>
+      <p className="text-white/80 leading-relaxed">
+        Прогулянки вздовж Дніпра та зелені парки.
+      </p>
+    </div>
+  </div>
+</div>
+
+
+    {/* Третій hero */}
+    <div className="h-screen w-full flex items-center relative justify-center bg-black/50 text-white">
+      <Image
+        alt="Hero3"
+        src="/Banners/banner3.png"
+        fill
+        className="object-cover -z-10"
+      />
+
+      <p className="text-6xl text-center">
+        Сплануйте свою подорож
+        <br />
+        <span className="bg-gradient-to-r from-blue-300 to-red-300 bg-clip-text text-transparent">
+          прямо зараз
+        </span>
+      </p>
+    </div>
+
     </div>
   );
 }
