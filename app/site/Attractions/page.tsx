@@ -103,7 +103,7 @@ export default function Attraction() {
               onClick={() => setPage(i + 1)}
               className={`px-3 py-1 border rounded ${
                 page === i + 1
-                  ? "bg-[var(--accent)] text-black"
+                  ? "bg-[var(--accentLO)] text-black"
                   : "border-white/20"
               }`}
             >
