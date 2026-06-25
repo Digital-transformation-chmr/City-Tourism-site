@@ -12,7 +12,7 @@ type Place = {
   description: string;
   images: string[];
   yearBuilt: number;
-  type:string,
+  type: string;
   status: string;
   visiting: string;
   address: string;
@@ -35,7 +35,7 @@ const emptyPlace: Place = {
   yearBuilt: 0,
   status: "",
   visiting: "",
-  type:"",
+  type: "",
   address: "",
   lat: DEFAULT_LAT,
   lng: DEFAULT_LNG,
@@ -62,45 +62,56 @@ function MapClickHandler({
 }
 
 export default function AdminEditPage({
-    initialData,
-  }: {
-    initialData?: Place;
-  }) {
-
-  const [place, setPlace] = useState<Place>(
-    initialData ?? emptyPlace
-  );
+  initialData,
+}: {
+  initialData?: Place;
+}) {
+  const [place, setPlace] = useState<Place>(initialData ?? emptyPlace);
   const [activeImage, setActiveImage] = useState(0);
   const [tagsInput, setTagsInput] = useState("");
   const [isClient, setIsClient] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ✅ Завантажуємо дані з localStorage при завантаженні сторінки
+  // 🔑 Генеруємо унікальний ключ для чернетки залежно від режиму (створення чи редагування)
+  const draftKey = initialData?.id
+    ? `${STORAGE_KEY}_edit_${initialData.id}`
+    : `${STORAGE_KEY}_new`;
+
+  // ✅ Завантажуємо дані з localStorage при першому рендері
   useEffect(() => {
     setIsClient(true);
-    if (!initialData) {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved) {
-        try {
-          const parsedPlace = JSON.parse(saved);
-          setPlace(parsedPlace);
-          setTagsInput(parsedPlace.tags?.join(", ") || "");
-        } catch (error) {
-          console.error("Помилка завантаження з localStorage:", error);
+
+    const saved = localStorage.getItem(draftKey);
+    if (saved) {
+      try {
+        const parsedPlace = JSON.parse(saved);
+        
+        // Запобіжник: якщо це створення нового, видаляємо ID, який міг затесатися
+        if (!initialData?.id) {
+          delete parsedPlace.id;
         }
+        
+        setPlace(parsedPlace);
+        setTagsInput(parsedPlace.tags?.join(", ") || "");
+      } catch (error) {
+        console.error("Помилка завантаження з localStorage:", error);
       }
+    } else if (initialData) {
+      // Якщо чернетки в localStorage немає, але є початкові дані (редагування)
+      setPlace(initialData);
+      setTagsInput(initialData.tags?.join(", ") || "");
     }
-  }, []);
+  }, [draftKey, initialData]);
 
-  // ✅ Зберігаємо place в localStorage при змінах
+  // ✅ Автоматично зберігаємо стан форми в localStorage при будь-яких змінах
   useEffect(() => {
-    if (isClient && !initialData) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(place));
+    if (isClient) {
+      localStorage.setItem(draftKey, JSON.stringify(place));
     }
-  }, [place, isClient, initialData]);
+  }, [place, isClient, draftKey]);
 
-  // ✅ Синхронізуємо текст в інпуті тегів, коли завантажуються дані місця
+  // ✅ Синхронізуємо текст в інпуті тегів, коли завантажуються дані існуючого місця
   useEffect(() => {
     if (place.id || place.tags.length > 0) {
       setTagsInput(place.tags.join(", "));
@@ -147,7 +158,7 @@ export default function AdminEditPage({
       .map((t) => t.trim())
       .filter(Boolean);
 
-    // 🧼 чистимо дані перед відправкою (ВАЖЛИВО)
+    // 🧼 чистимо дані перед відправкою (вирізаємо зайві пробіли)
     const placeToSend = {
       ...place,
       title: place.title?.trim() || "",
@@ -188,7 +199,7 @@ export default function AdminEditPage({
 
       const data = await res.json();
 
-      // 🔥 ВАЖЛИВО: не затираємо state повністю
+      // Оновлюємо стан актуальними даними з сервера
       setPlace((prev) => ({
         ...prev,
         ...data,
@@ -196,8 +207,8 @@ export default function AdminEditPage({
 
       setTagsInput((data.tags || []).join(", "));
 
-      // ✅ Очищуємо localStorage після успішного збереження на сервер
-      localStorage.removeItem(STORAGE_KEY);
+      // ✅ Очищуємо саме ту чернетку, яку щойно успішно зберегли
+      localStorage.removeItem(draftKey);
 
       alert(isEdit ? "Updated" : "Created");
     } catch (error) {
@@ -206,10 +217,10 @@ export default function AdminEditPage({
     }
   };
 
-  // ✅ Функція для очистки localStorage
+  // ✅ Функція для ручної очистки поточної чернетки
   const handleClearDraft = () => {
     if (confirm("Ви впевнені? Всі незбережені дані буде видалено.")) {
-      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem(draftKey);
       setPlace(emptyPlace);
       setTagsInput("");
       alert("Чорновик видалено");
@@ -380,13 +391,13 @@ export default function AdminEditPage({
             onChange={(e) => setPlace({ ...place, subtitle: e.target.value })}
           />
           <input
-              className="w-full p-2 bg-black/30 border border-white/20 rounded"
-              placeholder="Type"
-              value={place.type}
-              onChange={(e) =>
-                setPlace({ ...place, type: e.target.value })
-              }
-            />
+            className="w-full p-2 bg-black/30 border border-white/20 rounded"
+            placeholder="Type"
+            value={place.type}
+            onChange={(e) =>
+              setPlace({ ...place, type: e.target.value })
+            }
+          />
           <input
             className="w-full p-2 bg-black/30 border border-white/20 rounded"
             placeholder="Status"
@@ -459,7 +470,6 @@ export default function AdminEditPage({
             lng={place.lng ?? DEFAULT_LNG}
             title={place.title || "Cherkasy"}
             onLocationSelect={(lat, lng) =>
-              // 🔥 Використовуємо prev, щоб точно зберегти всі інші поля
               setPlace((prev) => ({
                 ...prev,
                 lat,
@@ -479,15 +489,13 @@ export default function AdminEditPage({
           {place.id ? "Update place" : "Create place"}
         </button>
 
-        {/* ✅ Кнопка очистки чорновику */}
-        {!initialData && (
-          <button
-            onClick={handleClearDraft}
-            className="px-10 py-3 bg-red-500/20 border border-red-500/30 backdrop-blur-md hover:bg-red-500/30 transition rounded font-medium text-red-400"
-          >
-            Clear draft
-          </button>
-        )}
+        {/* Кнопка очистки показується завжди для зручності */}
+        <button
+          onClick={handleClearDraft}
+          className="px-10 py-3 bg-red-500/20 border border-red-500/30 backdrop-blur-md hover:bg-red-500/30 transition rounded font-medium text-red-400"
+        >
+          Clear draft
+        </button>
       </div>
     </div>
   );

@@ -11,10 +11,10 @@
 :root {
   --bg-gradient: linear-gradient(
     135deg,
-    #d8e1ff 0%,
-    #e5ddff 35%,
-    #ffdede 70%,
-    #d8e1ff 100%
+    #edeff3 0%,
+    #dbdae0 35%,
+    #ebe1e1 70%,
+    #e4e9ed 100%
   );
   --text: rgb(37, 34, 34);
   --text-light: rgb(247, 240, 240);

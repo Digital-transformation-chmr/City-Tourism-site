@@ -43,7 +43,7 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="my-6 h-px bg-gray-200" />
+        <div className="my-6 h-px" />
 
         {/* Footer bottom */}
         <div className="flex flex-col gap-2 text-xs text-gray-500 md:flex-row md:items-center md:justify-between">

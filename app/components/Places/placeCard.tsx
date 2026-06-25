@@ -43,6 +43,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
                 flex flex-col
                 overflow-hidden
                 rounded-2xl
+            
                 border border-white/10
                 bg-black/40
                 backdrop-blur-md
@@ -61,7 +62,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
                     width={400}
                     height={300}
                     className="
-                        h-48
+                        h-60
                         w-full
                         object-cover
                         transition-transform
@@ -125,7 +126,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
 
 export default function PopPlaceGrid({Places}:PlaceGrid){
     return(
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-20">
             {Places.map((item, index) => (
               <PlaceCard key={index} item={item}/>))}
         </div>

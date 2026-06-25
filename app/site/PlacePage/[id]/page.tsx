@@ -79,13 +79,11 @@ export default function Page() {
             <div>📅 Рік: {place.yearBuilt}</div>
             <div>📍 {place.address}</div>
             <div>🏛 {place.status}</div>
+
           </div>
-        </div>
-
-        <aside className="bg-black/40 border border-white/30 rounded-xl p-5 space-y-4">
-          <h3 className="text-lg font-semibold">Додаткова інформація</h3>
-
-          <p className="text-sm">
+          
+          <p className="text-lg font-semibold">Додаткова інформація</p>
+          <p className="text-lg">
             {place.subtitle}
             <br />Години: {place.openingHours}
             <br />{place.phone ? `Телефон: ${place.phone}` : ""}
@@ -98,7 +96,7 @@ export default function Page() {
                 {place.tags.map((tag, i) => (
                   <span
                     key={i}
-                    className="px-2.5 py-1 text-xs font-medium text-white/80 bg-white/5 border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/40 transition-all"
+                    className="px-2.5 py-1 text-sm font-medium text-white/80 bg-white/5 border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/40 transition-all"
                   >
                     #{tag}
                   </span>
@@ -106,17 +104,16 @@ export default function Page() {
               </div>
             </div>
           )}
-        </aside>
-      </div>
+        </div>
 
-      {/* MAP (з перевіркою) */}
-      <div className="h-75 rounded-xl bg-white/5 border border-white/10 overflow-hidden">
-        <Map
-          id={`map-page-${place.id}`}
-          lat={place.lat!}
-          lng={place.lng!}
-          title={place.title || "Cherkasy"}
+        <aside className="bg-black/40 border border-white/30 rounded-xl p-5 space-y-4">
+          <Map
+            id={`map-page-${place.id}`}
+            lat={place.lat!}
+            lng={place.lng!}
+            title={place.title || "Cherkasy"}
         />
+        </aside>
       </div>
     </div>
   );
