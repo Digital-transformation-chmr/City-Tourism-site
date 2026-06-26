@@ -8,7 +8,7 @@ export async function fetchTelegramNews() {
 
   // Отримуємо останні 20 повідомлень
   const messages = await client.getMessages(channel, {
-    limit: 20,
+    limit: 15,
   });
 
   // Формуємо масив постів
