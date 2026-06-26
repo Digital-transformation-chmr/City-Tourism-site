@@ -17,10 +17,21 @@ export async function POST(req: Request) {
     const urls: string[] = [];
 
     for (const file of files) {
+
+      /* ❌ ВІДХИЛЯЄМО ВІДЕО */
+      if (file.type.startsWith("video/")) {
+        continue; // просто пропускаємо
+      }
+
+      /* ❌ ВІДХИЛЯЄМО НЕЗОБРАЖЕННЯ */
+      if (!file.type.startsWith("image/")) {
+        continue;
+      }
+
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
 
-      const ext = file.name.split(".").pop();
+      const ext = file.type.split("/")[1] || "jpg";
       const filename = `${crypto.randomUUID()}.${ext}`;
 
       const filepath = path.join(uploadDir, filename);
@@ -31,6 +42,7 @@ export async function POST(req: Request) {
     }
 
     return NextResponse.json({ urls });
+
   } catch (err) {
     console.error(err);
     return NextResponse.json(

@@ -1,117 +1,172 @@
-// import Image from "next/image";
-// // або де ти зберігаєш типи
+import Image from "next/image";
+import { useRef } from "react";
 
-// interface NewsCardProps {
-//   item: NewsItem;
-// }
-// export interface NewsItem {
-//   id: string;
-//   title: string;
-//   description: string;
-//   image: string;
-//   date?: string;
-//   category?: string;
-// }
+/* ================= TYPES ================= */
 
-// export function NewsCard({ item }: NewsCardProps) {
-//   return (
-//     <a
-//       href={`/site/news/${item.id}`}
-//       className="
-//         group
-//         relative
-//         flex flex-col
-//         overflow-hidden
-//         rounded-2xl
-//         border border-white/10
-//         bg-black/40
-//         backdrop-blur-md
-//         shadow-lg
-//         transition-all
-//         duration-300
-//         hover:-translate-y-1
-//         hover:border-white/20
-//         hover:shadow-2xl
-//       "
-//     >
-//       {/* Image */}
-//       <div className="relative">
-//         <Image
-//           alt={item.title}
-//           src={item.image}
-//           width={500}
-//           height={300}
-//           className="
-//             h-56
-//             w-full
-//             object-cover
-//             transition-transform
-//             duration-500
-//             group-hover:scale-105
-//           "
-//         />
+export interface NewsItem {
+  id: string;
+  content?: string;
+  title?: string;
+  description?: string;
+  image: string | null;
+  publishedAt?: string | Date;
+  date?: string;
+  category?: string;
+  telegramId?: string | number;
+}
 
-//         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+/* ================= PARSER ================= */
 
-//         {item.category && (
-//           <span
-//             className="
-//               absolute
-//               left-3
-//               top-3
-//               rounded-full
-//               bg-black/40
-//               px-3
-//               py-1
-//               text-xs
-//               text-white
-//               backdrop-blur-md
-//             "
-//           >
-//             {item.category}
-//           </span>
-//         )}
-//       </div>
+function parseTelegramContent(content: string = "") {
+  if (!content) {
+    return {
+      title: "Подія",
+      description: "",
+    };
+  }
 
-//       {/* Content */}
-//       <div className="flex flex-1 flex-col p-4">
-//         {item.date && (
-//           <span className="text-xs text-white/50 mb-2">
-//             {item.date}
-//           </span>
-//         )}
+  const cleanContent = content
+    .replace(/Підписуйтесь на канал:[\s\S]*/g, "")
+    .replace(/🎭 Запропонувати подію.*/g, "")
+    .replace(/📩 Замовити рекламу.*/g, "")
+    .trim();
 
-//         <h3 className="mb-2 text-lg font-semibold text-white">
-//           {item.title}
-//         </h3>
+  const lines = cleanContent.split("\n").map(l => l.trim()).filter(Boolean);
 
-//         <p className="line-clamp-3 text-sm text-white/70">
-//           {item.description}
-//         </p>
+  let title = lines[0] || "Цікава подія";
 
-//         <div className="mt-auto pt-4">
-//           <span className="inline-flex items-center gap-2 text-sm font-medium text-blue-300">
-//             Читати далі
-//             <span className="transition-transform duration-300 group-hover:translate-x-1">
-//               →
-//             </span>
-//           </span>
-//         </div>
-//       </div>
-//     </a>
-//   );
-// }
+  title = title.replace(
+    /^(📌|🎶|🚀|👋|🎙️|💃|☀️|💜|🌲)\s*(Куди піти:\s*)?/i,
+    ""
+  );
 
-// interface NewsGridProps {
-//   items: NewsItem[];
-// }
+  const description = lines.slice(1).join("\n");
 
-// export default function NewsGrid({ items }: NewsGridProps) {
-//   return (
-//     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-//       {items.map((item) => (
-//         <NewsCard key={item.id} item={item} />
-//       ))}
-//     </div>
-//   );
-// }
+  return { title, description };
+}
+
+/* ================= MAIN ================= */
+
+export default function NewsGrid({ items }: { items: NewsItem[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: "left" | "right") => {
+    if (!ref.current) return;
+
+    ref.current.scrollBy({
+      left: dir === "left" ? -600 : 600,
+      behavior: "smooth",
+    });
+  };
+
+  const channel = process.env.NEXT_PUBLIC_TG_CHANNEL;
+
+  return (
+    <div className="relative w-full">
+
+      {/* buttons */}
+      <button
+        onClick={() => scroll("left")}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 text-white px-3 py-2 rounded-full"
+      >
+        ←
+      </button>
+
+      <button
+        onClick={() => scroll("right")}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 text-white px-3 py-2 rounded-full"
+      >
+        →
+      </button>
+
+      {/* SCROLL */}
+      <div
+        ref={ref}
+        className="
+          flex gap-6
+          overflow-x-auto
+          scroll-smooth
+          px-12 py-6
+
+          [&::-webkit-scrollbar]:h-1
+          [&::-webkit-scrollbar-thumb]:bg-white/10
+          [&::-webkit-scrollbar-track]:bg-transparent
+        "
+      >
+        {items.map((item) => {
+          const { title, description } = parseTelegramContent(item.content);
+
+          const cardTitle = item.title || title;
+          const cardDescription = item.description || description;
+
+          const imageSrc = item.image || "/Banners/banner3.png";
+
+          const telegramLink = channel
+            ? `https://t.me/${channel}/${item.telegramId}`
+            : "#";
+
+          return (
+            <a
+              key={item.id}
+              href={telegramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                min-w-[600px]
+                h-[400px]
+                flex
+                bg-black/40
+                border border-white/10
+                rounded-2xl
+                overflow-hidden
+                backdrop-blur-md
+                transition
+                hover:scale-[1.02]
+              "
+            >
+
+              {/* IMAGE LEFT */}
+              <div className="relative w-[45%] h-full">
+                {item.image ? (
+                  <Image
+                    src={item.image}
+                    alt={cardTitle}
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5">
+                    <div className="text-center text-white/40">
+                      <div className="text-3xl mb-2">🖼️</div>
+                      <div className="text-xs">Немає зображення</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* TEXT RIGHT */}
+              <div className="w-[55%] p-6 flex flex-col justify-between">
+
+                <div>
+                  <h3 className="text-white font-bold text-xl line-clamp-2">
+                    {cardTitle}
+                  </h3>
+
+                  <p className="text-white/60 text-sm mt-3 line-clamp-5 leading-relaxed">
+                    {cardDescription}
+                  </p>
+                </div>
+
+                <div className="text-xs text-blue-400">
+                  Відкрити в Telegram →
+                </div>
+
+              </div>
+
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

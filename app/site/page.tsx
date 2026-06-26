@@ -5,7 +5,7 @@ import Image from "next/image";
 import PopPlaceGrid from "../components/Places/placeCard";
 import WeatherCity from "../components/UI/weather";
 import { Utensils, Drama, TreePine } from "lucide-react";
-
+import NewsGrid from "../components/News/newsCards";
 import { Place } from "../components/Places/placeCard";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [places, setPlaces] = useState<Place[]>([]);
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<any[]>([]);
 
   // Головний контейнер-обгортка для безпечного пошуку селекторів через useGSAP
   const mainRef = useRef<HTMLDivElement>(null);
@@ -27,7 +27,7 @@ export default function Home() {
   useEffect(() => {
     const loadPlaces = async () => {
       try {
-        const featuredPlaceIds = [3, 4, 5, 6, 7];
+        const featuredPlaceIds = [1,2,3,4,5];
         const res = await fetch("/api/places");
 
         if (!res.ok) {
@@ -48,11 +48,21 @@ export default function Home() {
     loadPlaces();
   }, []);
 
-  // Завантаження новин
+// Завантаження новин (додайте це всередину компонента Home)
   useEffect(() => {
     fetch("/api/news")
-      .then((r) => r.json())
-      .then(setNews);
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Помилка завантаження новин з сервера");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setNews(data); // Тут уже буде рівно 4 найсвіжіші новини
+        }
+      })
+      .catch((err) => console.error("Помилка під час запиту новин:", err));
   }, []);
 
   // Усі анімації сторінки в одному місці з правильним scope
@@ -248,7 +258,12 @@ export default function Home() {
         <h2 className="text-4xl font-bold text-center text-white mb-12">
           Останні новини
         </h2>
-        {/* <NewsGrid items={news} /> */}
+        
+        {news.length > 0 ? (
+          <NewsGrid items={news} /> // <--- ПЕРЕДАЄМО НАПРЯМУ МАСИВ NEWS
+        ) : (
+          <p className="text-center text-white/50 text-xl">Новин поки немає...</p>
+        )}
       </div>
 
     </div>

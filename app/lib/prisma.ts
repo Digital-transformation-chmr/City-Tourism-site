@@ -1,17 +1,25 @@
-import { PrismaClient } from "../generated/prisma/client";
+import { PrismaClient } from "../../generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg"; 
-const globalForPrisma = global as unknown as {
-  prisma: PrismaClient; 
-}; 
+import pg from "pg";
 
-const adapter = new PrismaPg({
-  connectionString: process.env.DATABASE_URL, 
-}); 
-const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    adapter, 
-  }); 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma; 
-export default prisma; 
+// 1. Оголошуємо тип для глобальної змінної за стандартом Node.js/Next.js
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
 
+// 2. Функція, яка за потреби створить клієнт
+const prismaClientSingleton = () => {
+  const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+  const adapter = new PrismaPg(pool);
+  return new PrismaClient({ adapter });
+};
+
+// 3. Беремо або вже існуючий клієнт, або створюємо новий
+const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
+
+// 4. Зберігаємо у глобальний об'єкт, якщо це не production
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
+
+export default prisma;
