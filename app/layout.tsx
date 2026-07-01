@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-
+import AccessibilityMenu from "./accsesability";
 
 export const metadata: Metadata = {
   title: "Туристичний сайт",
@@ -24,11 +24,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="ua"
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className=" flex flex-col">
         {children}
+        <AccessibilityMenu/>
       </body>
 
     </html>

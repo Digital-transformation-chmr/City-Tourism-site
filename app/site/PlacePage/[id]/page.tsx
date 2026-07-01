@@ -27,6 +27,18 @@ export default function Page() {
     load();
   }, [id]);
 
+  const nextImage = () => {
+    if (!place?.images?.length) return;
+    setActiveImage((prev) => (prev + 1) % place.images.length);
+  };
+
+  const prevImage = () => {
+    if (!place?.images?.length) return;
+    setActiveImage((prev) =>
+      prev === 0 ? place.images.length - 1 : prev - 1
+    );
+  };
+
   if (!place) {
     return <LoadingSkeleton />;
   }
@@ -51,6 +63,26 @@ export default function Page() {
 
         <div className="absolute inset-0 bg-black/30" />
 
+        {/* LEFT BUTTON */}
+        <button
+          onClick={prevImage}
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20
+                     w-12 h-12 rounded-full bg-black/50 hover:bg-black/70
+                     backdrop-blur-md flex items-center justify-center"
+        >
+          <span className="text-2xl">‹</span>
+        </button>
+
+        {/* RIGHT BUTTON */}
+        <button
+          onClick={nextImage}
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20
+                     w-12 h-12 rounded-full bg-black/50 hover:bg-black/70
+                     backdrop-blur-md flex items-center justify-center"
+        >
+          <span className="text-2xl">›</span>
+        </button>
+
         {/* thumbnails */}
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
           {place.images?.map((img, i) => (
@@ -68,52 +100,71 @@ export default function Page() {
       </div>
 
       {/* CONTENT */}
-      <div className="px-12 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="px-4 sm:px-8 lg:px-12 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
 
         <div className="lg:col-span-2 space-y-6 border border-white/30 p-5 rounded-2xl bg-black/40">
-          <h1 className="text-4xl font-bold">{place.title}</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold">{place.title}</h1>
 
           <p>{place.description}</p>
 
-          <div className="grid grid-cols-2 gap-4 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
             <div>📅 Рік: {place.yearBuilt}</div>
             <div>📍 {place.address}</div>
             <div>🏛 {place.status}</div>
-
           </div>
-          
+
           <p className="text-lg font-semibold">Додаткова інформація</p>
+
           <p className="text-lg">
             {place.subtitle}
             <br />Години: {place.openingHours}
             <br />{place.phone ? `Телефон: ${place.phone}` : ""}
-            <br />{place.website ? `Вебсайт: ${place.website}` : ""}
+              {place.website && (
+                  <>
+                    <br />
+                    <a
+                      href={
+                        place.website.startsWith("http")
+                          ? place.website
+                          : `https://${place.website}`
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className=" hover:text-blue-700 underline"
+                    >
+                      Вебсайт:{" "}{place.website}
+                    </a>
+                  </>
+                )}
           </p>
-          
+
           {place.tags && place.tags.length > 0 && (
-            <div className="space-y-3 pt-4">
-              <div className="flex flex-wrap gap-2">
-                {place.tags.map((tag, i) => (
-                  <span
-                    key={i}
-                    className="px-2.5 py-1 text-sm font-medium text-white/80 bg-white/5 border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/40 transition-all"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-2 pt-4">
+              {place.tags.map((tag, i) => (
+                <span
+                  key={i}
+                  className="px-2.5 py-1 text-sm text-white/80 bg-white/5 border border-white/20 rounded-lg"
+                >
+                  #{tag}
+                </span>
+              ))}
             </div>
           )}
         </div>
 
-        <aside className="bg-black/40 border border-white/30 rounded-xl p-5 space-y-4">
-          <Map
-            id={`map-page-${place.id}`}
-            lat={place.lat!}
-            lng={place.lng!}
-            title={place.title || "Cherkasy"}
-        />
+        {/* MAP */}
+        <aside className="bg-black/40 border border-white/30 rounded-xl p-3 sm:p-4 lg:p-5">
+          <div className="w-full h-[250px] sm:h-[350px] lg:h-[500px] rounded-xl overflow-hidden">
+            <Map
+              id={`map-page-${place.id}`}
+              lat={place.lat!}
+              lng={place.lng!}
+              title={place.title || "Cherkasy"}
+              
+            />
+          </div>
         </aside>
+
       </div>
     </div>
   );
@@ -122,68 +173,18 @@ export default function Page() {
 function LoadingSkeleton() {
   return (
     <div className="text-white/80 min-h-screen">
-      {/* HERO SKELETON */}
-      <div className="relative h-[85vh] w-full overflow-hidden bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 bg-[length:200%_100%] animate-pulse">
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
+      <div className="h-[85vh] bg-gray-800 animate-pulse" />
 
-      {/* CONTENT SKELETON */}
-      <div className="px-12 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
-        
-        <div className="lg:col-span-2 space-y-6 border border-white/30 p-5 rounded-2xl bg-black/40">
-          {/* Title skeleton */}
-          <div className="h-10 bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg animate-pulse w-3/4" />
-
-          {/* Description skeleton */}
-          <div className="space-y-3">
-            <div className="h-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded animate-pulse" />
-            <div className="h-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded animate-pulse w-5/6" />
-            <div className="h-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded animate-pulse w-4/6" />
-          </div>
-
-          {/* Info grid skeleton */}
-          <div className="grid grid-cols-2 gap-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="h-8 bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg animate-pulse"
-              />
-            ))}
+      <div className="px-4 sm:px-8 lg:px-12 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <div className="lg:col-span-2 space-y-6">
+          <div className="h-10 bg-gray-700 rounded animate-pulse w-3/4" />
+          <div className="space-y-2">
+            <div className="h-4 bg-gray-700 rounded animate-pulse" />
+            <div className="h-4 bg-gray-700 rounded animate-pulse w-5/6" />
           </div>
         </div>
 
-        {/* Sidebar skeleton */}
-        <div className="bg-black/40 border border-white/30 rounded-xl p-5 space-y-4">
-          <div className="h-6 bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg animate-pulse w-1/2" />
-
-          <div className="space-y-3 pt-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="h-4 bg-gradient-to-r from-gray-700 to-gray-600 rounded animate-pulse"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* MAP SKELETON */}
-      <div className="px-12 py-10">
-        <div className="h-75 rounded-xl bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 border border-white/10 overflow-hidden animate-pulse" />
-      </div>
-
-      {/* Floating loading text */}
-      <div className="fixed bottom-8 right-8 flex items-center gap-3">
-        <div className="flex gap-1">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="w-2 h-2 bg-blue-400 rounded-full animate-bounce"
-              style={{ animationDelay: `${i * 0.2}s` }}
-            />
-          ))}
-        </div>
-        <span className="text-sm text-white/60">Завантаження...</span>
+        <div className="h-[300px] bg-gray-800 rounded-xl animate-pulse" />
       </div>
     </div>
   );

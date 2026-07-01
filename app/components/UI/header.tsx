@@ -108,7 +108,7 @@ useGSAP(() => {
   return (
     <header
       ref={headerRef}
-      className={`fixed z-50 backdrop-blur-md bg-black/40 border border-white/20 shadow-lg transition-all duration-300 ease-in-out
+      className={`fixed z-50 backdrop-blur-md bg-black/40 border border-white/20 shadow-lg transition-all duration-300 ease-in-out z-100
         ${
           scrolled
             ? "top-4 left-4 right-4 rounded-2xl"

@@ -95,7 +95,7 @@ export default function Map({
   return (
     <div
       id={id} // 🔥 Передаємо динамічний ID в HTML!
-      className="w-full h-full"
+      className="w-full h-full z-0"
       style={{
         pointerEvents: "auto",
       }}
