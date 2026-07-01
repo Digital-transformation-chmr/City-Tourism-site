@@ -163,3 +163,12 @@ html::-webkit-scrollbar {
 
   z-index: 999999 !important;
 }
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}

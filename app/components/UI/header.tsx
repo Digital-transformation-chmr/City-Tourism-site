@@ -99,9 +99,9 @@ useGSAP(() => {
 }, { scope: headerRef });
 
   const navItems = [
-    { href: "/Attractions", label: "Пам'ятки" },
+    { href: "/Attractions", label: "Куди піти?" },
     { href: "/WhereToEat", label: "Де поїсти?" },
-    { href: "/Hotels", label: "Готелі" },
+    { href: "/Hotels", label: "Де зупинитись?" },
     { href: "/InteractiveMap", label: "Інтерактивна карта" },
   ];
 

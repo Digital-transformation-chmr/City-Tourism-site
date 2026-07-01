@@ -52,7 +52,8 @@ export default function WeatherCherkasy() {
     <div className="justify-center flex items-center gap-5 backdrop-blur-md bg-white/10 border
      border-white/10 rounded-xl py-2 px-5 text-white">
         <div className="text-lg text-white/60">
-            Черкаси
+            Погода в місті
+
         </div>
 
         <div className="text-2xl font-bold">
