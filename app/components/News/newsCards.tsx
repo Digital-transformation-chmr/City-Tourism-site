@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 /* ================= TYPES ================= */
 
@@ -45,16 +45,79 @@ function parseTelegramContent(content: string = "") {
   return { title, description };
 }
 
+/* ================= CONFIG ================= */
+
+// Base card size (the "unscaled" card). The center card grows via CSS scale,
+// so give some breathing room around it (padding on the scroller) rather
+// than reserving huge min-widths for every card.
+const CARD_WIDTH = 640; // px
+const CARD_HEIGHT = 440; // px
+
+const MIN_SCALE = 0.86; // cards far from center
+const MAX_SCALE = 1.12; // the centered card
+
 /* ================= MAIN ================= */
 
 export default function NewsGrid({ items }: { items: NewsItem[] }) {
-  const ref = useRef<HTMLDivElement>(null);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
+  const [scales, setScales] = useState<number[]>(() => items.map(() => MIN_SCALE));
+  const rafRef = useRef<number | null>(null);
+
+  const updateScales = useCallback(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    const scrollerRect = scroller.getBoundingClientRect();
+    const scrollerCenter = scrollerRect.left + scrollerRect.width / 2;
+
+    const next = cardRefs.current.map((card) => {
+      if (!card) return MIN_SCALE;
+      const rect = card.getBoundingClientRect();
+      const cardCenter = rect.left + rect.width / 2;
+      const distance = Math.abs(cardCenter - scrollerCenter);
+
+      // Normalize distance against half the scroller width so cards
+      // fully off to the side settle at MIN_SCALE.
+      const maxDistance = scrollerRect.width / 2 + rect.width / 2;
+      const ratio = Math.min(distance / maxDistance, 1);
+
+      return MAX_SCALE - ratio * (MAX_SCALE - MIN_SCALE);
+    });
+
+    setScales(next);
+  }, []);
+
+  const onScroll = useCallback(() => {
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = null;
+      updateScales();
+    });
+  }, [updateScales]);
+
+  useEffect(() => {
+    updateScales();
+
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      scroller.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items.length]);
 
   const scroll = (dir: "left" | "right") => {
-    if (!ref.current) return;
+    if (!scrollerRef.current) return;
 
-    ref.current.scrollBy({
-      left: dir === "left" ? -600 : 600,
+    scrollerRef.current.scrollBy({
+      left: dir === "left" ? -700 : 700,
       behavior: "smooth",
     });
   };
@@ -62,66 +125,78 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
   const channel = process.env.NEXT_PUBLIC_TG_CHANNEL;
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full z-0">
 
       {/* buttons */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 text-white px-3 py-2 rounded-full"
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white px-3 py-2 rounded-full z-[999]"
       >
         ←
       </button>
 
       <button
         onClick={() => scroll("right")}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-black/40 text-white px-3 py-2 rounded-full"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white px-3 py-2 rounded-full z-[999]"
       >
         →
       </button>
 
       {/* SCROLL */}
       <div
-        ref={ref}
+        ref={scrollerRef}
         className="
-          flex gap-6
+          flex items-center gap-8
           overflow-x-auto
           scroll-smooth
-          px-12 py-6
-
+          snap-x snap-mandatory
+          px-[15vw] py-16
+          gap-20
           [&::-webkit-scrollbar]:h-1
           [&::-webkit-scrollbar-thumb]:bg-white/10
           [&::-webkit-scrollbar-track]:bg-transparent
         "
       >
-        {items.map((item) => {
+        {items.map((item, index) => {
           const { title, description } = parseTelegramContent(item.content);
 
           const cardTitle = item.title || title;
           const cardDescription = item.description || description;
 
-          const imageSrc = item.image || "/Banners/banner3.png";
-
           const telegramLink = channel
             ? `https://t.me/${channel}/${item.telegramId}`
             : "#";
 
+          const scale = scales[index] ?? MIN_SCALE;
+
           return (
             <a
               key={item.id}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
               href={telegramLink}
               target="_blank"
               rel="noopener noreferrer"
+              style={{
+                width: CARD_WIDTH,
+                height: CARD_HEIGHT,
+                minWidth: CARD_WIDTH,
+                transform: `scale(${scale})`,
+                zIndex: Math.round(scale * 100),
+              }}
               className="
-                min-w-[600px]
-                h-[400px]
+                snap-center
+                shrink-0
                 flex
                 bg-black/40
                 border border-white/10
                 rounded-2xl
                 overflow-hidden
                 backdrop-blur-md
-                transition
-                hover:scale-[1.02]
+                transition-transform
+                duration-300
+                ease-out
               "
             >
 
@@ -145,14 +220,14 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
               </div>
 
               {/* TEXT RIGHT */}
-              <div className="w-[55%] p-6 flex flex-col justify-between">
+              <div className="w-[55%] p-7 flex flex-col justify-between">
 
                 <div>
-                  <h3 className="text-white font-bold text-xl line-clamp-2">
+                  <h3 className="text-white font-bold text-2xl line-clamp-2">
                     {cardTitle}
                   </h3>
 
-                  <p className="text-white/60 text-sm mt-3 line-clamp-5 leading-relaxed">
+                  <p className="text-white/60 text-sm mt-4 line-clamp-6 leading-relaxed">
                     {cardDescription}
                   </p>
                 </div>

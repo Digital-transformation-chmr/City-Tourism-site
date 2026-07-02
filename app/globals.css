@@ -9,13 +9,7 @@
 }
 
 :root {
-  --bg-gradient: linear-gradient(
-    135deg,
-    #edeff3 0%,
-    #dbdae0 35%,
-    #ebe1e1 70%,
-    #e4e9ed 100%
-  );
+  --bg-gradient: #faf7f1;
   --ink: #1c170f;
   --paper-l: #ede8dc;
   --paper-r: #f7f3eb;
@@ -32,13 +26,7 @@
 
 
 html.dark {
-  --bg-gradient: linear-gradient(
-    135deg,
-    #04164a 0%,
-    #3c1451 35%,
-    #0e0c37 70%,
-    #1c2541 100%
-  );
+  --bg-gradient: #ede8dc;
   --text:rgb(247, 240, 240);
   --accent: rgb(240, 29, 29);
   --gray-text: rgba(194, 184, 184, 0.962);
@@ -179,4 +167,27 @@ html::-webkit-scrollbar {
   }
 }
 
+
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #8b6b3f transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #8b6b3f;
+  border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #6f5532;
+}
 

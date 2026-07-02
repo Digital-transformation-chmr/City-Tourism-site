@@ -114,10 +114,10 @@ export function PlaceCard({ item }: PlaceCardProps) {
       </div>
 
       <div className="flex flex-1 flex-col p-4 w-full">
-        <h3 className="mb-2 text-lg font-semibold text-(--text-light)">
+        <h3 className="mb-2 text-3xl font-semibold text-(--text-light)">
           {item.title}
         </h3>
-        <p className="line-clamp-3 text-sm text-(--text-light)">
+        <p className="line-clamp-3 text-lg text-(--text-light)">
           {item.description}
         </p>
         <div className="mt-auto pt-4">

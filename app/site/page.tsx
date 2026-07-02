@@ -120,7 +120,7 @@ return (
           }}
         >
           <Image
-            src="/Banners/banner1.jpg"
+            src="/Banners/banner1.jpeg"
             alt="Hero"
             fill
             priority
@@ -206,7 +206,7 @@ return (
 
           {/* subtitle */}
           <motion.p
-            className="mt-6 uppercase tracking-[0.45em] text-white/60 text-xs"
+            className="mt-6 uppercase tracking-[0.45em] text-white/60 text-lg"
             initial={{ y: 20, opacity: 0 }}
             animate={heroReady ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 1.6 }}
@@ -261,7 +261,7 @@ return (
             <span className="italic text-[var(--accent)]">першу</span> чергу
           </h1>
 
-          <p className="mt-4 text-[var(--gray-text)] text-lg max-w-md leading-relaxed">
+          <p className="mt-4 text-[var(--gray-text)] text-2xl max-w-md leading-relaxed">
             Відкрийте найкращі місця, що зберігають дух і душу міста
           </p>
 
@@ -306,17 +306,17 @@ return (
           Що вас чекає?
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-15 max-w-7xl mx-auto">
 
           {/* FOOD */}
           <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition">
             <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-red-400">
               <Utensils color="#fff" />
             </div>
-            <h3 className="text-2xl font-semibold mb-4 text-[var(--accent)]">
+            <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]">
               ГАСТРОНОМІЯ
             </h3>
-            <p className="text-white/80 text-lg">
+            <p className="text-white/80 text-2xl">
               Скуштуйте найкращі страви місцевої кухні.
             </p>
           </div>
@@ -326,10 +326,10 @@ return (
             <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-indigo-400">
               <Drama color="#fff" />
             </div>
-            <h3 className="text-2xl font-semibold mb-4 text-[var(--accent)]">
+            <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]">
               КУЛЬТУРА
             </h3>
-            <p className="text-white/80 text-lg">
+            <p className="text-white/80 text-2xl">
               Театри, виставки та фестивалі для кожного.
             </p>
           </div>
@@ -339,10 +339,10 @@ return (
             <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-teal-400">
               <TreePine color="#fff" />
             </div>
-            <h3 className="text-2xl font-semibold mb-4 text-[var(--accent)]">
+            <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]">
               ПРИРОДА
             </h3>
-            <p className="text-white/80 text-lg">
+            <p className="text-white/80 text-2xl">
               Прогулянки вздовж Дніпра та зелені парки.
             </p>
           </div>
