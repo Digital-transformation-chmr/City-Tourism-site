@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { X, Search } from 'lucide-react'
 import { Place } from '@/app/components/Places/placeCard'
 import Image from 'next/image'
+import { useSearchParams } from "next/navigation";
 
 const MapContainer = dynamic(() => import('react-leaflet').then(m => m.MapContainer), { ssr: false })
 const TileLayer = dynamic(() => import('react-leaflet').then(m => m.TileLayer), { ssr: false })
@@ -28,6 +29,8 @@ const TYPE_COLORS: Record<string, string> = {
   'Галерея': '#ec4899',
   "Пам'ятник": '#f97316',
   "Готель": '#6788e6',
+  "Ресторан": '#5b24bf',
+  "Кафе": '#bf7b50',
 }
 
 const DEFAULT_COLOR = '#64748b'
@@ -68,8 +71,17 @@ export default function MapPage() {
 
     const load = async () => {
       const resPlaces = await fetch('/api/places')
-      const dataPlaces = await resPlaces.json()
-      setPlaces(dataPlaces)
+    const dataPlaces = await resPlaces.json();
+
+    setPlaces(dataPlaces);
+
+    if (placeId) {
+      const place = dataPlaces.find((p: Place) => String(p.id) === placeId);
+
+      if (place) {
+        setSelected(place);
+      }
+    }
 
       try {
         const resRoutes = await fetch('/data/routes.json')
@@ -89,13 +101,13 @@ export default function MapPage() {
     )
   }
 
-  const createIcon = (type?: string) => {
+  const createIcon = (type?: string, active = false) => {
     if (!leaflet) return undefined
     const color = getColor(type)
     return leaflet.divIcon({
       className: 'custom-pin',
       html: `
-        <div class="pin" style="background:${color}">
+        <div class="pin ${active ? 'active' : ''}" style="background:${color}">
           <div class="pin-dot"></div>
         </div>
       `,
@@ -121,13 +133,17 @@ export default function MapPage() {
 
   const buses = useMemo(() => routes.filter(r => r.transportType === 'bus'), [routes])
   const trolleybuses = useMemo(() => routes.filter(r => r.transportType === 'trolleybus'), [routes])
+  const searchParams = useSearchParams();
+  const placeId = searchParams.get("id");
 
   const activeRoutesOnMap = useMemo(() => {
     return routes.filter(route => selectedRouteIds.includes(route.id))
   }, [routes, selectedRouteIds])
 
+  
+
   return (
-    <div className="relative w-full h-screen flex flex-col pt-12">
+    <div className="relative w-full h-dvh flex flex-col pt-12 overflow-hidden">
 
       {/* 🔝 TOP BAR (Тільки фільтри та пошук місць) */}
       <div className="relative z-10 flex items-center justify-between gap-3 px-6 py-3 backdrop-blur-md bg-black/30 border-b border-white/10">
@@ -207,16 +223,24 @@ export default function MapPage() {
           ))}
 
           {leaflet &&
-            filtered.map((place) => (
-              <Marker
-                key={place.id}
-                position={[place.lat!, place.lng!]}
-                icon={createIcon(place.type)}
-                eventHandlers={{
-                  click: () => setSelected(place),
-                }}
-              />
-            ))}
+            filtered
+              .filter((place) => {
+                // якщо нічого не вибрано — показуємо всі результати фільтрації
+                if (!selected) return true;
+
+                // якщо вибрано місце — показуємо тільки його
+                return place.id === selected.id;
+              })
+              .map((place) => (
+                <Marker
+                  key={place.id}
+                  position={[place.lat!, place.lng!]}
+                  icon={createIcon(place.type, true)}
+                  eventHandlers={{
+                    click: () => setSelected(place),
+                  }}
+                />
+              ))}
         </MapContainer>
 
         {/* 🆕 ІКОНКИ ТРАНСПОРТУ ЗНИЗУ ПРАВОРУЧ */}

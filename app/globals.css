@@ -16,9 +16,15 @@
     #ebe1e1 70%,
     #e4e9ed 100%
   );
+  --ink: #1c170f;
+  --paper-l: #ede8dc;
+  --paper-r: #f7f3eb;
+  --accent: #7a3220;
+  --muted: #8a7d6b;
+  --rule: #d0c4b0;
+
   --text: rgb(37, 34, 34);
   --text-light: rgb(247, 240, 240);
-  --accent: rgb(221, 16, 16);
   --accentLO: rgba(225, 126, 126, 0.679);
   --gray-text: rgb(81, 78, 78);
 }
@@ -172,3 +178,5 @@ html::-webkit-scrollbar {
     transform: scale(1);
   }
 }
+
+
