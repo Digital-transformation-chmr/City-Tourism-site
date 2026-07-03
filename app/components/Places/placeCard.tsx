@@ -61,6 +61,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
   });
 
  return (
+  
   <button
     ref={cardRef}
     onClick={handleClick}
