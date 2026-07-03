@@ -4,6 +4,8 @@ import { useEffect, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MapPin, Clock, Phone, Globe, Utensils, Sandwich, Tag } from "lucide-react";
 import Link from "next/link";
+import SplitText from "@/components/SplitText";
+
 
 export interface Place {
   id: string;
@@ -162,7 +164,19 @@ export default function Attraction() {
                 className="text-3xl font-bold text-[var(--ink)] mt-1 leading-tight"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                {activeCategory}
+                <SplitText
+                  text={activeCategory}
+                  className="text-2xl font-semibold text-center"
+                  delay={80}
+                  duration={0.5}
+                  ease="power3.out"
+                  splitType="chars"
+                  from={{ opacity: 0, y: 40 }}
+                  to={{ opacity: 1, y: 0 }}
+                  threshold={0.1}
+                  rootMargin="-100px"
+                  textAlign="center"
+                />
               </motion.h2>
             </AnimatePresence>
             <div className="w-7 h-px bg-[var(--accent)] mt-2.5" />

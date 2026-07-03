@@ -49,7 +49,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
     }
 
     gsap.to(cardRef.current, {
-      scale: 2,
+      scale: 1.2,
       opacity: 0.3,
       duration: 0.1,
       ease: "power1.out",
@@ -60,77 +60,112 @@ export function PlaceCard({ item }: PlaceCardProps) {
     });
   });
 
-  return (
-    <button
-      ref={cardRef}
-      onClick={handleClick}
+ return (
+  <button
+    ref={cardRef}
+    onClick={handleClick}
+    className="
+      gsap-card
+      group
+      relative
+       w-full
+      aspect-[3/5]
+      max-h-[600px]
+      overflow-hidden
+      rounded-xl
+      text-left
+      opacity-0
+      border border-white/10
+      bg-black
+      will-change-transform
+    "
+  >
+    {/* Фото */}
+    <Image
+      src={item.images[0]}
+      alt={item.title}
+      fill
       className="
-        gsap-card
-        group
-        relative
-        flex flex-col
-        overflow-hidden
-        rounded-2xl
-        text-left
-        w-full
+        object-cover
+        transition-transform
+        duration-700
+        group-hover:scale-110
+      "
+    />
+
+    {/* Верхній легкий градієнт */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+
+    {/* Hover градієнт */}
+    <div
+      className="
+        absolute
+        inset-0
+        bg-gradient-to-t
+        from-black
+        via-black/70
+        to-transparent
         opacity-0
-        
-        /* Оптимізація рендерингу для відеокарти */
-        will-change-[transform,opacity]
-    
-        border border-white/10
-        bg-black/40
-        backdrop-blur-md
-        shadow-lg
-        
-        /* ВИПРАВЛЕНО: Анімуємо тільки бордер і тінь, не конфліктуємо з GSAP */
-        transition-[border-color,box-shadow]
-        duration-300
-        hover:border-white/20
-        hover:shadow-2xl
+        transition-all
+        duration-500
+        group-hover:opacity-100
+      "
+    />
+
+    {/* Контент */}
+    <div
+      className="
+        absolute
+        bottom-0
+        left-0
+        right-0
+        p-8
+        flex
+        flex-col
       "
     >
-      <div className="relative w-full">
-        <Image
-          alt={item.title}
-          src={item.images[0]}
-          width={300}
-          height={400}
-          className="
-            h-65
-            w-full
-            object-cover
-            transition-transform
-            duration-500
-            group-hover:scale-105
-          "
-        />
-        {/* Градієнтне затемнення знизу, щоб картка виглядала об'ємно і читався текст */}
-        <div className="absolute inset-0 bg-black/20 to-transparent" />
-        
-        <span className="absolute left-3 top-3 rounded-full bg-black/40 px-3 py-1 text-sm text-(--text-light) backdrop-blur-md">
-          {item.type}
-        </span>
-      </div>
+      <span className="text-lg text-lime-300 uppercase tracking-widest">
+        {item.type}
+      </span>
 
-      <div className="flex flex-1 flex-col p-4 w-full">
-        <h3 className="mb-2 text-3xl font-semibold text-(--text-light)">
-          {item.title}
-        </h3>
-        <p className="line-clamp-3 text-lg text-(--text-light)">
-          {item.description}
+      <h3 className="mt-2 text-4xl font-bold text-white">
+        {item.title}
+      </h3>
+
+      {item.subtitle && (
+        <p className="mt-2 text-lg text-white/70">
+          {item.subtitle}
         </p>
-        <div className="mt-auto pt-4">
-          <span className="inline-flex items-center gap-2 text-m font-medium text-lime-300">
-            Детальніше
-            <span className="transition-transform duration-300 group-hover:translate-x-1">
-              →
-            </span>
+      )}
+
+      {/* Те що показується тільки при hover */}
+      <div
+        className="
+          overflow-hidden
+          max-h-0
+          opacity-0
+          translate-y-5
+          transition-all
+          duration-500
+          group-hover:max-h-60
+          group-hover:opacity-100
+          group-hover:translate-y-0
+        "
+      >
+      <p className="mt-6 text-white/90 leading-relaxed line-clamp-4 text-lg">
+        {item.description}
+      </p>
+
+        <div className="mt-6 flex items-center gap-2 text-lime-300 font-medium">
+          Детальніше
+          <span className="transition-transform duration-300 group-hover:translate-x-2">
+            →
           </span>
         </div>
       </div>
-    </button>
-  );
+    </div>
+  </button>
+);
 }
 
 {/* Компонент сітки з плавною появою карток по черзі */}

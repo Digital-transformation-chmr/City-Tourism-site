@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Utensils, Drama, TreePine } from "lucide-react";
 import NewsGrid from "../components/News/newsCards";
 import { Place } from "../components/Places/placeCard";
-
+import Particles from "@/components/Particles";
 import gsap from "gsap";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
@@ -119,6 +119,7 @@ return (
             ease: [0.22, 1, 0.36, 1],
           }}
         >
+
           <Image
             src="/Banners/banner1.jpeg"
             alt="Hero"
@@ -129,11 +130,21 @@ return (
               animation: "slowZoom 20s ease-out forwards",
             }}
           />
-
+        <Particles
+          particleColors={["#ffffff"]}
+          particleCount={400}
+          particleSpread={10}
+          speed={0.1}
+          particleBaseSize={200}
+          moveParticlesOnHover={false}
+          alphaParticles
+          disableRotation={false}
+          pixelRatio={1}
+      />
           {/* cinematic overlays */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#080a0f] via-[#080a0f]/60 to-black/20" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/20" />
-          <div className="absolute inset-0 bg-[#13284f]/20 mix-blend-color" />
+          <div className="absolute inset-0 bg-[#13284f]/10 mix-blend-color" />
         </motion.div>
 
         {/* grain */}
