@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useMemo, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence,  useTransform, useMotionValue} from "motion/react";
 import { MapPin, Clock, Phone, Globe, Utensils, Sandwich, Tag } from "lucide-react";
 import Link from "next/link";
 import gsap from "gsap";
@@ -42,7 +42,7 @@ const CATEGORIES: {
 // наскільки закладка "пірнає" вниз при кліку (px)
 const DIP_EXTRA = 12;
 // глибина трикутного вирізу знизу закладки (px)
-const NOTCH = 15;
+const NOTCH = 12;
 // наскільки закладка фізично довша й виступає вище за верхній край
 // смужки — так вона виглядає прикріпленою до краю, а не підвішеною
 // окремо в повітрі
@@ -60,6 +60,19 @@ export default function Attraction() {
       document.documentElement.style.overflow = ''
     }
   }, [])
+
+
+  // Створюємо motion value для відстеження позиції Y однієї та другої закладки
+  // Оскільки у нас масив, створимо об'єкт або два окремих MotionValues. 
+  // Найпростіший і найнадійніший варіант для динамічних списків — зробити масив motion values:
+  const dragYValues = [useMotionValue(0), useMotionValue(0)];
+
+  // Перетворюємо зсув по Y у звуження по X (scaleX).
+  // Якщо Y = 0 (спокій), то scaleX = 1 (100% ширини).
+  // Якщо Y = 150px (максимально розтягнули вниз), то scaleX = 0.75 (звузилась на 25%).
+  const scaleXValues = dragYValues.map(y => useTransform(y, [0, 150], [1, 0.75]));
+
+
   const [places, setPlaces] = useState<Place[]>([]);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("Ресторани");
@@ -154,6 +167,8 @@ export default function Attraction() {
     setPageFlipKey((k) => k + 1);
   }
 
+  
+
   return (
     <div
       className="min-h-screen md:h-screen w-full pt-12 flex flex-col bg-[#e8e2d4]"
@@ -180,49 +195,59 @@ export default function Attraction() {
        {/* Category bookmarks — self-start так вони прикріплені до
     верхнього краю смужки, а не центровані батьківським рядом */}
           <div className="relative flex items-start gap-2 flex-shrink-0 order-2 sm:order-3 ml-auto sm:ml-0 self-start z-[99]">
+            
             {CATEGORIES.map((cat, i) => {
               const active = cat.key === activeCategory;
               const Icon = cat.icon;
               
+              // Беремо відповідні motion values для поточного індексу закладки
+              const dragY = dragYValues[i];
+              const scaleX = scaleXValues[i];
+
               return (
                 <motion.button
                   key={cat.key}
-                  // 1. Налаштування фізики перетягування (Drag)
                   drag="y"
-                  dragConstraints={{ top: 0, bottom: 0 }} // Повертається в нульову точку
-                  dragElastic={{ top: 0, bottom: 0.6 }}   // Наскільки легко тягнеться вниз (0.6 — пружна гумка)
-                  dragMomentum={false}                    // Вимикаємо інерцію, щоб працювала суто пружина
+                  dragConstraints={{ top: 0, bottom: 0}}
+                  dragElastic={{ top: 0, bottom: 0.1 }} // трішки зменшив пружність для кращого контролю резинки
+                  dragMomentum={false}
                   
-                  // Повернення на місце після того, як відпустили
+                  // Передаємо наше motion value, щоб Framer Motion записував туди рух пальця/миші
+                  style={{
+                    y: dragY,
+                    scaleX: scaleX, // <--- ОСЬ ТУТ МАГІЯ ЗВУЖЕННЯ!
+                    clipPath: `polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - ${NOTCH}px), 0 100%)`,
+                    background: active ? "var(--accent)" : "var(--muted)",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.18)",
+                    marginTop: -PROTRUDE,
+                    paddingTop: PROTRUDE + 10,
+                    willChange: "transform",
+                    originX: 0.5, // Звужується рівномірно до центру
+                    originY: 0,   // Тягнеться зверху вниз
+                  }}
+
                   onDragEnd={(event, info) => {
-                    // Якщо потягнули достатньо сильно вниз (наприклад, більше 25px) — перемикаємо категорію
-                    if (info.offset.y > 25 && !active && !isAnimating.current) {
+                    // Якщо потягнули вниз більше ніж на 40px — активуємо
+                    if (info.offset.y > 40 && !active && !isAnimating.current) {
                       switchCategory(cat.key);
                     }
                   }}
 
-                  // 2. Ефект легкого колихання (Wind/Wobble effect)
-                  // Перепиши ці пропси всередині <motion.button>
+                  // М'яке колихання в спокої (працює паралельно)
                   animate={{
-                    // Кут повороту робимо мікроскопічним, бо при довжині 800px навіть 0.2 градуси дадуть помітний рух внизу
-                    rotate: active ? [0, -0.15, 0.15, -0.05, 0.05, 0] : [0, -0.3, 0.3, -0.15, 0.15, 0],
-                    // Зсув по Y теж робимо крихітним, щоб стрічка не стрибала вгору-вниз
-                    y: active ? [0, 0.3, -0.2, 0.2, 0] : [0, 0.5, -0.3, 0.3, 0],
+                    rotate: active ? [0, -0.1, 0.1, 0] : [0, -0.2, 0.2, 0],
                   }}
                   transition={{
-                    // Збільшуємо час (наприклад, до 8-10 секунд). Що довша стрічка, то повільніше вона має гойдатися
-                    duration: active ? 7 : 9, 
+                    duration: active ? 8 : 10,
                     repeat: Infinity,
                     repeatType: "mirror",
-                    ease: "easeInOut", // Забезпечує максимально м'яке сповільнення в крайніх точках
-                    delay: i * 0.6,    // Трішки більший розсинхрон між сусідніми закладками
+                    ease: "easeInOut",
+                    delay: i * 0.5,
                   }}
 
-                  // 3. Фізика кліку (Замість GSAP timeline на клік)
+                  // При кліку теж буде легкий ефект резинки
                   whileTap={{ 
-                    y: 25, // можна збільшити хід кліку, бо стрічка довга
-                    scaleY: 1.02, // менше спотворення, щоб не розтягувати 800px ще сильніше
-                    transition: { type: "spring", stiffness: 120, damping: 20 } // м'якша, важча пружина
+                    scaleY: 1.03,
                   }}
                   onClick={() => {
                     if (!active && !isAnimating.current) {
@@ -233,16 +258,6 @@ export default function Attraction() {
                   title={cat.key}
                   aria-label={cat.key}
                   aria-current={active ? "page" : undefined}
-                  style={{
-                    clipPath: `polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - ${NOTCH}px), 0 100%)`,
-                    background: active ? "var(--accent)" : "var(--muted)",
-                    boxShadow: "0 4px 8px rgba(0,0,0,0.18)",
-                    marginTop: -PROTRUDE,
-                    paddingTop: PROTRUDE + 10,
-                    willChange: "transform",
-                    originX: 0.5, // Центр гойдання по горизонталі
-                    originY: 0,   // Гойдається ТІЛЬКИ від верхнього краю (як закріплена стрічка)
-                  }}
                   className="relative w-10 sm:w-11 pb-4 flex justify-center items-start cursor-pointer border-none hover:brightness-110 transition-[filter] select-none touch-none"
                 >
                   <Icon size={17} color="var(--paper-l)" />
