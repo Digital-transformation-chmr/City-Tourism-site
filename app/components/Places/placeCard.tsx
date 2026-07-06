@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +42,28 @@ export function PlaceCard({ item }: PlaceCardProps) {
   const router = useRouter();
   const cardRef = useRef<HTMLButtonElement>(null);
   const { contextSafe } = useGSAP({ scope: cardRef });
+  const [mobileActive, setMobileActive] = useState(false);
+  const observerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) return;
+
+    const element = observerRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setMobileActive(entry.isIntersecting);
+      },
+      {
+        threshold: 0.6,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleClick = contextSafe(() => {
     if (cardRef.current) {
@@ -49,8 +71,8 @@ export function PlaceCard({ item }: PlaceCardProps) {
     }
 
     gsap.to(cardRef.current, {
-      scale: 1.2,
-      opacity: 0.3,
+      scale: 1,
+      opacity: 0.9,
       duration: 0.1,
       ease: "power1.out",
       force3D: true, // Вмикаємо прискорення GPU для плавного вибухового кліку
@@ -62,9 +84,12 @@ export function PlaceCard({ item }: PlaceCardProps) {
 
  return (
   
-  <button
-    ref={cardRef}
-    onClick={handleClick}
+    <button
+      ref={(el) => {
+        cardRef.current = el;
+        observerRef.current = el;
+      }}
+      onClick={handleClick}
     className="
       gsap-card
       group
@@ -99,18 +124,21 @@ export function PlaceCard({ item }: PlaceCardProps) {
 
     {/* Hover градієнт */}
     <div
-      className="
+      className={`
         absolute
         inset-0
         bg-gradient-to-t
         from-black
         via-black/70
         to-transparent
-        opacity-0
         transition-all
         duration-500
-        group-hover:opacity-100
-      "
+        ${
+          mobileActive
+            ? "opacity-100"
+            : "opacity-0 group-hover:opacity-100"
+        }
+      `}
     />
 
     {/* Контент */}
@@ -141,17 +169,16 @@ export function PlaceCard({ item }: PlaceCardProps) {
 
       {/* Те що показується тільки при hover */}
       <div
-        className="
+        className={`
           overflow-hidden
-          max-h-0
-          opacity-0
-          translate-y-5
           transition-all
           duration-500
-          group-hover:max-h-60
-          group-hover:opacity-100
-          group-hover:translate-y-0
-        "
+          ${
+            mobileActive
+              ? "max-h-60 opacity-100 translate-y-0"
+              : "max-h-0 opacity-0 translate-y-5 group-hover:max-h-60 group-hover:opacity-100 group-hover:translate-y-0"
+          }
+        `}
       >
       <p className="mt-6 text-white/90 leading-relaxed line-clamp-4 text-lg">
         {item.description}

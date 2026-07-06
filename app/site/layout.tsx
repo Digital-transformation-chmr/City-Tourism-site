@@ -17,7 +17,7 @@ import DotField from "@/components/DotField";
               sparkCount={8}
               duration={400}
             >
-            <main className="flex-1"> 
+            <main className="flex-1  pt-[var(--header-h)]"> 
               {children}
             </main>
 

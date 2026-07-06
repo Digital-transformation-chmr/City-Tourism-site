@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MapPin, Clock, Phone, Globe, Utensils, Sandwich, Tag } from "lucide-react";
 import Link from "next/link";
+import gsap from "gsap";
 import SplitText from "@/components/SplitText";
 
 
@@ -28,20 +29,47 @@ export interface Place {
 
 type CategoryKey = "Ресторани" | "Кафе";
 
-const CATEGORIES: { key: CategoryKey; icon: React.ReactNode; chapter: string; match: string }[] = [
-  { key: "Ресторани", icon: <Utensils size={18} />, chapter: "Розділ I", match: "Ресторан" },
-  { key: "Кафе",      icon: <Sandwich size={18} />, chapter: "Розділ II", match: "Кафе" },
+const CATEGORIES: {
+  key: CategoryKey;
+  icon: React.ComponentType<{ size?: number; color?: string }>;
+  chapter: string;
+  match: string;
+}[] = [
+  { key: "Ресторани", icon: Utensils, chapter: "Розділ I", match: "Ресторан" },
+  { key: "Кафе", icon: Sandwich, chapter: "Розділ II", match: "Кафе" },
 ];
+
+// наскільки закладка "пірнає" вниз при кліку (px)
+const DIP_EXTRA = 12;
+// глибина трикутного вирізу знизу закладки (px)
+const NOTCH = 15;
+// наскільки закладка фізично довша й виступає вище за верхній край
+// смужки — так вона виглядає прикріпленою до краю, а не підвішеною
+// окремо в повітрі
+const PROTRUDE = 800;
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export default function Attraction() {
+    useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    document.documentElement.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+    }
+  }, [])
   const [places, setPlaces] = useState<Place[]>([]);
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<CategoryKey>("Ресторани");
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [dir, setDir] = useState(1);
   const [pageFlipKey, setPageFlipKey] = useState(0);
+
+  // рефи закладок-категорій + прапорець, що анімація кліку вже триває
+  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const isAnimating = useRef(false);
 
   useEffect(() => {
     const load = async () => {
@@ -50,6 +78,17 @@ export default function Attraction() {
       setPlaces(data);
     };
     load();
+  }, []);
+
+  // закладки "випадають" згори один раз при заході на сторінку
+  useEffect(() => {
+    const tabs = tabRefs.current.filter(Boolean) as HTMLButtonElement[];
+    if (!tabs.length) return;
+    gsap.fromTo(
+      tabs,
+      { y: -24 },
+      { y: 0, duration: 0.6, ease: "back.out(1.7)", stagger: 0.1 }
+    );
   }, []);
 
   const searched = useMemo(() => {
@@ -79,6 +118,37 @@ export default function Attraction() {
     setPageFlipKey((k) => k + 1);
   }
 
+  // клік по закладці-категорії: пірнає вниз, пружно піднімається,
+  // і лише потім перемикає категорію
+  function handleCategoryClick(
+    e: React.MouseEvent<HTMLButtonElement>,
+    key: CategoryKey
+  ) {
+    if (key === activeCategory || isAnimating.current) return;
+    const target = e.currentTarget;
+    isAnimating.current = true;
+
+    gsap
+      .timeline({
+        onComplete: () => {
+          isAnimating.current = false;
+          switchCategory(key);
+        },
+      })
+      .to(target, {
+        y: DIP_EXTRA,
+        scaleY: 1.05,
+        duration: 0.18,
+        ease: "power2.in",
+      })
+      .to(target, {
+        y: 0,
+        scaleY: 1,
+        duration: 0.2,
+        ease: "elastic.out(1, 0.55)",
+      });
+  }
+
   function selectPlace(id: string) {
     setSelectedId(id);
     setPageFlipKey((k) => k + 1);
@@ -86,7 +156,7 @@ export default function Attraction() {
 
   return (
     <div
-      className="min-h-screen md:h-screen pt-12 w-full flex flex-col bg-[#e8e2d4]"
+      className="min-h-screen md:h-screen w-full pt-12 flex flex-col bg-[#e8e2d4]"
       style={{ fontFamily: "'Lora', serif" }}
     >
       {/* ── Running header / title bar ── */}
@@ -107,36 +177,79 @@ export default function Attraction() {
           </span>
         </div>
 
-        {/* Category tabs */}
-        <div className="flex items-center gap-0 flex-shrink-0 order-2 sm:order-3 ml-auto sm:ml-0">
-          {CATEGORIES.map((cat) => {
-            const active = cat.key === activeCategory;
-            return (
-              <button
-                key={cat.key}
-                onClick={() => switchCategory(cat.key)}
-                className={`relative flex items-center gap-1.5 px-2.5 sm:px-4 py-2 cursor-pointer transition-colors duration-200 text-lg uppercase bg-none border-none border-b-2 ${
-                  active
-                    ? "text-[var(--accent)] border-b-[var(--accent)]"
-                    : "text-[var(--muted)] border-b-transparent"
-                }`}
-                style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.1em" }}
-              >
-                {cat.icon} {cat.match}
-                <span className="hidden xs:inline">{cat.key}</span>
-              </button>
-            );
-          })}
-        </div>
+       {/* Category bookmarks — self-start так вони прикріплені до
+    верхнього краю смужки, а не центровані батьківським рядом */}
+          <div className="relative flex items-start gap-2 flex-shrink-0 order-2 sm:order-3 ml-auto sm:ml-0 self-start z-[99]">
+            {CATEGORIES.map((cat, i) => {
+              const active = cat.key === activeCategory;
+              const Icon = cat.icon;
+              
+              return (
+                <motion.button
+                  key={cat.key}
+                  // 1. Налаштування фізики перетягування (Drag)
+                  drag="y"
+                  dragConstraints={{ top: 0, bottom: 0 }} // Повертається в нульову точку
+                  dragElastic={{ top: 0, bottom: 0.6 }}   // Наскільки легко тягнеться вниз (0.6 — пружна гумка)
+                  dragMomentum={false}                    // Вимикаємо інерцію, щоб працювала суто пружина
+                  
+                  // Повернення на місце після того, як відпустили
+                  onDragEnd={(event, info) => {
+                    // Якщо потягнули достатньо сильно вниз (наприклад, більше 25px) — перемикаємо категорію
+                    if (info.offset.y > 25 && !active && !isAnimating.current) {
+                      switchCategory(cat.key);
+                    }
+                  }}
 
-        {/* 🔎 SEARCH */}
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Пошук по назві…"
-          className="order-3 sm:order-2 w-full sm:w-auto sm:flex-1 sm:max-w-xs px-3 py-1.5 outline-none text-lg text-[var(--ink)] bg-[var(--paper-r)] border border-[var(--rule)]"
-          style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.04em" }}
-        />
+                  // 2. Ефект легкого колихання (Wind/Wobble effect)
+                  // Перепиши ці пропси всередині <motion.button>
+                  animate={{
+                    // Кут повороту робимо мікроскопічним, бо при довжині 800px навіть 0.2 градуси дадуть помітний рух внизу
+                    rotate: active ? [0, -0.15, 0.15, -0.05, 0.05, 0] : [0, -0.3, 0.3, -0.15, 0.15, 0],
+                    // Зсув по Y теж робимо крихітним, щоб стрічка не стрибала вгору-вниз
+                    y: active ? [0, 0.3, -0.2, 0.2, 0] : [0, 0.5, -0.3, 0.3, 0],
+                  }}
+                  transition={{
+                    // Збільшуємо час (наприклад, до 8-10 секунд). Що довша стрічка, то повільніше вона має гойдатися
+                    duration: active ? 7 : 9, 
+                    repeat: Infinity,
+                    repeatType: "mirror",
+                    ease: "easeInOut", // Забезпечує максимально м'яке сповільнення в крайніх точках
+                    delay: i * 0.6,    // Трішки більший розсинхрон між сусідніми закладками
+                  }}
+
+                  // 3. Фізика кліку (Замість GSAP timeline на клік)
+                  whileTap={{ 
+                    y: 25, // можна збільшити хід кліку, бо стрічка довга
+                    scaleY: 1.02, // менше спотворення, щоб не розтягувати 800px ще сильніше
+                    transition: { type: "spring", stiffness: 120, damping: 20 } // м'якша, важча пружина
+                  }}
+                  onClick={() => {
+                    if (!active && !isAnimating.current) {
+                      switchCategory(cat.key);
+                    }
+                  }}
+                  
+                  title={cat.key}
+                  aria-label={cat.key}
+                  aria-current={active ? "page" : undefined}
+                  style={{
+                    clipPath: `polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - ${NOTCH}px), 0 100%)`,
+                    background: active ? "var(--accent)" : "var(--muted)",
+                    boxShadow: "0 4px 8px rgba(0,0,0,0.18)",
+                    marginTop: -PROTRUDE,
+                    paddingTop: PROTRUDE + 10,
+                    willChange: "transform",
+                    originX: 0.5, // Центр гойдання по горизонталі
+                    originY: 0,   // Гойдається ТІЛЬКИ від верхнього краю (як закріплена стрічка)
+                  }}
+                  className="relative w-10 sm:w-11 pb-4 flex justify-center items-start cursor-pointer border-none hover:brightness-110 transition-[filter] select-none touch-none"
+                >
+                  <Icon size={17} color="var(--paper-l)" />
+                </motion.button>
+              );
+            })}
+          </div>
       </div>
 
       {/* ── Book spread ── */}
@@ -180,6 +293,14 @@ export default function Attraction() {
               </motion.h2>
             </AnimatePresence>
             <div className="w-7 h-px bg-[var(--accent)] mt-2.5" />
+              {/* 🔎 SEARCH */}
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Пошук по назві…"
+                className="order-3 sm:order-2 w-full sm:w-auto sm:flex-1 sm:max-w-xs mt-2 px-3 py-1.5 outline-none text-lg text-[var(--ink)] bg-[var(--paper-r)] border border-[var(--rule)]"
+                style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.04em" }}
+              />
           </div>
 
           {/* Place list — horizontal scroll on mobile, vertical on desktop */}
@@ -187,6 +308,7 @@ export default function Attraction() {
             className="flex-1 md:overflow-y-auto py-3 md:py-4 overflow-x-auto md:overflow-x-visible"
             style={{ scrollbarWidth: "none" }}
           >
+            
             {filtered.length === 0 && (
               <p
                 className="px-4 sm:px-8 py-4 text-lg italic text-[var(--muted)]"

@@ -218,7 +218,7 @@ return (
 
           {/* subtitle */}
           <motion.p
-            className="mt-6 uppercase tracking-[0.45em] text-white/60 text-lg"
+            className="mt-6 uppercase tracking-[0.45em] text-white/60 text-lg text-center"
             initial={{ y: 20, opacity: 0 }}
             animate={heroReady ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 1.6 }}
@@ -320,103 +320,30 @@ return (
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-15 max-w-7xl mx-auto">
 
-          {/* FOOD */}
-          <BorderGlow
-            edgeSensitivity={80}
-            glowRadius={50}
-            glowIntensity={0.8}
-            coneSpread={30}
-            borderRadius={24}
-            backgroundColor="rgba(0,0,0,0.2)"
-            glowColor="255 255 255"
-            animated
-            colors={["#ec4899", "#f97316", "#ef4444"]}
-          >
-            <div
-              className="
-                h-full
-                p-8
-                rounded-2xl
-                transition-all
-                duration-500
-              "
-            >
-              <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-red-400">
-                <Utensils color="#fff" />
-              </div>
-
-              <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]">
-                ГАСТРОНОМІЯ
-              </h3>
-
-              <p className="text-white/80 text-2xl">
-                Скуштуйте найкращі страви місцевої кухні.
-              </p>
-            </div>
-          </BorderGlow>
-          {/* CULTURE */}
-            <BorderGlow
-            edgeSensitivity={80}
-            glowRadius={50}
-            glowIntensity={0.8}
-            coneSpread={30}
-            borderRadius={24}
-            backgroundColor="rgba(0,0,0,0.2)"
-            glowColor="324 80 80"
-            animated
-            colors={["#cf1b27", "#ed620c", "#3d0ced"]}
-          >
-          <div
-              className="
-                h-full
-                p-8
-                rounded-2xl
-                transition-all
-                duration-500
-              ">
-            <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-indigo-400">
-              <Drama color="#fff" />
-            </div>
-            <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]">
-              КУЛЬТУРА
-            </h3>
-            <p className="text-white/80 text-2xl">
-              Театри, виставки та фестивалі для кожного.
-            </p>
+        <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition"> 
+          <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-red-400"> 
+            <Utensils color="#fff" /> 
+          </div> 
+          <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]"> ГАСТРОНОМІЯ </h3> 
+          <p className="text-white/80 text-2xl"> Скуштуйте найкращі страви місцевої кухні. </p> 
+        </div> 
+        {/* CULTURE */} 
+        <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition"> 
+          <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-indigo-400"> 
+            <Drama color="#fff" /> 
+          </div> 
+          <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]"> КУЛЬТУРА </h3> 
+          <p className="text-white/80 text-2xl"> Театри, виставки та фестивалі для кожного. </p> 
+        </div> 
+        {/* NATURE */} 
+        <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition">
+          <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-teal-400">
+           <TreePine color="#fff" />
           </div>
-          </BorderGlow>
-
-          {/* NATURE */}
-          <BorderGlow
-            edgeSensitivity={80}
-            glowRadius={50}
-            glowIntensity={0.8}
-            coneSpread={30}
-            borderRadius={24}
-            backgroundColor="rgba(0,0,0,0.2)"
-            glowColor="255 255 255"
-            animated
-            colors={["#ec4899", "#f97316", "#ef4444"]}
-          >
-                      <div
-              className="
-                h-full
-                p-8
-                rounded-2xl
-                transition-all
-                duration-500
-              ">
-            <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-teal-400">
-              <TreePine color="#fff" />
-            </div>
-            <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]">
-              ПРИРОДА
-            </h3>
-            <p className="text-white/80 text-2xl">
-              Прогулянки вздовж Дніпра та зелені парки.
-            </p>
-          </div>
-        </BorderGlow>
+          <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]"> ПРИРОДА </h3> 
+          <p className="text-white/80 text-2xl"> Прогулянки вздовж Дніпра та зелені парки. </p> 
+        </div> 
+         
         </div>
       </div>
 

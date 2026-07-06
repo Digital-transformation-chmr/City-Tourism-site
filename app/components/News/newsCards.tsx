@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, MouseEvent } from "react";
 
 /* ================= TYPES ================= */
 
@@ -47,14 +47,11 @@ function parseTelegramContent(content: string = "") {
 
 /* ================= CONFIG ================= */
 
-// Base card size (the "unscaled" card). The center card grows via CSS scale,
-// so give some breathing room around it (padding on the scroller) rather
-// than reserving huge min-widths for every card.
-const CARD_WIDTH = 640; // px
-const CARD_HEIGHT = 440; // px
+const CARD_WIDTH = 640; 
+const CARD_HEIGHT = 440; 
 
-const MIN_SCALE = 0.86; // cards far from center
-const MAX_SCALE = 1.12; // the centered card
+const MIN_SCALE = 0.86; 
+const MAX_SCALE = 1.12; 
 
 /* ================= MAIN ================= */
 
@@ -63,6 +60,12 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
   const cardRefs = useRef<Array<HTMLAnchorElement | null>>([]);
   const [scales, setScales] = useState<number[]>(() => items.map(() => MIN_SCALE));
   const rafRef = useRef<number | null>(null);
+
+  // Рефи для реалізації перетягування (Drag)
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const [isMoved, setIsMoved] = useState(false); // Щоб відрізнити клік від свайпу
 
   const updateScales = useCallback(() => {
     const scroller = scrollerRef.current;
@@ -77,8 +80,6 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
       const cardCenter = rect.left + rect.width / 2;
       const distance = Math.abs(cardCenter - scrollerCenter);
 
-      // Normalize distance against half the scroller width so cards
-      // fully off to the side settle at MIN_SCALE.
       const maxDistance = scrollerRect.width / 2 + rect.width / 2;
       const ratio = Math.min(distance / maxDistance, 1);
 
@@ -110,8 +111,7 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
       window.removeEventListener("resize", onScroll);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [items.length]);
+  }, [items.length, onScroll, updateScales]);
 
   const scroll = (dir: "left" | "right") => {
     if (!scrollerRef.current) return;
@@ -122,29 +122,83 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
     });
   };
 
+  /* ================= DRAG HANDLERS ================= */
+
+  const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+    if (!scrollerRef.current) return;
+    isDragging.current = true;
+    setIsMoved(false);
+    
+    // Тимчасово вимикаємо плавну прокрутку (scroll-smooth), щоб картка йшла чітко за мишкою
+    scrollerRef.current.style.scrollBehavior = 'auto';
+    // Також вимикаємо snap-ефект під час руху миші
+    scrollerRef.current.style.scrollSnapType = 'none';
+
+    startX.current = e.pageX - scrollerRef.current.offsetLeft;
+    scrollLeft.current = scrollerRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (!isDragging.current || !scrollerRef.current) return;
+    e.preventDefault();
+    
+    const x = e.pageX - scrollerRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5; // Коефіцієнт 1.5 робить прокрутку чутливішою
+    
+    if (Math.abs(walk) > 5) {
+      setIsMoved(true); // Користувач саме тягне, а не просто клікнув
+    }
+    
+    scrollerRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    if (!isDragging.current || !scrollerRef.current) return;
+    isDragging.current = false;
+
+    // Повертаємо назад плавний скрол та snap-ефект
+    scrollerRef.current.style.scrollBehavior = 'smooth';
+    scrollerRef.current.style.scrollSnapType = 'x mandatory';
+
+    // Невеликий хак: змушуємо контейнер оновити свою позицію згідно з правилами snap
+    const currentScroll = scrollerRef.current.scrollLeft;
+    scrollerRef.current.scrollLeft = currentScroll + 1;
+    scrollerRef.current.scrollLeft = currentScroll;
+  };
+
+  const handleCardClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    // Якщо користувач тягнув картку — блокуємо перехід за посиланням
+    if (isMoved) {
+      e.preventDefault();
+    }
+  };
+
   const channel = process.env.NEXT_PUBLIC_TG_CHANNEL;
 
   return (
     <div className="relative w-full z-0">
-
       {/* buttons */}
       <button
         onClick={() => scroll("left")}
-        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white px-3 py-2 rounded-full z-[999]"
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white px-3 py-2 rounded-full z-[999] cursor-pointer selection:bg-transparent"
       >
         ←
       </button>
 
       <button
         onClick={() => scroll("right")}
-        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white px-3 py-2 rounded-full z-[999]"
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-black/40 text-white px-3 py-2 rounded-full z-[999] cursor-pointer selection:bg-transparent"
       >
         →
       </button>
 
-      {/* SCROLL */}
+      {/* SCROLL CONTAINER */}
       <div
         ref={scrollerRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUpOrLeave}
+        onMouseLeave={handleMouseUpOrLeave}
         className="
           flex items-center gap-8
           overflow-x-auto
@@ -152,6 +206,8 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
           snap-x snap-mandatory
           px-[15vw] py-16
           gap-20
+          cursor-grab active:cursor-grabbing
+          select-none
           [&::-webkit-scrollbar]:h-1
           [&::-webkit-scrollbar-thumb]:bg-white/10
           [&::-webkit-scrollbar-track]:bg-transparent
@@ -178,6 +234,14 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
               href={telegramLink}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={handleCardClick}
+              
+              // 1. Забороняємо браузеру підхоплювати посилання як drag-елемент
+              draggable={false} 
+              
+              // 2. Додатково глушимо подію старту drag-і-дропу на рівні JS
+              onDragStart={(e) => e.preventDefault()} 
+
               style={{
                 width: CARD_WIDTH,
                 height: CARD_HEIGHT,
@@ -197,17 +261,19 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
                 transition-transform
                 duration-300
                 ease-out
+                pointer-events-auto
+                select-none
               "
             >
-
               {/* IMAGE LEFT */}
-              <div className="relative w-[45%] h-full">
+              <div className="relative w-[45%] h-full pointer-events-none">
                 {item.image ? (
                   <Image
                     src={item.image}
                     alt={cardTitle}
                     fill
                     className="object-cover"
+                    draggable={false}
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white/10 to-white/5">
@@ -220,8 +286,7 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
               </div>
 
               {/* TEXT RIGHT */}
-              <div className="w-[55%] p-7 flex flex-col justify-between">
-
+              <div className="w-[55%] p-7 flex flex-col justify-between pointer-events-none">
                 <div>
                   <h3 className="text-white font-bold text-2xl line-clamp-2">
                     {cardTitle}
@@ -235,9 +300,7 @@ export default function NewsGrid({ items }: { items: NewsItem[] }) {
                 <div className="text-xs text-blue-400">
                   Відкрити в Telegram →
                 </div>
-
               </div>
-
             </a>
           );
         })}

@@ -143,7 +143,7 @@ export default function MapPage() {
   
 
   return (
-    <div className="relative w-full h-dvh flex flex-col pt-12 overflow-hidden">
+    <div className="relative w-full h-dvh pt-12 flex flex-col  overflow-hidden">
 
       {/* 🔝 TOP BAR (Тільки фільтри та пошук місць) */}
       <div className="relative z-10 flex items-center justify-between gap-3 px-6 py-3 backdrop-blur-md bg-black/30 border-b border-white/10">

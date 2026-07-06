@@ -68,7 +68,7 @@ export default function Page() {
           onClick={prevImage}
           className="absolute left-4 top-1/2 -translate-y-1/2 z-20
                      w-12 h-12 rounded-full bg-black/50 hover:bg-black/70
-                     backdrop-blur-md flex items-center justify-center"
+                     backdrop-blur-md flex items-center justify-center cursor-pointer"
         >
           <span className="text-2xl">‹</span>
         </button>
@@ -78,7 +78,7 @@ export default function Page() {
           onClick={nextImage}
           className="absolute right-4 top-1/2 -translate-y-1/2 z-20
                      w-12 h-12 rounded-full bg-black/50 hover:bg-black/70
-                     backdrop-blur-md flex items-center justify-center"
+                     backdrop-blur-md flex items-center justify-center cursor-pointer"
         >
           <span className="text-2xl">›</span>
         </button>
