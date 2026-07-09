@@ -120,9 +120,8 @@ useGSAP(() => {
         <Link href="/">
           <Logo />
         </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6 font-bold font-heading items-center">
+{/* Desktop Navigation */}
+        {/* <nav className="hidden md:flex gap-6 font-bold font-heading items-center">
           {navItems.map((item) => {
             const isActive = pathname === "/site" + item.href;
 
@@ -145,11 +144,11 @@ useGSAP(() => {
               </Link>
             );
           })}
-        </nav>
+        </nav> */}
 
         {/* Burger Button */}
         <button
-          className="md:hidden flex flex-col justify-center items-center h-10 w-10 p-2 relative z-50 focus:outline-none"
+          className=" flex flex-col justify-center items-center h-10 w-10 p-2 relative z-50 focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Menu"
         >
@@ -163,7 +162,7 @@ useGSAP(() => {
       {/* Mobile Navigation */}
       <div
         ref={menuRef}
-        className="md:hidden overflow-hidden h-0 opacity-0 border-white/10"
+        className="overflow-hidden h-0 opacity-0 border-white/10"
         style={{ borderTopWidth: menuOpen ? '1px' : '0px' }}
       >
         <nav className="flex flex-col px-8 py-4 gap-4">

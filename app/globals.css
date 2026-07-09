@@ -58,7 +58,7 @@
 }
 
 :root {
-  --bg-gradient: #faf7f1;
+  --bg-gradient:#f7f9fb;
   --ink: #1c170f;
   --paper-l: #ede8dc;
   --paper-r: #f7f3eb;
@@ -325,4 +325,13 @@ html::-webkit-scrollbar {
   html {
     @apply font-mono;
   }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee var(--speed, 20s) linear infinite;
 }

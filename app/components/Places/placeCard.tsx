@@ -94,9 +94,9 @@ export function PlaceCard({ item }: PlaceCardProps) {
       gsap-card
       group
       relative
-       w-full
-      aspect-[3/5]
-      max-h-[600px]
+      w-full
+      aspect-[3/4]
+      
       overflow-hidden
       rounded-xl
       text-left
@@ -120,16 +120,16 @@ export function PlaceCard({ item }: PlaceCardProps) {
     />
 
     {/* Верхній легкий градієнт */}
-    <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+    <div className="absolute inset-0 bg-gradient-to-t from-[#071A2EEB] via-transparent to-transparent" />
 
     {/* Hover градієнт */}
     <div
       className={`
         absolute
         inset-0
+        from-[#071A2EEB]
+        via-[#071A2EEB]/70
         bg-gradient-to-t
-        from-black
-        via-black/70
         to-transparent
         transition-all
         duration-500
@@ -153,7 +153,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
         flex-col
       "
     >
-      <span className="text-lg text-lime-300 uppercase tracking-widest">
+      <span className="text-lg text-[#86b6e8] uppercase tracking-widest">
         {item.type}
       </span>
 
@@ -184,7 +184,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
         {item.description}
       </p>
 
-        <div className="mt-6 flex items-center gap-2 text-lime-300 font-medium">
+        <div className="mt-6 flex items-center gap-2 text-[#f28f88] font-medium">
           Детальніше
           <span className="transition-transform duration-300 group-hover:translate-x-2">
             →
@@ -231,7 +231,7 @@ export default function PopPlaceGrid({ Places }: PlaceGrid) {
   });
 
   return (
-    <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-18">
+    <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[28px]">
       {Places.map((item, index) => (
         <PlaceCard key={item.id || index} item={item} />
       ))}
