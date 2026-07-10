@@ -13,6 +13,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LogoLoop from "@/components/LogoLoop";
 import Marquee from "../components/UI/Marquee";
+import { CategoriesSection } from "../components/UI/category";
 
 import { FaDiamond } from "react-icons/fa6";
 import { motion } from "motion/react";
@@ -124,6 +125,14 @@ export default function Home() {
   }, []);
  
 
+  type CategoryKey = "food" | "entertainment" | "newbies";
+
+  interface PlaceItem {
+  icon: string;
+  title: string;
+  desc: string;
+  }
+
 return (
     <div ref={mainRef} className="overflow-x-hidden">
 
@@ -217,7 +226,7 @@ return (
     <div className="w-full overflow-hidden bg-[oklch(0.22_0.05_250)] py-3.5 select-none">
       <Marquee 
         items={cherkasyFacts} 
-        speed={28} // твоя швидкість з анімації (28s)
+        speed={30}// твоя швидкість з анімації (28s)
         pauseOnHover={false} // у твоєму коді не було паузи, тому вимикаємо
         // Передаємо ромбик з твоїм кольором oklch(0.55 0.19 25)
         defaultLogo={<FaDiamond className="text-[#d20707] text-xs" />} 
@@ -375,88 +384,12 @@ return (
       </div>
 
             {/* ================= HERO 2 ================= */}
-      <div className="h-screen w-full flex flex-col items-center justify-center relative bg-black/60 text-white px-8">
+        <CategoriesSection></CategoriesSection>
 
-        <Image
-          alt="Hero2"
-          src="/Banners/banner2.jpg"
-          fill
-          className="object-cover -z-10"
-        />
-
-        <h2 className="text-5xl font-bold mb-6 text-center">
-          Відкрийте <span className="text-[var(--accent)]">атмосферу</span> міста
-        </h2>
-
-        <p className="text-2xl max-w-2xl text-center text-white/80 leading-relaxed">
-          Тут кожна вулиця має свою історію, кожна пам’ятка — свою легенду.
-          Досліджуйте, відкривайте і закохуйтесь у місто знову і знову.
-        </p>
-
-      </div>
-
-            {/* ================= FEATURES ================= */}
-      <div className="bg-white/10 py-20 px-12 text-center">
-
-        <h2 className="text-4xl font-bold text-[var(--accent)] mb-12">
-          Що вас чекає?
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-15 max-w-7xl mx-auto">
-
-        <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition"> 
-          <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-pink-400 to-red-400"> 
-            <Utensils color="#fff" /> 
-          </div> 
-          <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]"> ГАСТРОНОМІЯ </h3> 
-          <p className="text-white/80 text-2xl"> Скуштуйте найкращі страви місцевої кухні. </p> 
-        </div> 
-        {/* CULTURE */} 
-        <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition"> 
-          <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-indigo-400"> 
-            <Drama color="#fff" /> 
-          </div> 
-          <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]"> КУЛЬТУРА </h3> 
-          <p className="text-white/80 text-2xl"> Театри, виставки та фестивалі для кожного. </p> 
-        </div> 
-        {/* NATURE */} 
-        <div className="p-8 rounded-2xl bg-black/20 backdrop-blur-md shadow-2xl border border-white/20 hover:-translate-y-2 transition">
-          <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-r from-green-400 to-teal-400">
-           <TreePine color="#fff" />
-          </div>
-          <h3 className="text-3xl font-semibold mb-4 text-[var(--accent)]"> ПРИРОДА </h3> 
-          <p className="text-white/80 text-2xl"> Прогулянки вздовж Дніпра та зелені парки. </p> 
-        </div> 
-         
-        </div>
-      </div>
-
-            {/* ================= HERO 3 ================= */}
-      <div className="h-screen w-full flex items-center justify-center relative bg-black/50 text-white">
-
-        <Image
-          alt="Hero3"
-          src="/Banners/banner3.png"
-          fill
-          className="object-cover -z-10"
-        />
-
-        <p className="text-6xl text-center">
-          Сплануйте свою подорож
-          <br />
-          <span className="bg-gradient-to-r from-blue-300 to-red-300 bg-clip-text text-transparent">
-            прямо зараз
-          </span>
-        </p>
-
-      </div>
+        
 
             {/* ================= NEWS ================= */}
-      <div className="py-20 px-12 bg-[071a2e]">
 
-        <h2 className="text-4xl font-bold text-center text-white mb-12">
-          Останні новини
-        </h2>
 
         {news.length > 0 ? (
           <NewsGrid items={news} />
@@ -466,8 +399,6 @@ return (
           </p>
         )}
 
-      </div>
-
-          </div>
+  </div>
   );
 }
