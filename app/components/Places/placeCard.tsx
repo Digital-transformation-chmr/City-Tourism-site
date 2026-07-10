@@ -96,7 +96,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
       relative
       w-full
       aspect-[3/4]
-      
+      max-h-[500px]
       overflow-hidden
       rounded-xl
       text-left
@@ -231,7 +231,7 @@ export default function PopPlaceGrid({ Places }: PlaceGrid) {
   });
 
   return (
-    <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[28px]">
+    <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12">
       {Places.map((item, index) => (
         <PlaceCard key={item.id || index} item={item} />
       ))}

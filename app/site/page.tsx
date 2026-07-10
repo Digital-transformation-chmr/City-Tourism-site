@@ -136,7 +136,7 @@ export default function Home() {
 return (
     <div ref={mainRef} className="overflow-x-hidden">
 
-      <div className="flex justify-between gap-[clamp(2rem,4vw,5rem)] overflow-hidden px-[clamp(1.5rem,5vw,6rem)] pb-[clamp(3rem,6vw,5rem)] pt-[clamp(3rem,6vw,6rem)] min-h-[70vh] mx-auto">
+      <div className="flex justify-between gap-[clamp(2rem,4vw,5rem)] overflow-hidden px-10 mx-2 pb-[clamp(3rem,6vw,5rem)] pt-[clamp(3rem,6vw,6rem)] min-h-[70vh] mx-auto">
         {/* ================= ЛІВА КОЛОНКА ================= */}
         <div className="flex-[1.1_1_0%]">
           {/* бейдж */}
@@ -150,7 +150,7 @@ return (
           </motion.div>
   
           {/* заголовок — слово за словом, знизу вгору */}
-          <h1 className="mb-[clamp(1rem,1.5vw,1.75rem)] flex flex-wrap gap-x-[clamp(0.5rem,1vw,1rem)] gap-y-0 font-[Unbounded,sans-serif] text-[clamp(2.75rem,2.4vw+2rem,5.5rem)] font-bold leading-[1.08] text-[oklch(0.22_0.05_250)] [text-wrap:balance]">
+          <h1 className="mb-4 flex flex-wrap gap-x-[clamp(0.5rem,1vw,1rem)] gap-y-0 font-[Unbounded,sans-serif] text-6xl font-bold leading-[1.08] text-[oklch(0.22_0.05_250)] [text-wrap:balance]">
             {HEADLINE.map((word, i) => (
               <span key={i} className="inline-block overflow-hidden">
                 <motion.span

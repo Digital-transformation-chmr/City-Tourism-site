@@ -50,130 +50,132 @@ function MiniFlash() {
 
 function CanonCamera({ imageUrl, onPrev, onNext }: { imageUrl?: string; onPrev: () => void; onNext: () => void }) {
   return (
-    <div className="relative flex flex-col items-center w-full" style={{ maxWidth: "min(850px, 100%)" }}>
+    <div className="relative flex flex-col items-center w-full" style={{ maxWidth: "min(900px, 100%)" }}>
+      {/* КОРПУС КАМЕРИ (Задня панель) */}
       <div
-        className="relative select-none w-full aspect-[4/3] flex items-center justify-center"
-        style={{ filter: "drop-shadow(0 30px 50px rgba(0,0,0,0.4))" }}
+        className="relative select-none w-full aspect-[3/2] bg-[#1a1a1a] rounded-[24px] p-2 sm:p-6 flex items-center justify-between border-b-8 border-black/40"
+        style={{ 
+          boxShadow: "inset 0 4px 10px rgba(255,255,255,0.1), 0 30px 60px rgba(0,0,0,0.5)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundSize: "4px 4px"
+        }}
       >
-        {/* Silhouette */}
-        <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute top-[8%] left-0 w-[30%] h-[88%] bg-[#1a1a1a] rounded-l-[40px] rounded-r-[20px]" 
-            style={{
-              boxShadow: "inset 10px 0 20px rgba(0,0,0,0.6), inset -5px 0 15px rgba(255,255,255,0.05)",
-              backgroundImage: "radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px)",
-              backgroundSize: "3px 3px"
-            }}
-          />
-          <div className="absolute top-[12%] right-0 w-[76%] h-[84%] bg-[#1c1c1c] rounded-r-[24px] rounded-l-[10px] shadow-2xl" />
-          <div 
-            className="absolute top-0 left-[34%] w-[36%] h-[22%] bg-[#1c1c1c]"
-            style={{ 
-              clipPath: "polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%)",
-              borderRadius: "12px 12px 0 0"
-            }}
-          />
+        {/* Верхній видошукач (Окуляр над екраном) */}
+        <div className="absolute -top-[12px] left-1/2 -translate-x-1/2 w-[28%] h-[16px] bg-[#121212] border border-black rounded-t-lg shadow-md z-0 flex items-center justify-center">
+          <div className="w-[85%] h-[4px] bg-red-600/30 rounded-full blur-[1px]" />
         </div>
 
-        {/* Controls */}
-        <div 
-          className="absolute top-[3%] left-[22%] w-[14%] h-[9%] bg-[#2b2b2b] z-10 border-b-2 border-black"
-          style={{
-            borderRadius: "6px 6px 0 0",
-            background: "repeating-linear-gradient(90deg, #333, #333 3px, #111 3px, #111 6px)"
-          }}
-        />
-        <div 
-          className="absolute top-[6%] left-[12%] w-[10%] h-[5%] bg-gradient-to-b from-[#333] to-[#1a1a1a] z-10 rounded-full border border-black/60 rotate-[-12deg]"
-          style={{ boxShadow: "inset 0 2px 3px rgba(255,255,255,0.2), 0 2px 4px rgba(0,0,0,0.4)" }}
-        />
-        <div className="absolute top-[22%] left-[26%] w-3 h-4 bg-[#111] border border-white/10 rounded-full z-10 flex items-center justify-center">
-          <div className="w-1.5 h-1.5 bg-red-900 rounded-full opacity-80" />
-        </div>
-        <div className="absolute bottom-[34%] right-[18%] w-6 h-6 bg-[#222] border border-black rounded-full z-20 shadow-md active:bg-[#111]" />
+        {/* ================= ЗАДНІЙ ЕКРАН КАМЕРИ ================= */}
+        <div className="relative flex-1 h-full bg-black rounded-lg overflow-hidden border-[6px] border-[#121212] shadow-inner group">
+          
+          {/* Зображення пам'ятки */}
+          <AnimatePresence mode="wait">
+            {imageUrl && (
+              <motion.img
+                key={imageUrl}
+                src={imageUrl}
+                alt="Live View"
+                className="w-full h-full object-cover absolute inset-0"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+              />
+            )}
+          </AnimatePresence>
 
-        {/* Lens */}
-        <div className="absolute left-[52%] top-[56%] -translate-x-1/2 -translate-y-1/2 z-10 w-[74%] aspect-square rounded-full flex items-center justify-center">
-          <div 
-            className="absolute inset-0 rounded-full bg-[#141414]" 
-            style={{ boxShadow: "0 20px 45px rgba(0,0,0,0.7), inset 0 2px 4px rgba(255,255,255,0.1)", border: "2px solid #282828" }}
-          />
-          <div 
-            className="absolute inset-[4%] rounded-full"
-            style={{ 
-              background: "repeating-conic-gradient(from 0deg, #181818 0deg 1deg, #262626 1deg 2deg)",
-              boxShadow: "inset 0 0 15px rgba(0,0,0,0.95)"
-            }}
-          />
-          <div 
-            className="absolute inset-[10%] rounded-full bg-[#1a1a1a] border-4 border-[#121212] flex items-center justify-center select-none"
-            style={{ boxShadow: "inset 0 0 10px rgba(0,0,0,0.85)" }}
-          >
-            <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full animate-[spin_160s_linear_infinite] opacity-40">
-              <path id="textPath" d="M 100, 100 m -74, 0 a 74,74 0 1,1 148,0 a 74,74 0 1,1 -148,0" fill="none" />
-              <text fill="white" fontSize="8" fontWeight="600" letterSpacing="1.5" className="font-sans uppercase">
-                <textPath href="#textPath" startOffset="0%">
-                  Digital Vision Lens &nbsp;&nbsp; F/1.4 &nbsp;&nbsp; 50mm &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; High Resolution
-                </textPath>
-              </text>
-            </svg>
-            <div className="absolute top-[4%] w-1.5 h-1.5 bg-slate-400 rounded-sm" />
-          </div>
+          {/* Екранний фільтр (легкий шум та віньєтка для реалізму) */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none z-10" />
 
-          <div 
-            className="absolute inset-[18%] overflow-hidden rounded-full bg-black border-[3px] border-[#0a0a0a]"
-            style={{ boxShadow: "inset 0 0 30px rgba(0,0,0,1)" }}
-          >
-            <AnimatePresence mode="wait">
-              {imageUrl && (
-                <motion.img
-                  key={imageUrl}
-                  src={imageUrl}
-                  alt="Місце"
-                  className="w-full h-full object-cover absolute inset-0 rounded-full"
-                  initial={{ opacity: 0, scale: 1.15 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.4 }}
-                  style={{ filter: "brightness(0.92) saturate(1.15) contrast(1.05)" }}
-                />
-              )}
-            </AnimatePresence>
-            <div
-              className="absolute inset-0 pointer-events-none rounded-full mix-blend-screen opacity-65"
-              style={{ 
-                background: "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.3) 0%, transparent 35%), radial-gradient(circle at 70% 72%, rgba(0,102,255,0.25) 0%, transparent 45%), radial-gradient(circle at 50% 50%, rgba(200,120,20,0.1) 0%, transparent 40%)" 
-              }}
-            />
+          {/* ================= CAMERA HUD (ІНТЕРФЕЙС ДИСПЛЕЯ) ================= */}
+          <div className="absolute inset-0 p-3 flex flex-col justify-between text-white font-mono text-[10px] sm:text-xs z-20 pointer-events-none select-none tracking-wider drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
+            
+            {/* Верхній ряд HUD */}
+            <div className="flex justify-between items-center w-full">
+              <div className="flex items-center gap-1.5 bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
+                <span className="font-bold text-red-500">LIVE</span>
+              </div>
+              <div className="bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                1080p 60fps
+              </div>
+              {/* Іконка батареї */}
+              <div className="flex items-center gap-1 bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                <span>94%</span>
+                <div className="w-5 h-2.5 border border-white p-0.5 flex rounded-sm">
+                  <div className="h-full w-full bg-emerald-500 rounded-2xs" />
+                </div>
+              </div>
+            </div>
+
+            {/* Сітка третин (Rule of Thirds) — ледь помітна */}
+            <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 opacity-20 pointer-events-none">
+              <div className="border-r border-b border-white" />
+              <div className="border-r border-b border-white" />
+              <div className="border-b border-white" />
+              <div className="border-r border-b border-white" />
+              <div className="border-r border-b border-white" />
+              <div className="border-b border-white" />
+            </div>
+
+            {/* Рамка фокусування по центру */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-24 sm:h-24 border border-white/40 flex items-center justify-center">
+              <div className="w-2 h-2 border border-emerald-400 bg-emerald-400/20 rounded-full" />
+              {/* Куточки фокусу */}
+              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-emerald-400" />
+              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-emerald-400" />
+              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-emerald-400" />
+              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-emerald-400" />
+            </div>
+
+            {/* Нижній ряд HUD: Параметри експозиції */}
+            <div className="flex justify-center items-center gap-4 sm:gap-6 w-full text-amber-400 font-bold bg-black/50 py-1 px-3 rounded-md max-w-max mx-auto backdrop-blur-sm">
+              <span>1/125</span>
+              <span>F1.4</span>
+              <span className="text-white/60">MM. <span className="text-emerald-400">0.0</span></span>
+              <span className="bg-amber-500 text-black px-1 rounded text-[9px]">ISO 400</span>
+              <span className="text-white text-[9px] font-sans">AWB</span>
+            </div>
           </div>
         </div>
 
-        {/* Navigation Buttons */}
-        <button
-          onClick={onPrev}
-          className="absolute left-2 top-[54%] -translate-y-1/2 z-30 flex items-center justify-center rounded-full transition-all duration-150 hover:scale-110 active:scale-95 bg-black/40 text-white/80 hover:text-white backdrop-blur-sm"
-          style={{
-            width: "clamp(38px, 5vw, 52px)",
-            height: "clamp(38px, 5vw, 52px)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            boxShadow: "0 6px 16px rgba(0,0,0,0.4)",
-          }}
-        >
-          <ChevronLeft size={24} />
-        </button>
+        {/* ================= ФІЗИЧНІ КНОПКИ ПРАВОРУЧ ЕКРАНА ================= */}
+        <div className="w-[60px] sm:w-[80px] h-full flex flex-col justify-between items-center pl-3 sm:pl-4 py-2 z-10 border-l border-white/5">
+          
+          {/* Диск режимів або верхня кнопка */}
+          <div className="flex flex-col items-center gap-1">
+            <div className="w-7 h-7 bg-[#262626] border border-black rounded-full shadow flex items-center justify-center text-[8px] text-white/40 font-bold">
+              MENU
+            </div>
+          </div>
 
-        <button
-          onClick={onNext}
-          className="absolute right-2 top-[54%] -translate-y-1/2 z-30 flex items-center justify-center rounded-full transition-all duration-150 hover:scale-110 active:scale-95 bg-black/40 text-white/80 hover:text-white backdrop-blur-sm"
-          style={{
-            width: "clamp(38px, 5vw, 52px)",
-            height: "clamp(38px, 5vw, 52px)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            boxShadow: "0 6px 16px rgba(0,0,0,0.4)",
-          }}
-        >
-          <ChevronRight size={24} />
-        </button>
+          {/* Джойстик навігації (Кнопки назад/вперед в стилі клікера камери) */}
+          <div className="flex flex-col gap-3 my-auto items-center">
+            {/* Кнопка ВЛІВО (Попередній слайд) */}
+            <button
+              onClick={onPrev}
+              className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] active:bg-[#151515] text-white/80 hover:text-white rounded-full flex items-center justify-center border border-black transition-all shadow-md group/btn"
+              style={{ boxShadow: "inset 0 1px 3px rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.3)" }}
+            >
+              <ChevronLeft size={20} className="transition-transform group-hover/btn:-translate-x-0.5" />
+            </button>
+
+            {/* Кнопка ВПРАВО (Наступний слайд) */}
+            <button
+              onClick={onNext}
+              className="w-10 h-10 bg-[#222] hover:bg-[#2a2a2a] active:bg-[#151515] text-white/80 hover:text-white rounded-full flex items-center justify-center border border-black transition-all shadow-md group/btn"
+              style={{ boxShadow: "inset 0 1px 3px rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.3)" }}
+            >
+              <ChevronRight size={20} className="transition-transform group-hover/btn:translate-x-0.5" />
+            </button>
+          </div>
+
+          {/* Кнопка перегляду галереї (Просто декор для автентичності) */}
+          <div className="w-7 h-5 bg-[#262626] border border-black rounded flex items-center justify-center">
+            <div className="w-3 h-2.5 border border-white/30 rounded-xs" />
+          </div>
+        </div>
+
       </div>
     </div>
   );
