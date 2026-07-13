@@ -59,21 +59,7 @@ export function CategoriesSection() {
       }}
       className="relative overflow-hidden py-20 px-12 bg-[oklch(0.94_0.02_70)]"
     >
-      {/* Background Number — тепер позиціонується точно так само, як 01 */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, scale: 0.8, x: -30 },
-          show: {
-            opacity: 0.06,
-            scale: 1,
-            x: 0,
-            transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
-          },
-        }}
-        className="absolute top-0 -translate-y-2 left-6 font-['Unbounded',sans-serif] text-[120px] md:text-[170px] font-extrabold text-[oklch(0.42_0.13_250)] pointer-events-none z-0 leading-none select-none"
-      >
-        02
-      </motion.div>
+
 
       <div className="relative max-w-7xl mx-auto z-10">
         {/* Section Header */}

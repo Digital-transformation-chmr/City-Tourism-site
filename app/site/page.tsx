@@ -250,43 +250,6 @@ return (
           }}
           className="relative overflow-hidden py-20 px-8 md:px-12"
         >
-          {/* Background Number */}
-          <motion.div
-            variants={{
-              hidden: {
-                opacity: 0,
-                scale: 0.7,
-                x: -40,
-              },
-              show: {
-                opacity: 0.06,
-                scale: 1,
-                x: 0,
-                transition: {
-                  duration: 1,
-                  ease: [0.22, 1, 0.36, 1],
-                },
-              },
-            }}
-            style={{ color: "oklch(0.22 0.05 250)" }}
-            className="
-              absolute
-              left-6
-              top-0
-              -translate-y-2
-              font-['Unbounded']
-              text-[120px]
-              md:text-[170px]
-              font-extrabold
-              leading-none
-              pointer-events-none
-              select-none
-              z-0
-            "
-          >
-            01
-          </motion.div>
-
           {/* Content */}
           <div className="relative z-10 flex flex-col md:flex-row justify-between items-end gap-8">
 
@@ -395,9 +358,11 @@ return (
           <NewsGrid items={news} />
         ) : (
           <p className="text-center text-white/50 text-xl">
-            Новин поки немає...
           </p>
         )}
+
+
+    
 
   </div>
   );

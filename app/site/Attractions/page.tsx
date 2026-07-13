@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MapPin, Clock, ChevronLeft, ChevronRight, Info, Globe } from "lucide-react";
-import PopPlaceGrid from "../../components/Places/placeCard";
+import PlacePolaroidGrid from "@/app/components/Places/placePolaroidCard";
 import { Place } from "../../components/Places/placeCard";
 
 const SIDEBAR_WIDTH_DESKTOP = "clamp(260px, 22vw, 340px)";
@@ -50,7 +50,7 @@ function MiniFlash() {
 
 function CanonCamera({ imageUrl, onPrev, onNext }: { imageUrl?: string; onPrev: () => void; onNext: () => void }) {
   return (
-    <div className="relative flex flex-col items-center w-full" style={{ maxWidth: "min(900px, 100%)" }}>
+    <div className="relative flex flex-col items-center w-full">
       {/* КОРПУС КАМЕРИ (Задня панель) */}
       <div
         className="relative select-none w-full aspect-[3/2] bg-[#1a1a1a] rounded-[24px] p-2 sm:p-6 flex items-center justify-between border-b-8 border-black/40"
@@ -90,52 +90,8 @@ function CanonCamera({ imageUrl, onPrev, onNext }: { imageUrl?: string; onPrev: 
           {/* ================= CAMERA HUD (ІНТЕРФЕЙС ДИСПЛЕЯ) ================= */}
           <div className="absolute inset-0 p-3 flex flex-col justify-between text-white font-mono text-[10px] sm:text-xs z-20 pointer-events-none select-none tracking-wider drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
             
-            {/* Верхній ряд HUD */}
-            <div className="flex justify-between items-center w-full">
-              <div className="flex items-center gap-1.5 bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse" />
-                <span className="font-bold text-red-500">LIVE</span>
-              </div>
-              <div className="bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                1080p 60fps
-              </div>
-              {/* Іконка батареї */}
-              <div className="flex items-center gap-1 bg-black/40 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                <span>94%</span>
-                <div className="w-5 h-2.5 border border-white p-0.5 flex rounded-sm">
-                  <div className="h-full w-full bg-emerald-500 rounded-2xs" />
-                </div>
-              </div>
-            </div>
 
-            {/* Сітка третин (Rule of Thirds) — ледь помітна */}
-            <div className="absolute inset-0 grid grid-cols-3 grid-rows-3 opacity-20 pointer-events-none">
-              <div className="border-r border-b border-white" />
-              <div className="border-r border-b border-white" />
-              <div className="border-b border-white" />
-              <div className="border-r border-b border-white" />
-              <div className="border-r border-b border-white" />
-              <div className="border-b border-white" />
-            </div>
 
-            {/* Рамка фокусування по центру */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-24 sm:h-24 border border-white/40 flex items-center justify-center">
-              <div className="w-2 h-2 border border-emerald-400 bg-emerald-400/20 rounded-full" />
-              {/* Куточки фокусу */}
-              <div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-emerald-400" />
-              <div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-emerald-400" />
-              <div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-emerald-400" />
-              <div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-emerald-400" />
-            </div>
-
-            {/* Нижній ряд HUD: Параметри експозиції */}
-            <div className="flex justify-center items-center gap-4 sm:gap-6 w-full text-amber-400 font-bold bg-black/50 py-1 px-3 rounded-md max-w-max mx-auto backdrop-blur-sm">
-              <span>1/125</span>
-              <span>F1.4</span>
-              <span className="text-white/60">MM. <span className="text-emerald-400">0.0</span></span>
-              <span className="bg-amber-500 text-black px-1 rounded text-[9px]">ISO 400</span>
-              <span className="text-white text-[9px] font-sans">AWB</span>
-            </div>
           </div>
         </div>
 
@@ -551,7 +507,7 @@ export default function Attraction() {
       </div>
 
       <div className="mx-auto px-10 py-12">
-        <PopPlaceGrid Places={paginated} />
+        <PlacePolaroidGrid Places={paginated} />
 
         {totalPages > 1 && (
           <div className="flex gap-2 justify-center mt-12 flex-wrap">

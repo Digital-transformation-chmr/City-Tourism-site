@@ -59,16 +59,6 @@ export default function TelegramEventsSection({ items }: { items: NewsItem[] }) 
       }}
       className="relative overflow-hidden py-20 px-12 w-full bg-[#071a2e]"
     >
-      {/* Background Number — вирівняно відповідно до логіки першої секції */}
-      <motion.div
-        variants={{
-          hidden: { opacity: 0, y: -20 },
-          show: { opacity: 0.06, y: 0, transition: { duration: 0.8 } },
-        }}
-        className="absolute -top-2 right-11 font-['Unbounded',sans-serif] text-[120px] md:text-[170px] font-extrabold text-[oklch(0.99_0.002_90)] pointer-events-none z-0 leading-none select-none"
-      >
-        03
-      </motion.div>
 
       <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center z-10">
         

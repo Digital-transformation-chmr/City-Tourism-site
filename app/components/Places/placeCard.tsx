@@ -162,7 +162,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
       </h3>
 
       {item.subtitle && (
-        <p className="mt-2 text-lg text-white/70">
+        <p className="mt-2 text-lg line-clamp-2 text-white/70">
           {item.subtitle}
         </p>
       )}
@@ -179,7 +179,7 @@ export function PlaceCard({ item }: PlaceCardProps) {
               : "max-h-0 opacity-0 translate-y-5 group-hover:max-h-60 group-hover:opacity-100 group-hover:translate-y-0"
           }
         `}
-      >
+      > 
       <p className="mt-6 text-white/90 leading-relaxed line-clamp-4 text-lg">
         {item.description}
       </p>

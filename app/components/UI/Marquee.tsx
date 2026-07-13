@@ -20,25 +20,6 @@ export const Marquee: React.FC<MarqueeProps> = ({
   // Дублюємо елементи для ефекту нескінченної стрічки
   const listItems = [...items, ...items, ...items, ...items];
 
-  const renderTitleWithFixedNumbers = (text: string) => {
-    const parts = text.split(/(\d+)/);
-
-    return parts.map((part, index) => {
-      if (/^\d+$/.test(part)) {
-        return (
-          <span
-            key={index}
-            className="inline-block text-[16.5px] font-semibold tracking-tight translate-y-[-2px]"
-          >
-            {part}
-          </span>
-        );
-      }
-
-      return <span key={index}>{part}</span>;
-    });
-  };
-
   return (
     <div className="w-full overflow-hidden flex whitespace-nowrap">
       <div
@@ -58,7 +39,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
               <>
                 {item.title && (
                   <span className="flex items-baseline gap-[2px]">
-                    {renderTitleWithFixedNumbers(item.title)}
+                    {item.title}
                   </span>
                 )}
 
