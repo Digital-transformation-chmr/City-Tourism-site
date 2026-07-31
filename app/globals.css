@@ -92,25 +92,7 @@ body {
   min-height: 100vh;
 
   background: var(--bg-gradient);
-  background-attachment: fixed;
 
-  background-size: 1000% 1000%;
-
-  animation: bgMove 90s ease infinite;
-}
-
-@keyframes bgMove {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 html {

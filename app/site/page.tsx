@@ -229,7 +229,7 @@ return (
     {/* Фото */}
     <div className="relative h-full w-full overflow-hidden rounded-[40px] shadow-2xl">
       <Image
-        src="/Banners/banner1.jpeg"
+        src="/Banners/banner1.webp"
         alt="Панорама Черкас"
         fill
         priority

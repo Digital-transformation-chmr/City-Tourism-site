@@ -11,7 +11,7 @@ export default function siteLayout({children,}: Readonly<{children: React.ReactN
       <Header/>
       
       {/* ОРЕСУРСОМІСТКИЙ ЕФЕКТ ТОЧОК ІЗ ВАШОГО ПРИКЛАДУ */}
-      <div 
+      {/* <div 
         style={{
           position: 'fixed',
           inset: 0,
@@ -26,7 +26,7 @@ export default function siteLayout({children,}: Readonly<{children: React.ReactN
           backgroundSize: '5px 5px, 7px 7px',
           backgroundPosition: '0px 0px, 1.5px 2.5px'
         }}
-      />
+      /> */}
 
       <PageTransition>
         <ClickSpark
