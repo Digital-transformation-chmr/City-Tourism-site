@@ -146,7 +146,7 @@ export default function MapPage() {
     <div className="relative w-full h-dvh pt-12 flex flex-col  overflow-hidden">
 
       {/* 🔝 TOP BAR (Тільки фільтри та пошук місць) */}
-      <div className="relative z-10 flex items-center justify-between gap-3 px-6 py-3 backdrop-blur-md bg-black/30 border-b border-white/10">
+      <div className="relative z-10 flex items-center justify-between gap-3 px-6 pt-4 pb-2 backdrop-blur-md bg-black/30 border-b border-white/10">
         {/* TAGS */}
         <div className="flex gap-2 flex-wrap">
           {types.map(type => {

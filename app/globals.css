@@ -8,10 +8,8 @@
 /* @custom-variant dark (&:is(.dark *)); */
 
 @theme {
-  --font-inter: "Inter", sans-serif;
-  --font-heading: "Poppins", sans-serif;
+  --font-sans: var(--font-main);
 }
-
 :root {
   --bg-gradient: #faf7f1;
   --ink: #1c170f;

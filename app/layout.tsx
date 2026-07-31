@@ -9,26 +9,11 @@ import "./globals.css";
 import AccessibilityMenu from "./accsesability";
 import { cn } from "@/lib/utils";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import { Montserrat } from "next/font/google";
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-poppins",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-display",
+const montserrat = Montserrat({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-main",
 });
 
 export const metadata: Metadata = {
@@ -47,13 +32,11 @@ export default function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        inter.variable,
-        poppins.variable,
-        jetbrainsMono.variable,
-        playfair.variable
+        montserrat.variable
+
       )}
     >
-      <body className="flex flex-col font-display">
+      <body className="flex flex-col font-sans">
         {children}
         <AccessibilityMenu />
       </body>

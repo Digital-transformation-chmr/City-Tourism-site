@@ -136,92 +136,111 @@ export default function Home() {
 return (
     <div ref={mainRef} className="overflow-x-hidden">
 
-      <div className="flex justify-between gap-[clamp(2rem,4vw,5rem)] overflow-hidden px-10 mx-2 pb-[clamp(3rem,6vw,5rem)] pt-[clamp(3rem,6vw,6rem)] min-h-[70vh] mx-auto">
-        {/* ================= ЛІВА КОЛОНКА ================= */}
-        <div className="flex-[1.1_1_0%]">
-          {/* бейдж */}
-          <motion.div
-            initial={{ opacity: 0, y: -14 }}
-            animate={ready ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease, delay: 0.15 }}
-            className="inline-flex items-center gap-2 rounded-full bg-[oklch(0.93_0.03_250)] px-[clamp(0.75rem,1vw,1.1rem)] py-[clamp(0.3rem,0.5vw,0.5rem)] text-[clamp(0.85rem,0.7vw+0.6rem,1.05rem)] font-semibold text-[oklch(0.32_0.11_250)] mb-[clamp(1rem,1.5vw,1.75rem)]"
-          >
-            Місто над Дніпром
-          </motion.div>
-  
-          {/* заголовок — слово за словом, знизу вгору */}
-          <h1 className="mb-4 flex flex-wrap gap-x-[clamp(0.5rem,1vw,1rem)] gap-y-0 font-[Unbounded,sans-serif] text-6xl font-bold leading-[1.08] text-[oklch(0.22_0.05_250)] [text-wrap:balance]">
-            {HEADLINE.map((word, i) => (
-              <span key={i} className="inline-block overflow-hidden">
-                <motion.span
-                  initial={{ y: "110%", opacity: 0 }}
-                  animate={ready ? { y: 0, opacity: 1 } : {}}
-                  transition={{ duration: 0.8, ease, delay: 0.4 + i * 0.12 }}
-                  className={`inline-block ${
-                    word.accent ? "text-[oklch(0.55_0.19_25)]" : ""
-                  }`}
-                >
-                  {word.text}
-                </motion.span>
-              </span>
-            ))}
-          </h1>
-  
-          {/* опис */}
-          <motion.p
-            initial={{ y: 18, opacity: 0 }}
-            animate={ready ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.7, ease, delay: 0.85 }}
-            className="mb-[clamp(1.5rem,2.5vw,2.75rem)] max-w-[clamp(420px,38vw,680px)] text-[clamp(1.1rem,0.5vw+1rem,1.45rem)] leading-[1.6] text-[oklch(0.35_0.04_250)]"
-          >
-            Козацька історія, набережна Дніпра, затишні кав&apos;ярні та тепла
-            атмосфера — місто, яке варто відчути особисто. Ми зібрали найкраще,
-            щоб ти нічого не пропустив.
-          </motion.p>
-  
-          {/* кнопки */}
-          <motion.div
-            initial={{ y: 18, opacity: 0 }}
-            animate={ready ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.7, ease, delay: 1.05 }}
-            className="flex flex-wrap gap-4"
-          >
-            <a
-              href="#places"
-              className="scp2 rounded-xl bg-[oklch(0.42_0.13_250)] px-[clamp(1.5rem,2vw,2.25rem)] py-[clamp(0.9rem,1.2vw,1.25rem)] text-[clamp(0.95rem,0.3vw+0.85rem,1.15rem)] font-semibold text-[oklch(0.99_0.002_90)] no-underline transition-transform duration-300 hover:scale-105"
+     <div className="mx-auto flex min-h-[70vh] flex-col-reverse items-center gap-12 overflow-hidden px-6 py-12 lg:flex-row lg:gap-16 lg:px-10 lg:py-20">
+
+  {/* ================= ЛІВА КОЛОНКА ================= */}
+  <div className="flex w-full flex-col justify-center lg:flex-[1]">
+
+    {/* Бейдж */}
+    <div className="mb-6 flex">
+      <motion.div
+        initial={{ opacity: 0, y: -14 }}
+        animate={ready ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease, delay: 0.15 }}
+        className="inline-flex items-center gap-2 rounded-full bg-[oklch(0.93_0.03_250)] px-5 py-2 text-base font-semibold text-[oklch(0.32_0.11_250)]"
+      >
+        Місто над Дніпром
+      </motion.div>
+    </div>
+
+    {/* Заголовок */}
+    <div className="mb-6">
+      <h1 className="flex flex-wrap gap-x-3 font-[Unbounded,sans-serif] text-5xl font-bold leading-tight text-[oklch(0.22_0.05_250)] lg:text-6xl">
+        {HEADLINE.map((word, i) => (
+          <span key={i} className="overflow-hidden">
+            <motion.span
+              initial={{ y: "110%", opacity: 0 }}
+              animate={ready ? { y: 0, opacity: 1 } : {}}
+              transition={{
+                duration: 0.8,
+                ease,
+                delay: 0.4 + i * 0.12,
+              }}
+              className={`inline-block ${
+                word.accent ? "text-[oklch(0.55_0.19_25)]" : ""
+              }`}
             >
-              Почати мандрівку
-            </a>
-            <a
-              href="#tours"
-              className="rounded-xl border-2 border-[oklch(0.42_0.13_250)] bg-transparent px-[clamp(1.5rem,2vw,2.25rem)] py-[clamp(0.9rem,1.2vw,1.25rem)] text-[clamp(0.95rem,0.3vw+0.85rem,1.15rem)] font-semibold text-[oklch(0.32_0.11_250)] no-underline transition-colors duration-300 hover:border-[oklch(0.55_0.19_25)]"
-            >
-              Обрати тур
-            </a>
-          </motion.div>
-        </div>
-  
-        {/* ================= ПРАВА КОЛОНКА — ФОТО ================= */}
-        <motion.div
-          initial={{ clipPath: "circle(0% at 50% 45%)" }}
-          animate={ready ? { clipPath: "circle(160% at 50% 45%)" } : {}}
-          transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
-          className="relative h-[clamp(380px,34vw,640px)] flex-1 overflow-hidden rounded-3xl"
+              {word.text}
+            </motion.span>
+          </span>
+        ))}
+      </h1>
+    </div>
+
+    {/* Опис */}
+    <div className="mb-10 max-w-2xl">
+      <motion.p
+        initial={{ y: 18, opacity: 0 }}
+        animate={ready ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.7, ease, delay: 0.85 }}
+        className="text-xl leading-relaxed text-[oklch(0.32_0.03_250)] lg:text-2xl"
+      >
+        Козацька історія, набережна Дніпра, затишні кав&apos;ярні та тепла
+        атмосфера — місто, яке варто відчути особисто. Ми зібрали найкраще,
+        щоб ти нічого не пропустив.
+      </motion.p>
+    </div>
+
+    {/* Кнопки */}
+    <div className="flex">
+      <motion.div
+        initial={{ y: 18, opacity: 0 }}
+        animate={ready ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 0.7, ease, delay: 1.05 }}
+        className="flex flex-wrap gap-4"
+      >
+        <a
+          href="#places"
+          className="scp2 rounded-xl bg-[oklch(0.42_0.13_250)] px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 hover:scale-105"
         >
-          <Image
-            src="/Banners/banner1.jpeg"
-            alt="Панорама Черкас"
-            fill
-            priority
-            className="object-cover [animation:slowZoom_20s_ease-out_forwards]"
-          />
-  
-          {/* градієнтні накладки — той самий прийом, що й у першому герої */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[oklch(0.22_0.05_250)]/75 via-[oklch(0.22_0.05_250)]/15 to-transparent" />
-          <div className="absolute inset-0 bg-[oklch(0.42_0.13_250)]/10 mix-blend-color" />
-  
-        </motion.div>
-      </div>    
+          Почати мандрівку
+        </a>
+
+        <a
+          href="#tours"
+          className="rounded-xl border-2 border-[oklch(0.42_0.13_250)] px-8 py-4 text-lg font-semibold text-[oklch(0.32_0.11_250)] transition-colors duration-300 hover:border-[oklch(0.55_0.19_25)]"
+        >
+          Обрати тур
+        </a>
+      </motion.div>
+    </div>
+  </div>
+
+  {/* ================= ПРАВА КОЛОНКА ================= */}
+  <motion.div
+    initial={{ opacity: 0, x: 80, scale: 0.9 }}
+    animate={ready ? { opacity: 1, x: 0, scale: 1 } : {}}
+    transition={{ duration: 1.2, ease }}
+    className="relative h-[400px] w-full lg:h-[650px] lg:flex-[1.3]"
+  >
+    {/* Декоративне світіння */}
+    <div className="absolute top-6 left-6 h-full w-full rounded-[40px] bg-[oklch(0.55_0.19_25)]/15 blur-3xl" />
+
+    {/* Фото */}
+    <div className="relative h-full w-full overflow-hidden rounded-[40px] shadow-2xl">
+      <Image
+        src="/Banners/banner1.jpeg"
+        alt="Панорама Черкас"
+        fill
+        priority
+        className="object-cover transition-transform duration-[6000ms] hover:scale-105"
+      />
+
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+    </div>
+  </motion.div>
+
+</div>    
   {/* ================= END HERO 1 ================= */}
     <div className="w-full overflow-hidden bg-[oklch(0.22_0.05_250)] py-3.5 select-none">
       <Marquee 
