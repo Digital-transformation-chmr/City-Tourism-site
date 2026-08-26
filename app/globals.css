@@ -157,6 +157,10 @@ html::-webkit-scrollbar {
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.5s ease-out forwards;
 }

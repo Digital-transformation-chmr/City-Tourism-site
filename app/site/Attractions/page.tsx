@@ -31,7 +31,7 @@ function DiamondSVG({ style }: { style?: React.CSSProperties }) {
       <path d="M 50,1 Q 50,50 99,50 Q 50,50 50,99 Q 50,50 1,50 Q 50,50 50,1 Z" />
     </svg>
   );
-}
+} 
 
 function MiniFlash() {
   return (
@@ -100,9 +100,9 @@ function CanonCamera({ imageUrl, onPrev, onNext }: { imageUrl?: string; onPrev: 
           
           {/* Диск режимів або верхня кнопка */}
           <div className="flex flex-col items-center gap-1">
-            <div className="w-7 h-7 bg-[#262626] border border-black rounded-full shadow flex items-center justify-center text-[8px] text-white/40 font-bold">
+            <a href="#Pin-1" className="w-7 h-7 bg-[#262626] border border-black rounded-full shadow flex items-center justify-center text-[8px] text-white/40 font-bold">
               MENU
-            </div>
+            </a>
           </div>
 
           {/* Джойстик навігації (Кнопки назад/вперед в стилі клікера камери) */}
@@ -480,7 +480,7 @@ export default function Attraction() {
       <CameraHero places={places} />
 
       {/* HERO & SEARCH */}
-      <div className="relative overflow-hidden bg-black/10">
+      <div className="relative overflow-hidden bg-black/10"id="Pin-1">
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] opacity-80" />
 
         <div className="py-20 px-12 flex flex-col items-start">
