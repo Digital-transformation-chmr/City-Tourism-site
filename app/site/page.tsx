@@ -34,7 +34,7 @@ const cherkasyFacts = [
     { title: "Засновано 1354 року" },
     { title: "Місто над Дніпром" },
     { title: "Серце Черкащини" },
-    { title: "Набережна довжиною 5 км" },
+    { title: "Набережна довжиною 17 км" },
   ];
 
 export default function Home() {
@@ -200,18 +200,18 @@ return (
         className="flex flex-wrap gap-4"
       >
         <a
-          href="#places"
+          href="/site/Attractions"
           className="scp2 rounded-xl bg-[oklch(0.42_0.13_250)] px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 hover:scale-105"
         >
           Почати мандрівку
         </a>
 
-        <a
+        {/* <a
           href="#tours"
           className="rounded-xl border-2 border-[oklch(0.42_0.13_250)] px-8 py-4 text-lg font-semibold text-[oklch(0.32_0.11_250)] transition-colors duration-300 hover:border-[oklch(0.55_0.19_25)]"
         >
           Обрати тур
-        </a>
+        </a> */}
       </motion.div>
     </div>
   </div>

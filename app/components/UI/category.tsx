@@ -57,11 +57,11 @@ export function CategoriesSection() {
           },
         },
       }}
-      className="relative overflow-hidden py-20 px-12 bg-[oklch(0.94_0.02_70)]"
+      className="relative overflow-hidden py-20 bg-[oklch(0.94_0.02_70)]"
     >
 
 
-      <div className="relative max-w-7xl mx-auto z-10">
+      <div className="relative mx-2 px-10 z-10">
         {/* Section Header */}
         <div className="text-center mb-8">
           <motion.div

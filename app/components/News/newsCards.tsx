@@ -57,10 +57,10 @@ export default function TelegramEventsSection({ items }: { items: NewsItem[] }) 
         hidden: {},
         show: { transition: { staggerChildren: 0.1 } },
       }}
-      className="relative overflow-hidden py-20 px-12 w-full bg-[#071a2e]"
+      className="relative overflow-hidden py-20  bg-[#071a2e]"
     >
 
-      <div className="relative max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center z-10">
+      <div className="relative mx-2 px-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center z-10">
         
         {/* ================= ЛІВА КОЛОНКА (ТЕКСТ) ================= */}
         <motion.div
