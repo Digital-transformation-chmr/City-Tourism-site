@@ -1,188 +1,431 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { Logo } from "./logo";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+const navItems = [
+  { href: "/Attractions", label: "Куди піти?" },
+  { href: "/WhereToEat", label: "Де поїсти?" },
+  { href: "/Hotels", label: "Де зупинитись?" },
+  { href: "/InteractiveMap", label: "Інтерактивна карта" },
+];
+
 const Header = () => {
-  const [dark, setDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const pathname = usePathname();
-  
-  // Рефи для анімації
+
   const headerRef = useRef<HTMLElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+
   const line1Ref = useRef<HTMLSpanElement>(null);
   const line2Ref = useRef<HTMLSpanElement>(null);
   const line3Ref = useRef<HTMLSpanElement>(null);
 
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const isDark = savedTheme === "dark";
-    setDark(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
-  }, []);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+
+  // -----------------------------
+  // SCROLL
+  // -----------------------------
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  // КЕРУВАННЯ АНІМАЦІЄЮ ЧЕРЕЗ useGSAP
-const tl = useRef<gsap.core.Timeline | null>(null);
+  // -----------------------------
+  // THEME
+  // -----------------------------
 
-useEffect(() => {
-  if (!tl.current) return;
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
 
-  if (menuOpen) {
-    tl.current.play();
-  } else {
-    tl.current.reverse();
-  }
-}, [menuOpen]);
+    const isDark = savedTheme === "dark";
 
-useGSAP(() => {
-  tl.current = gsap.timeline({ paused: true });
+    document.documentElement.classList.toggle("dark", isDark);
+  }, []);
 
-  tl.current
-    .to(line1Ref.current, {
-      y: 8,
-      rotate: 45,
-      duration: 0.3,
-      ease: "power2.out",
-    }, 0)
-    .to(line2Ref.current, {
-      opacity: 0,
-      scaleX: 0,
-      duration: 0.2,
-      ease: "power2.out",
-    }, 0)
-    .to(line3Ref.current, {
-      y: -8,
-      rotate: -45,
-      duration: 0.3,
-      ease: "power2.out",
-    }, 0)
-    .to(menuRef.current, {
-      height: "auto",
-      opacity: 1,
-      duration: 0.4,
-      ease: "power3.out",
-    }, 0);
+  // -----------------------------
+  // GSAP MOBILE MENU
+  // -----------------------------
 
-  const links = menuRef.current?.querySelectorAll(".mobile-link");
+  useGSAP(
+    () => {
+      tl.current = gsap.timeline({
+        paused: true,
+      });
 
-  if (links?.length) {
-    tl.current.fromTo(
-      links,
-      {
-        x: 50,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        stagger: 0.08,
-        duration: 0.3,
-      },
-      "-=0.2"
-    );
-  }
-}, { scope: headerRef });
+      tl.current
+        // burger line 1
+        .to(
+          line1Ref.current,
+          {
+            y: 8,
+            rotate: 45,
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          0
+        )
 
-  const navItems = [
-    { href: "/Attractions", label: "Куди піти?" },
-    { href: "/WhereToEat", label: "Де поїсти?" },
-    { href: "/Hotels", label: "Де зупинитись?" },
-    { href: "/InteractiveMap", label: "Інтерактивна карта" },
-  ];
+        // burger line 2
+        .to(
+          line2Ref.current,
+          {
+            opacity: 0,
+            scaleX: 0,
+            duration: 0.2,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        // burger line 3
+        .to(
+          line3Ref.current,
+          {
+            y: -8,
+            rotate: -45,
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          0
+        )
+
+        // mobile menu
+        .to(
+          menuRef.current,
+          {
+            height: "auto",
+            opacity: 1,
+            duration: 0.4,
+            ease: "power3.out",
+          },
+          0
+        );
+
+      const links =
+        menuRef.current?.querySelectorAll(".mobile-link");
+
+      if (links?.length) {
+        tl.current.fromTo(
+          links,
+          {
+            x: 40,
+            opacity: 0,
+          },
+          {
+            x: 0,
+            opacity: 1,
+            stagger: 0.07,
+            duration: 0.3,
+            ease: "power2.out",
+          },
+          "-=0.2"
+        );
+      }
+    },
+    {
+      scope: headerRef,
+    }
+  );
+
+  // -----------------------------
+  // OPEN / CLOSE MENU
+  // -----------------------------
+
+  useEffect(() => {
+    if (!tl.current) return;
+
+    if (menuOpen) {
+      tl.current.play();
+    } else {
+      tl.current.reverse();
+    }
+  }, [menuOpen]);
+
+  // -----------------------------
+  // CLOSE MENU AFTER NAVIGATION
+  // -----------------------------
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header
       ref={headerRef}
-      className={`fixed z-50 backdrop-blur-md bg-black/40 border border-white/20 shadow-lg transition-all duration-300 ease-in-out z-100
+      className={`
+        fixed z-[100]
+        left-0 right-0
+        transition-all duration-300 ease-out
+
         ${
           scrolled
-            ? "top-4 left-4 right-4 rounded-2xl"
-            : "top-0 left-0 right-0 rounded-none"
+            ? "top-3 mx-3 rounded-2xl"
+            : "top-0"
         }
+
+        bg-black/45
+        backdrop-blur-xl
+        border border-white/10
+        shadow-[0_8px_30px_rgba(0,0,0,0.25)]
       `}
     >
-      <div className="w-full px-8 py-2 flex items-center justify-between">
-        <Link href="/">
+      {/* ================================= */}
+      {/* MAIN HEADER */}
+      {/* ================================= */}
+
+      <div
+        className={`
+          h-[50px] md:h-[60px]
+          px-5 sm:px-6 md:px-8 lg:px-10
+          flex items-center
+          transition-all duration-300
+        `}
+      >
+        {/* ================================= */}
+        {/* LOGO */}
+        {/* ================================= */}
+
+        <Link
+          href="/"
+          className="
+            flex items-center
+            shrink-0
+            transition-transform duration-300
+            hover:scale-[1.03]
+          "
+        >
           <Logo />
         </Link>
-{/* Desktop Navigation */}
-        {/* <nav className="hidden md:flex gap-6 font-bold font-heading items-center">
+
+        {/* ================================= */}
+        {/* DESKTOP NAVIGATION */}
+        {/* ================================= */}
+
+        <nav
+          className="
+            hidden md:flex
+            ml-auto
+            items-center
+            gap-2 lg:gap-3
+            font-heading
+          "
+        >
           {navItems.map((item) => {
-            const isActive = pathname === "/site" + item.href;
+            const isActive =
+              pathname === "/site" + item.href;
 
             return (
               <Link
                 key={item.href}
                 href={"/site" + item.href}
-                className={`relative transition
+                className={`
+                  relative
+                  px-4 lg:px-5
+                  py-2.5
+                  rounded-xl
+                  text-sm lg:text-base
+                  font-semibold
+                  whitespace-nowrap
+                  transition-all duration-300
+
                   ${
                     isActive
-                      ? "text-red-400"
-                      : "text-white/90 hover:text-red-200"
+                      ? `
+                        text-white
+                        bg-white/12
+                        shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08)]
+                      `
+                      : `
+                        text-white/80
+                        hover:text-white
+                        hover:bg-white/8
+                      `
                   }
                 `}
               >
                 {item.label}
-                {isActive && (
-                  <span className="absolute -bottom-2 left-0 w-full h-[3px] bg-[var(--accent)] rounded-full animate-pulse" />
-                )}
+
+                {/* ACTIVE INDICATOR */}
+
+                <span
+                  className={`
+                    absolute
+                    left-1/2
+                    -translate-x-1/2
+                    -bottom-[2px]
+                    h-[3px]
+                    rounded-full
+                    bg-[var(--accent)]
+                    transition-all duration-300
+
+                    ${
+                      isActive
+                        ? "w-8 opacity-100"
+                        : "w-0 opacity-0"
+                    }
+                  `}
+                />
               </Link>
             );
           })}
-        </nav> */}
+        </nav>
 
-        {/* Burger Button */}
+        {/* ================================= */}
+        {/* MOBILE BURGER */}
+        {/* ================================= */}
+
         <button
-          className=" flex flex-col justify-center items-center h-10 w-10 p-2 relative z-50 focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
+          type="button"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={
+            menuOpen
+              ? "Закрити меню"
+              : "Відкрити меню"
+          }
+          aria-expanded={menuOpen}
+          className="
+            md:hidden
+            ml-auto
+            relative
+            z-[110]
+            w-11 h-11
+            rounded-xl
+            flex flex-col
+            items-center
+            justify-center
+            transition-all duration-300
+            hover:bg-white/10
+            active:scale-95
+          "
         >
-          {/* Смужки тепер мають рефи і керуються виключно через GSAP */}
-          <span ref={line1Ref} className="block w-6 h-0.5 bg-white will-change-transform" />
-          <span ref={line2Ref} className="block w-6 h-0.5 bg-white my-1.5 will-change-transform" />
-          <span ref={line3Ref} className="block w-6 h-0.5 bg-white will-change-transform" />
+          <span
+            ref={line1Ref}
+            className="
+              block
+              w-6 h-[2px]
+              bg-white
+              rounded-full
+              will-change-transform
+          "
+          />
+
+          <span
+            ref={line2Ref}
+            className="
+              block
+              w-6 h-[2px]
+              bg-white
+              rounded-full
+              my-[6px]
+              will-change-transform
+          "
+          />
+
+          <span
+            ref={line3Ref}
+            className="
+              block
+              w-6 h-[2px]
+              bg-white
+              rounded-full
+              will-change-transform
+          "
+          />
         </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* ================================= */}
+      {/* MOBILE MENU */}
+      {/* ================================= */}
+
       <div
         ref={menuRef}
-        className="overflow-hidden h-0 opacity-0 border-white/10"
-        style={{ borderTopWidth: menuOpen ? '1px' : '0px' }}
+        className="
+          md:hidden
+          overflow-hidden
+          h-0
+          opacity-0
+          border-t
+          border-white/10
+        "
       >
-        <nav className="flex flex-col px-8 py-4 gap-4">
+        <nav
+          className="
+            px-5
+            py-5
+            flex flex-col
+            gap-2
+          "
+        >
           {navItems.map((item) => {
-            const isActive = pathname === "/site" + item.href;
+            const isActive =
+              pathname === "/site" + item.href;
 
             return (
               <Link
                 key={item.href}
                 href={"/site" + item.href}
                 onClick={() => setMenuOpen(false)}
-                className={`mobile-link font-bold opacity-0 will-change-transform block py-1 text-lg
+                className={`
+                  mobile-link
+                  block
+                  px-4
+                  py-3.5
+                  rounded-xl
+                  text-base
+                  font-semibold
+                  will-change-transform
+                  transition-all duration-300
+
                   ${
                     isActive
-                      ? "text-red-400"
-                      : "text-white hover:text-red-200"
+                      ? `
+                        text-white
+                        bg-white/12
+                        border border-white/10
+                      `
+                      : `
+                        text-white/80
+                        hover:text-white
+                        hover:bg-white/8
+                      `
                   }
                 `}
               >
-                {item.label}
+                <div className="flex items-center justify-between">
+                  <span>{item.label}</span>
+
+                  {isActive && (
+                    <span
+                      className="
+                        w-2
+                        h-2
+                        rounded-full
+                        bg-[var(--accent)]
+                        shadow-[0_0_10px_var(--accent)]
+                      "
+                    />
+                  )}
+                </div>
               </Link>
             );
           })}

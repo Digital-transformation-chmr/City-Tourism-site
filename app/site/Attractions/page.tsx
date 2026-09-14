@@ -145,15 +145,18 @@ function LeftSidebar({ place, visible, current, total, isMobile }: { place: Plac
       initial={isMobile ? { y: 20, opacity: 0 } : { x: "-115%" }}
       transition={{ type: "spring", damping: 26, stiffness: 180 }}
       className={isMobile ? "w-full" : "absolute left-0 top-0 bottom-0 z-20 flex flex-col justify-center"}
-      style={{
-        width: isMobile ? "100%" : SIDEBAR_WIDTH_DESKTOP,
-        padding: isMobile ? "24px 20px" : "0 clamp(24px, 2.5vw, 36px)",
-        background: "rgba(255, 255, 255, 0.08)",
-        borderRight: !isMobile ? "1px solid rgba(0, 0, 0, 0.05)" : undefined,
-        border: isMobile ? "1px solid rgba(255, 255, 255, 0.2)" : undefined,
-        borderRadius: isMobile ? "20px" : "0",
-        backdropFilter: "blur(20px)",
-      }}
+        style={{
+          width: isMobile ? "100%" : SIDEBAR_WIDTH_DESKTOP,
+          padding: isMobile
+            ? "24px 20px"
+            : "0 clamp(24px, 2.5vw, 36px)",
+          background: "rgb(223 225 226 / 79%)",
+          borderLeft: !isMobile ? "4px solid #8f5547" : undefined,
+          borderRight: !isMobile
+            ? "1px solid rgba(0, 0, 0, 0.05)"
+            : undefined,
+          borderRadius: isMobile ? "20px" : "0",
+        }}
     >
       <div className="flex flex-col gap-6">
         <div className="flex items-center justify-between gap-2">
@@ -225,7 +228,7 @@ function RightSidebar({ place, visible, onNext, isMobile }: { place: Place; visi
       style={{
         width: isMobile ? "100%" : SIDEBAR_WIDTH_DESKTOP,
         padding: isMobile ? "24px 20px" : "0 clamp(24px, 2.5vw, 36px)",
-        background: "rgba(255, 255, 255, 0.08)",
+        background: "rgb(223 225 226 / 79%)",
         borderLeft: !isMobile ? "1px solid rgba(0, 0, 0, 0.05)" : undefined,
         border: isMobile ? "1px solid rgba(255, 255, 255, 0.2)" : undefined,
         borderRadius: isMobile ? "20px" : "0",
@@ -358,7 +361,7 @@ function CameraHero({ places }: { places: Place[] }) {
 
   return (
     <section
-      className="relative min-h-screen md:h-screen w-full overflow-hidden flex flex-col justify-center items-center bg-slate-100"
+      className="relative min-h-screen md:h-screen w-full overflow-hidden flex flex-col justify-center items-center "
       style={{
         paddingLeft: isMobile ? "16px" : SIDEBAR_WIDTH_DESKTOP,
         paddingRight: isMobile ? "16px" : SIDEBAR_WIDTH_DESKTOP,

@@ -9,11 +9,11 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const navLinks = [
-    { label: "Місця", href: "/site/Attractions" },
+    { label: "Про портал", href: "/site/AboutUs" },
   ]
   const channel = process.env.NEXT_PUBLIC_TG_CHANNEL || "kudypityCherkasy";
   return (
-    <footer className="relative w-full overflow-hidden border-t border-[oklch(0.9_0.02_250)] bg-white">
+    <footer className="relative w-full overflow-hidden border-t border-[oklch(0.9_0.02_250)]">
       {/* легке декоративне світіння, як у хіро-секції, але приглушене */}
       <div className="pointer-events-none absolute  h-72 w-72 rounded-full bg-[oklch(0.55_0.19_25)]/[0.06] blur-3xl" />
       <div className="pointer-events-none absolute  h-72 w-72 rounded-full bg-[oklch(0.42_0.13_250)]/[0.08] blur-3xl" />
@@ -94,12 +94,12 @@ export default function Footer() {
         <div className="flex flex-col gap-3 text-xs text-[oklch(0.55_0.02_250)] md:flex-row md:items-center md:justify-between">
           <p>© {currentYear} CheTour. Усі права захищено.</p>
           <div className="flex gap-6">
-            <a href="#privacy" className="transition-colors hover:text-[oklch(0.22_0.05_250)]">
+            {/* <a href="#privacy" className="transition-colors hover:text-[oklch(0.22_0.05_250)]">
               Приватність
             </a>
             <a href="#terms" className="transition-colors hover:text-[oklch(0.22_0.05_250)]">
               Умови
-            </a>
+            </a> */}
           </div>
           <p>Зроблено з ❤️ в Україні</p>
         </div>

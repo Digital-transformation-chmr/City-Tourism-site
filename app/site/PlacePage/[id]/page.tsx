@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Map from "../../../components/UI/map";
 import { Place } from "@/app/components/Places/placeCard";
+import { AnimatePresence, motion } from "motion/react";
 
 export default function Page() {
   const params = useParams<{ id: string }>();
   const id = params?.id;
-
+  const [isImageOpen, setIsImageOpen] = useState(false);
   const [place, setPlace] = useState<Place | null>(null);
   const [activeImage, setActiveImage] = useState(0);
 
@@ -52,53 +53,178 @@ export default function Page() {
           <Image
             key={img}
             src={img}
-            alt="place"
+            alt={place.title}
             fill
             className={`object-cover transition-opacity duration-1000 ${
-              i === activeImage ? "opacity-100" : "opacity-0"
+              i === activeImage
+                ? "opacity-100 cursor-zoom-in"
+                : "opacity-0 pointer-events-none"
             }`}
             priority={i === activeImage}
+            onClick={() => setIsImageOpen(true)}
           />
         ))}
 
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/30 pointer-events-none" />
 
-        {/* LEFT BUTTON */}
-        <button
-          onClick={prevImage}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20
-                     w-12 h-12 rounded-full bg-black/50 hover:bg-black/70
-                     backdrop-blur-md flex items-center justify-center cursor-pointer"
-        >
-          <span className="text-2xl">‹</span>
-        </button>
+        {!isImageOpen && (
+          <>
+            <button
+              onClick={prevImage}
+              className="absolute left-5 top-1/2 -translate-y-1/2 z-20
+                        w-12 h-12 rounded-full bg-black/50
+                        backdrop-blur-md flex items-center justify-center
+                        text-white cursor-pointer"
+            >
+              <span className="w-3 h-3 border-l-2 border-b-2 rotate-45 translate-x-0.5" />
+            </button>
 
-        {/* RIGHT BUTTON */}
-        <button
-          onClick={nextImage}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20
-                     w-12 h-12 rounded-full bg-black/50 hover:bg-black/70
-                     backdrop-blur-md flex items-center justify-center cursor-pointer"
-        >
-          <span className="text-2xl">›</span>
-        </button>
+            <button
+              onClick={nextImage}
+              className="absolute right-5 top-1/2 -translate-y-1/2 z-20
+                        w-12 h-12 rounded-full bg-black/50
+                        backdrop-blur-md flex items-center justify-center
+                        text-white cursor-pointer"
+            >
+              <span className="w-3 h-3 border-r-2 border-t-2 rotate-45 -translate-x-0.5" />
+            </button>
+          </>
+        )}
 
         {/* thumbnails */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
           {place.images?.map((img, i) => (
             <div
               key={i}
               onClick={() => setActiveImage(i)}
               className={`w-16 h-10 relative cursor-pointer border transition-all ${
-                i === activeImage ? "border-white" : "border-white/30"
+                i === activeImage
+                  ? "border-white"
+                  : "border-white/30"
               }`}
             >
-              <Image src={img} alt="" fill className="object-cover" />
+              <Image
+                src={img}
+                alt=""
+                fill
+                className="object-cover"
+              />
             </div>
           ))}
         </div>
       </div>
 
+<AnimatePresence>
+  {isImageOpen && (
+    <motion.div
+      className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm
+                 flex items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      onClick={() => setIsImageOpen(false)}
+    >
+      {/* IMAGE */}
+      <motion.div
+        className="relative z-[1000] w-[95vw] h-[95vh]"
+        initial={{
+          opacity: 0,
+          scale: 0.85,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+        }}
+        exit={{
+          opacity: 0,
+          scale: 0.85,
+        }}
+        transition={{
+          duration: 0.35,
+          ease: "easeOut",
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <Image
+          src={place.images[activeImage]}
+          alt={place.title}
+          fill
+          className="object-contain"
+          sizes="95vw"
+          priority
+        />
+      </motion.div>
+
+      {/* CLOSE */}
+      <motion.button
+        onClick={() => setIsImageOpen(false)}
+        className="absolute top-20 right-5 z-[110]
+                   w-12 h-12 rounded-full
+                   bg-white/90 hover:bg-white/70
+                   backdrop-blur-md
+                   flex items-center justify-center
+                   text-black text-3xl cursor-pointer"
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.15, duration: 0.2 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        ×
+      </motion.button>
+
+      {/* PREVIOUS */}
+      <motion.button
+        onClick={(e) => {
+          e.stopPropagation();
+          prevImage();
+        }}
+        className="absolute left-5 top-1/2 -translate-y-1/2 z-[110]
+                   w-12 h-12 rounded-full
+                   bg-black/50 hover:bg-black/70
+                   backdrop-blur-md
+                   flex items-center justify-center
+                   text-white text-3xl cursor-pointer"
+        whileHover={{ scale: 1.1, x: -3 }}
+        whileTap={{ scale: 0.9 }}
+      >
+         <span className="w-3 h-3 border-l-2 border-b-2 rotate-45  translate-x-0.5" />
+      </motion.button>
+
+      {/* NEXT */}
+      <motion.button
+        onClick={(e) => {
+          e.stopPropagation();
+          nextImage();
+        }}
+        className="absolute right-5 top-1/2 -translate-y-1/2 z-[110]
+                   w-12 h-12 rounded-full
+                  bg-black/50 hover:bg-black/70
+                   backdrop-blur-md
+                   flex items-center justify-center
+                   text-white text-3xl cursor-pointer"
+        whileHover={{ scale: 1.1, x: 3 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <span className="w-3 h-3 border-r-2 border-t-2 rotate-45 -translate-x-0.5" />
+      </motion.button>
+
+      {/* COUNTER */}
+      <motion.div
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 z-[110]
+                   px-4 py-2 rounded-full
+                   bg-black/50 backdrop-blur-md
+                   text-white text-sm"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        {activeImage + 1} / {place.images.length}
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
       {/* CONTENT */}
       <div className="px-4 sm:px-8 lg:px-12 py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
 

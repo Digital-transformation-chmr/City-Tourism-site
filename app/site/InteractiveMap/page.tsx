@@ -197,12 +197,19 @@ export default function MapPage() {
 
       {/* 🗺 MAP */}
       <div className="relative flex-1">
-        <MapContainer
-          center={[49.4444, 32.0598]}
-          zoom={13}
-          className="w-full h-full z-0"
-          zoomControl={false}
-        >
+<MapContainer
+  center={[49.4444, 32.0598]}
+  zoom={13}
+  minZoom={10}
+  maxZoom={17}
+  className="w-full h-full z-0"
+  zoomControl={false}
+  maxBounds={[
+    [48.40, 28.00],
+    [50.15, 33.75],
+  ]}
+  maxBoundsViscosity={1.0}
+>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution="© OpenStreetMap"

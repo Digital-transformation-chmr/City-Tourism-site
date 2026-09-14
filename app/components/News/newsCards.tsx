@@ -137,7 +137,7 @@ export default function TelegramEventsSection({ items }: { items: NewsItem[] }) 
                   >
                     <div>
                       {item.image && (
-                        <div className="relative w-full h-24 rounded-lg overflow-hidden mb-2.5">
+                        <div className="relative w-full h-80   rounded-lg overflow-hidden mb-2.5">
                           <Image
                             src={item.image}
                             alt={cardTitle}

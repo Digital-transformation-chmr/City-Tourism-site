@@ -41,14 +41,23 @@ export default function Map({
         (container as any)._leaflet_id = null;
       }
 
-      const mapInstance = L.map(container, {
-        zoomControl: true,
-        attributionControl: false,
-        dragging: true,
-        touchZoom: true,
-        doubleClickZoom: true,
-        scrollWheelZoom: true,
-      }).setView([lat, lng], zoom);
+    const mapInstance = L.map(container, {
+      zoomControl: true,
+      attributionControl: false,
+      dragging: true,
+      touchZoom: true,
+      doubleClickZoom: true,
+      scrollWheelZoom: true,
+
+      // Межі Черкаської області
+      maxBounds: [
+        [48.40, 30.00], // південний захід
+        [50.15, 33.75], // північний схід
+      ],
+
+      // 1 = карта взагалі не дозволяє "витягнути" її за межі
+      maxBoundsViscosity: 1.0,
+}).setView([lat, lng], zoom);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: "© OpenStreetMap",

@@ -136,7 +136,7 @@ export default function Home() {
 return (
     <div ref={mainRef} className="overflow-x-hidden">
 
-     <div className="mx-auto flex min-h-[70vh] flex-col-reverse items-center gap-12 overflow-hidden px-6 py-12 lg:flex-row lg:gap-16 lg:px-10 lg:py-20">
+     <div className="mx-auto flex  flex-col-reverse items-center gap-12 overflow-hidden px-6 py-12 lg:flex-row lg:gap-16 lg:px-10 lg:py-20">
 
   {/* ================= ЛІВА КОЛОНКА ================= */}
   <div className="flex w-full flex-col justify-center lg:flex-[1]">
@@ -224,10 +224,10 @@ return (
     className="relative h-[400px] w-full lg:h-[650px] lg:flex-[1.3]"
   >
     {/* Декоративне світіння */}
-    <div className="absolute top-6 left-6 h-full w-full rounded-[40px] bg-[oklch(0.55_0.19_25)]/15 blur-3xl" />
+    <div className="absolute  left-6 h-full w-full rounded-[40px] bg-[oklch(0.55_0.19_25)]/15 blur-3xl" />
 
     {/* Фото */}
-    <div className="relative h-full w-full overflow-hidden rounded-[40px] shadow-2xl">
+    <div className="relative  h-full w-full overflow-hidden rounded-[40px] shadow-2xl">
       <Image
         src="/Banners/banner1.webp"
         alt="Панорама Черкас"
