@@ -144,14 +144,14 @@ function LeftSidebar({ place, visible, current, total, isMobile }: { place: Plac
       animate={isMobile ? { y: visible ? 0 : 20, opacity: visible ? 1 : 0 } : { x: visible ? 0 : "-115%", opacity: 1 }}
       initial={isMobile ? { y: 20, opacity: 0 } : { x: "-115%" }}
       transition={{ type: "spring", damping: 26, stiffness: 180 }}
-      className={isMobile ? "w-full" : "absolute left-0 top-0 bottom-0 z-20 flex flex-col justify-center"}
+      className={isMobile ? "w-full" : "absolute left-0 top-0 bottom-0 z-20 flex flex-col justify-center "}
         style={{
           width: isMobile ? "100%" : SIDEBAR_WIDTH_DESKTOP,
           padding: isMobile
             ? "24px 20px"
             : "0 clamp(24px, 2.5vw, 36px)",
-          background: "rgb(223 225 226 / 79%)",
-          borderLeft: !isMobile ? "4px solid #8f5547" : undefined,
+          background:"color-mix(in srgb, var(--bg-gradient) 95%, black)",
+          borderLeft: !isMobile ? "4px solid var(--accent)" : undefined,
           borderRight: !isMobile
             ? "1px solid rgba(0, 0, 0, 0.05)"
             : undefined,
@@ -224,15 +224,20 @@ function RightSidebar({ place, visible, onNext, isMobile }: { place: Place; visi
       animate={isMobile ? { y: visible ? 0 : 20, opacity: visible ? 1 : 0 } : { x: visible ? 0 : "115%", opacity: 1 }}
       initial={isMobile ? { y: 20, opacity: 0 } : { x: "115%" }}
       transition={{ type: "spring", damping: 26, stiffness: 180 }}
-      className={isMobile ? "w-full" : "absolute right-0 top-0 bottom-0 z-20 flex flex-col justify-center"}
+      className={
+  isMobile
+    ? "w-full mb-5"
+    : "absolute right-0 top-0 bottom-0 z-20 flex flex-col justify-center"
+}
       style={{
         width: isMobile ? "100%" : SIDEBAR_WIDTH_DESKTOP,
+         background:"color-mix(in srgb, var(--bg-gradient) 95%, black)",
         padding: isMobile ? "24px 20px" : "0 clamp(24px, 2.5vw, 36px)",
-        background: "rgb(223 225 226 / 79%)",
         borderLeft: !isMobile ? "1px solid rgba(0, 0, 0, 0.05)" : undefined,
         border: isMobile ? "1px solid rgba(255, 255, 255, 0.2)" : undefined,
         borderRadius: isMobile ? "20px" : "0",
         backdropFilter: "blur(20px)",
+        
       }}
     >
       
@@ -397,7 +402,7 @@ function CameraHero({ places }: { places: Place[] }) {
       {place && (
         <>
           {isMobile ? (
-            <div className="w-full max-w-[500px]  z-10 flex flex-col gap-5 mt-8">
+            <div className="w-full  z-10 flex flex-col gap-5 mt-8">
               <LeftSidebar place={place} visible={sidebarVisible} current={current} total={places.length} isMobile={true} />
               <RightSidebar place={place} visible={sidebarVisible} onNext={() => navigate(1)} isMobile={true} />
             </div>
@@ -415,9 +420,9 @@ function CameraHero({ places }: { places: Place[] }) {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 0.45, y: 0 }} // Робимо напівпрозорим (ледь помітним)
         transition={{ delay: 1, duration: 0.8 }}
-        className="absolute  bottom-2 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-white font-medium text-xs tracking-wider select-none pointer-events-none uppercase"
+        className="absolute pt-0  bottom-2 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-white font-medium text-xs tracking-wider select-none pointer-events-none uppercase"
       >
-        <span>Більше</span>
+        <span className="pt-3">Більше</span>
         
         {/* Анімована стрілочка, що рухається вгору-вниз */}
         <motion.svg 
@@ -479,12 +484,12 @@ export default function Attraction() {
   }, [places, page]);
 
   return (
-    <div className="min-h-screen relative bg-slate-50">
+    <div className="min-h-screen relative pt-10 md:pt-0">
       <CameraHero places={places} />
 
       {/* HERO & SEARCH */}
-      <div className="relative overflow-hidden bg-black/10"id="Pin-1">
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] opacity-80" />
+      <div className="relative overflow-hidden bg-black/10 "id="Pin-1">
+        <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)]" />
 
         <div className="py-20 px-12 flex flex-col items-start">
           <span className="text-sm tracking-[0.25em] uppercase font-bold text-[var(--accent)] flex items-center gap-3 mb-4">

@@ -51,3 +51,18 @@ model News {
   createdAt   DateTime @default(now())
   publishedAt DateTime?
 }
+
+model Feedback {
+  id          Int      @id @default(autoincrement())
+
+  email       String
+  category    String
+  message     String
+
+  images      String[] @default([])
+
+  status      String   @default("new")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

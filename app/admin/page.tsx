@@ -2,20 +2,33 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Place } from "../components/Places/placeCard";
+import {
+  Plus,
+  Pencil,
+  Trash2,
+  MessageCircle,
+  MapPin,
+  ArrowUpRight,
+} from "lucide-react";
 
 export default function AdminHome() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Загрузите ваши місця звідси
     const fetchPlaces = async () => {
       try {
-        const response = await fetch("/api/places");
+        const response = await fetch("/api/places", {
+          cache: "no-store",
+        });
+
+        if (!response.ok) {
+          throw new Error("Не вдалося завантажити місця");
+        }
+
         const data = await response.json();
-        setPlaces(data);
+        setPlaces(Array.isArray(data) ? data : []);
       } catch (error) {
         console.error("Помилка завантаження:", error);
       } finally {
@@ -27,87 +40,254 @@ export default function AdminHome() {
   }, []);
 
   return (
-    <div className="min-h-scree text-white overflow-hidden">
-      {/* Фонові декорації */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 p-8 max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[var(--paper-l)] text-[var(--ink)]">
+      <div className="max-w-7xl mx-auto px-6 py-10 md:px-8 md:py-14">
         {/* Header */}
-        <div className="mb-16 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-            Адміністративна Панель
-          </h1>
-          <p className="text-(--text) text-lg">
-            Керування місцинами Черкас
-          </p>
-        </div>
+        <header className="mb-12">
+          <div className="flex items-end justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-2 mb-4 text-sm uppercase tracking-[0.18em] text-[var(--accent)]">
+                <span className="w-8 h-px bg-[var(--accent)]" />
+                Admin Panel
+              </div>
 
-        {/* Головне меню */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          {/* Кнопка створити */}
-          <Link
-            href="/admin/edit"
-            className="group relative p-8 rounded-2xl bg-gradient-to-br from-green-500/20 to-emerald-600/20 border border-green-500/30 hover:border-green-400/60 transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-green-500/0 to-green-400/0 group-hover:from-green-500/10 group-hover:to-green-400/10 transition-all duration-300"></div>
-            <div className="relative">
-              <div className="text-4xl mb-3">➕</div>
-              <h3 className="text-2xl font-bold mb-2">Створити</h3>
-              <p className="text-(--text) text-sm">
-                Додати нове місце у систему
+              <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
+                Адміністративна панель
+              </h1>
+
+              <p className="mt-3 text-base md:text-lg text-[var(--ink)]/60">
+                Керування туристичними місцями Черкас
               </p>
             </div>
-          </Link>
 
-          {/* Кнопка редагувати */}
-          <Link
-            href="/admin/select"
-            className="group relative p-8 rounded-2xl bg-gradient-to-br from-blue-500/20 to-cyan-600/20 border border-blue-500/30 hover:border-blue-400/60 transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-blue-400/0 group-hover:from-blue-500/10 group-hover:to-blue-400/10 transition-all duration-300"></div>
-            <div className="relative">
-              <div className="text-4xl mb-3">✏️</div>
-              <h3 className="text-2xl font-bold mb-2">Редагувати</h3>
-              <p className="text-(--text) text-sm">
-                Змінити існуюче місце
+            <div className="hidden md:flex items-center gap-2 text-sm text-[var(--ink)]/50">
+              <MapPin size={16} />
+              Черкаси
+            </div>
+          </div>
+        </header>
+
+        {/* Main actions */}
+        <section className="mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {/* Створити */}
+            <Link
+              href="/admin/edit"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-lg"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/10 text-green-700">
+                  <Plus size={24} />
+                </div>
+
+                <ArrowUpRight
+                  size={20}
+                  className="text-[var(--ink)]/30 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--ink)]"
+                />
+              </div>
+
+              <h2 className="mt-6 text-xl font-semibold">
+                Створити
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-[var(--ink)]/55">
+                Додати нове туристичне місце до системи
               </p>
-            </div>
-          </Link>
+            </Link>
 
-          {/* Кнопка видалити */}
-          <Link
-            href="/admin/select?mode=delete"
-            className="group relative p-8 rounded-2xl bg-gradient-to-br from-red-500/20 to-rose-600/20 border border-red-500/30 hover:border-red-400/60 transition-all duration-300 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 to-red-400/0 group-hover:from-red-500/10 group-hover:to-red-400/10 transition-all duration-300"></div>
-            <div className="relative">
-              <div className="text-4xl mb-3">🗑️</div>
-              <h3 className="text-2xl font-bold mb-2">Видалити</h3>
-              <p className="text-(--text) text-sm">
-                Видалити місце з системи
+            {/* Редагувати */}
+            <Link
+              href="/admin/select"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-lg"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-700">
+                  <Pencil size={22} />
+                </div>
+
+                <ArrowUpRight
+                  size={20}
+                  className="text-[var(--ink)]/30 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[var(--ink)]"
+                />
+              </div>
+
+              <h2 className="mt-6 text-xl font-semibold">
+                Редагувати
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-[var(--ink)]/55">
+                Змінити інформацію про існуюче місце
               </p>
-            </div>
-          </Link>
-        </div>
+            </Link>
 
-        {/* Статистика */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
-          <div className="p-6 rounded-xl bg-slate-800/50 border border-slate-700/50 text-center">
-            <div className="text-3xl font-bold text-blue-400">
-              {places.length}
-            </div>
-            <div className="text-(--text-light) text-sm mt-2">Всього місць</div>
+            {/* Видалити */}
+            <Link
+              href="/admin/select?mode=delete"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-red-400/70 hover:shadow-lg"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-red-500/10 text-red-700">
+                  <Trash2 size={22} />
+                </div>
+
+                <ArrowUpRight
+                  size={20}
+                  className="text-[var(--ink)]/30 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-red-700"
+                />
+              </div>
+
+              <h2 className="mt-6 text-xl font-semibold">
+                Видалити
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-[var(--ink)]/55">
+                Видалити туристичне місце із системи
+              </p>
+            </Link>
+
+            {/* Feedback */}
+            <Link
+              href="/admin/feedback"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-violet-400/70 hover:shadow-lg"
+            >
+              <div className="flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-violet-500/10 text-violet-700">
+                  <MessageCircle size={23} />
+                </div>
+
+                <ArrowUpRight
+                  size={20}
+                  className="text-[var(--ink)]/30 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-violet-700"
+                />
+              </div>
+
+              <h2 className="mt-6 text-xl font-semibold">
+                Зворотний зв'язок
+              </h2>
+
+              <p className="mt-2 text-sm leading-6 text-[var(--ink)]/55">
+                Переглянути звернення користувачів
+              </p>
+            </Link>
+          </div>
+        </section>
+
+        {/* Statistics */}
+        <section>
+          <div className="flex items-center gap-4 mb-5">
+            <h2 className="text-xl font-semibold">
+              Статистика
+            </h2>
+
+            <div className="h-px flex-1 bg-[var(--rule)]" />
           </div>
 
-        </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {/* Places */}
+            <div className="rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--accent)]/10 text-[var(--accent)]">
+                  <MapPin size={20} />
+                </div>
 
-    
-                   
+                <span className="text-xs uppercase tracking-wider text-[var(--ink)]/40">
+                  Places
+                </span>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-3xl font-bold">
+                  {loading ? "—" : places.length}
+                </div>
+
+                <div className="mt-1 text-sm text-[var(--ink)]/50">
+                  Всього місць
+                </div>
+              </div>
+            </div>
+
+            {/* Статус */}
+            <div className="rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-green-500/10 text-green-700">
+                  <span className="h-2.5 w-2.5 rounded-full bg-current" />
+                </div>
+
+                <span className="text-xs uppercase tracking-wider text-[var(--ink)]/40">
+                  Status
+                </span>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-3xl font-bold">
+                  Онлайн
+                </div>
+
+                <div className="mt-1 text-sm text-[var(--ink)]/50">
+                  Система працює
+                </div>
+              </div>
+            </div>
+
+            {/* API */}
+            <div className="rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-500/10 text-blue-700">
+                  <span className="text-sm font-bold">
+                    API
+                  </span>
+                </div>
+
+                <span className="text-xs uppercase tracking-wider text-[var(--ink)]/40">
+                  Backend
+                </span>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-3xl font-bold">
+                  Active
+                </div>
+
+                <div className="mt-1 text-sm text-[var(--ink)]/50">
+                  API доступне
+                </div>
+              </div>
+            </div>
+
+            {/* Admin */}
+            <div className="rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-violet-500/10 text-violet-700">
+                  <span className="text-sm font-bold">
+                    ✓
+                  </span>
+                </div>
+
+                <span className="text-xs uppercase tracking-wider text-[var(--ink)]/40">
+                  Access
+                </span>
+              </div>
+
+              <div className="mt-5">
+                <div className="text-3xl font-bold">
+                  Admin
+                </div>
+
+                <div className="mt-1 text-sm text-[var(--ink)]/50">
+                  Режим адміністрування
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer hint */}
+        <div className="mt-12 pt-6 border-t border-[var(--rule)]">
+          <p className="text-xs text-[var(--ink)]/40">
+            Панель керування туристичним порталом Черкас
+          </p>
         </div>
       </div>
+    </div>
   );
 }

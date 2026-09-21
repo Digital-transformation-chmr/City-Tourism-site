@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Logo } from "./logo";
+import { Identity } from "./identity";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
@@ -214,6 +215,7 @@ const Header = () => {
           "
         >
           <Logo />
+          <Identity/>
         </Link>
 
         {/* ================================= */}
@@ -222,7 +224,7 @@ const Header = () => {
 
         <nav
           className="
-            hidden md:flex
+            hidden lg:flex
             ml-auto
             items-center
             gap-2 lg:gap-3
@@ -303,7 +305,7 @@ const Header = () => {
           }
           aria-expanded={menuOpen}
           className="
-            md:hidden
+            lg:hidden
             ml-auto
             relative
             z-[110]
@@ -360,7 +362,7 @@ const Header = () => {
       <div
         ref={menuRef}
         className="
-          md:hidden
+          lg:hidden
           overflow-hidden
           h-0
           opacity-0

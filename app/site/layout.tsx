@@ -40,7 +40,7 @@ export default function siteLayout({children,}: Readonly<{children: React.ReactN
             {children}
           </main>
 
-          <div className="relative z-10">
+          <div className="relative">
             <Footer />
           </div>
         </ClickSpark>

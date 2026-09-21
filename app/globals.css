@@ -11,19 +11,18 @@
   --font-sans: var(--font-main);
 }
 :root {
-  --bg-gradient: #faf7f1;
+  --bg-gradient: #eee9dd;
   --ink: #1c170f;
   --paper-l: #ede8dc;
   --paper-r: #f7f3eb;
-  --accent: oklch(0.97 0 0);
-  --muted: oklch(0.97 0 0);
+  --accent: #8f5547;
+  --muted: #8a7d6b;
   --rule: #d0c4b0;
 
   --text: rgb(37, 34, 34);
   --text-light: rgb(247, 240, 240);
   --accentLO: rgba(225, 126, 126, 0.679);
   --gray-text: rgb(81, 78, 78);
-  --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -55,29 +54,12 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-:root {
-  --bg-gradient:#f1dfbf26;
-  --ink: #1c170f;
-  --paper-l: #ede8dc;
-  --paper-r: #f7f3eb;
-  --accent: #7a3220;
-  --muted: #8a7d6b;
-  --rule: #d0c4b0;
-
-  --text: rgb(37, 34, 34);
-  --text-light: rgb(247, 240, 240);
-  --accentLO: rgba(225, 126, 126, 0.679);
-  --gray-text: rgb(81, 78, 78);
-
-
-}
-
 /* :root {
   --header-h: 92px;
 } */
 
 html.dark {
-  --bg-gradient: #ede8dc;
+  --bg-gradient: #eddcdc;
   --text:rgb(247, 240, 240);
   --accent: rgb(240, 29, 29);
   --gray-text: rgba(194, 184, 184, 0.962);
@@ -317,4 +299,29 @@ html {
 
 .animate-marquee {
   animation: marquee var(--speed, 20s) linear infinite;
+}
+
+
+
+.feedback-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+  scrollbar-gutter: stable;
+}
+
+.feedback-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 9999px;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }

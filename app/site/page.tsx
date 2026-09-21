@@ -15,6 +15,7 @@ import LogoLoop from "@/components/LogoLoop";
 import Marquee from "../components/UI/Marquee";
 import { CategoriesSection } from "../components/UI/category";
 
+import {HeroSection} from "../components/UI/heroMain";
 import { FaDiamond } from "react-icons/fa6";
 import { motion } from "motion/react";
 
@@ -134,113 +135,12 @@ export default function Home() {
   }
 
 return (
-    <div ref={mainRef} className="overflow-x-hidden">
+    <div ref={mainRef} className="overflow-x-hidden pt-10 lg:pt-0">
 
-     <div className="mx-auto flex  flex-col-reverse items-center gap-12 overflow-hidden px-6 py-12 lg:flex-row lg:gap-16 lg:px-10 lg:py-20">
+     {/* */}
 
-  {/* ================= ЛІВА КОЛОНКА ================= */}
-  <div className="flex w-full flex-col justify-center lg:flex-[1]">
-
-    {/* Бейдж */}
-    <div className="mb-6 flex">
-      <motion.div
-        initial={{ opacity: 0, y: -14 }}
-        animate={ready ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease, delay: 0.15 }}
-        className="inline-flex items-center gap-2 rounded-full bg-[oklch(0.93_0.03_250)] px-5 py-2 text-base font-semibold text-[oklch(0.32_0.11_250)]"
-      >
-        Місто над Дніпром
-      </motion.div>
-    </div>
-
-    {/* Заголовок */}
-    <div className="mb-6">
-      <h1 className="flex flex-wrap gap-x-3 font-[Unbounded,sans-serif] text-5xl font-bold leading-tight text-[oklch(0.22_0.05_250)] lg:text-6xl">
-        {HEADLINE.map((word, i) => (
-          <span key={i} className="overflow-hidden">
-            <motion.span
-              initial={{ y: "110%", opacity: 0 }}
-              animate={ready ? { y: 0, opacity: 1 } : {}}
-              transition={{
-                duration: 0.8,
-                ease,
-                delay: 0.4 + i * 0.12,
-              }}
-              className={`inline-block ${
-                word.accent ? "text-[oklch(0.55_0.19_25)]" : ""
-              }`}
-            >
-              {word.text}
-            </motion.span>
-          </span>
-        ))}
-      </h1>
-    </div>
-
-    {/* Опис */}
-    <div className="mb-10 max-w-2xl">
-      <motion.p
-        initial={{ y: 18, opacity: 0 }}
-        animate={ready ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 0.7, ease, delay: 0.85 }}
-        className="text-xl leading-relaxed text-[oklch(0.32_0.03_250)] lg:text-2xl"
-      >
-        Козацька історія, набережна Дніпра, затишні кав&apos;ярні та тепла
-        атмосфера — місто, яке варто відчути особисто. Ми зібрали найкраще,
-        щоб ти нічого не пропустив.
-      </motion.p>
-    </div>
-
-    {/* Кнопки */}
-    <div className="flex">
-      <motion.div
-        initial={{ y: 18, opacity: 0 }}
-        animate={ready ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 0.7, ease, delay: 1.05 }}
-        className="flex flex-wrap gap-4"
-      >
-        <a
-          href="/site/Attractions"
-          className="scp2 rounded-xl bg-[oklch(0.42_0.13_250)] px-8 py-4 text-lg font-semibold text-white transition-transform duration-300 hover:scale-105"
-        >
-          Почати мандрівку
-        </a>
-
-        {/* <a
-          href="#tours"
-          className="rounded-xl border-2 border-[oklch(0.42_0.13_250)] px-8 py-4 text-lg font-semibold text-[oklch(0.32_0.11_250)] transition-colors duration-300 hover:border-[oklch(0.55_0.19_25)]"
-        >
-          Обрати тур
-        </a> */}
-      </motion.div>
-    </div>
-  </div>
-
-  {/* ================= ПРАВА КОЛОНКА ================= */}
-  <motion.div
-    initial={{ opacity: 0, x: 80, scale: 0.9 }}
-    animate={ready ? { opacity: 1, x: 0, scale: 1 } : {}}
-    transition={{ duration: 1.2, ease }}
-    className="relative h-[400px] w-full lg:h-[650px] lg:flex-[1.3]"
-  >
-    {/* Декоративне світіння */}
-    <div className="absolute  left-6 h-full w-full rounded-[40px] bg-[oklch(0.55_0.19_25)]/15 blur-3xl" />
-
-    {/* Фото */}
-    <div className="relative  h-full w-full overflow-hidden rounded-[40px] shadow-2xl">
-      <Image
-        src="/Banners/banner1.webp"
-        alt="Панорама Черкас"
-        fill
-        priority
-        className="object-cover transition-transform duration-[6000ms] hover:scale-105"
-      />
-
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-    </div>
-  </motion.div>
-
-</div>    
+  {/* ================= HERO ================= */}
+  <HeroSection></HeroSection>
   {/* ================= END HERO 1 ================= */}
     <div className="w-full overflow-hidden bg-[oklch(0.22_0.05_250)] py-3.5 select-none">
       <Marquee 

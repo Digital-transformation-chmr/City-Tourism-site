@@ -152,6 +152,17 @@ exports.Prisma.NewsScalarFieldEnum = {
   publishedAt: 'publishedAt'
 };
 
+exports.Prisma.FeedbackScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  category: 'category',
+  message: 'message',
+  images: 'images',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -170,7 +181,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Place: 'Place',
-  News: 'News'
+  News: 'News',
+  Feedback: 'Feedback'
 };
 
 /**
