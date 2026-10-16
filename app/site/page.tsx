@@ -141,16 +141,6 @@ return (
 
   {/* ================= HERO ================= */}
   <HeroSection></HeroSection>
-  {/* ================= END HERO 1 ================= */}
-    <div className="w-full overflow-hidden bg-[oklch(0.22_0.05_250)] py-3.5 select-none">
-      <Marquee 
-        items={cherkasyFacts} 
-        speed={30}// твоя швидкість з анімації (28s)
-        pauseOnHover={false} // у твоєму коді не було паузи, тому вимикаємо
-        // Передаємо ромбик з твоїм кольором oklch(0.55 0.19 25)
-        defaultLogo={<FaDiamond className="text-[#d20707] text-xs" />} 
-      />
-    </div>
 
 
  {/* ================= TOP SECTION ================= */}
@@ -221,10 +211,10 @@ return (
               >
                 Куди піти в{" "}
                 <motion.span
-                  initial={{ color: "oklch(0.22 0.05 250)" }}
+                  initial={{ color: "oklch(0.55 0.19 25)" }}
                   whileInView={{ color: "oklch(0.55 0.19 25)" }}
                   transition={{ delay: 0.8, duration: 0.5 }}
-                  className="italic"
+                  className=""
                 >
                   перший день
                 </motion.span>

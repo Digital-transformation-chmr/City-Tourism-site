@@ -300,17 +300,22 @@ html {
 .animate-marquee {
   animation: marquee var(--speed, 20s) linear infinite;
 }
-
-
-
 .feedback-scrollbar {
   scrollbar-width: thin;
   scrollbar-color: var(--rule) transparent;
-  scrollbar-gutter: stable;
 }
 
 .feedback-scrollbar::-webkit-scrollbar {
   width: 6px;
+}
+
+.feedback-scrollbar::-webkit-scrollbar-button,
+.feedback-scrollbar::-webkit-scrollbar-button:single-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
 }
 
 .feedback-scrollbar::-webkit-scrollbar-track {
@@ -325,3 +330,4 @@ html {
 .feedback-scrollbar::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
+  

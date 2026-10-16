@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { MapPin, Clock, ChevronLeft, ChevronRight, Info, Globe } from "lucide-react";
 import PlacePolaroidGrid from "@/app/components/Places/placePolaroidCard";
 import { Place } from "../../components/Places/placeCard";
+import Image from "next/image";
 
 const SIDEBAR_WIDTH_DESKTOP = "clamp(260px, 22vw, 340px)";
 
@@ -56,7 +57,7 @@ function CanonCamera({ imageUrl, onPrev, onNext }: { imageUrl?: string; onPrev: 
         className="relative select-none w-full aspect-[3/2] bg-[#1a1a1a] rounded-[24px] p-2 sm:p-6 flex items-center justify-between border-b-8 border-black/40"
         style={{ 
           boxShadow: "inset 0 4px 10px rgba(255,255,255,0.1), 0 30px 60px rgba(0,0,0,0.5)",
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px)",
+          backgroundImage: "radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px) ",
           backgroundSize: "4px 4px"
         }}
       >
@@ -377,16 +378,19 @@ function CameraHero({ places }: { places: Place[] }) {
       <style>{KEYFRAMES}</style>
 
       {imageUrl ? (
-        <div
-          className="absolute inset-0 transition-all duration-700 ease-in-out"
+      <div className="absolute inset-0 overflow-hidden">
+        <Image
+          src={imageUrl}
+          alt=""
+          fill
+          unoptimized
+          className="object-cover transition-all duration-700 ease-in-out"
           style={{
-            backgroundImage: `url(${imageUrl})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
             filter: "blur(30px) brightness(0.94) saturate(1.1)",
             transform: "scale(1.06)",
           }}
         />
+      </div>
       ) : (
         <div className="absolute inset-0 bg-slate-200" />
       )}

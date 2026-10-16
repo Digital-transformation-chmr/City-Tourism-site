@@ -1,5 +1,9 @@
 "use client";
 
+import RotatingText from "@/components/RotatingText";
+import Marquee from "./Marquee";
+import { FaDiamond } from "react-icons/fa6";
+
 import React, {
   useCallback,
   useEffect,
@@ -26,18 +30,15 @@ const TITLE = ["Ч", "Е", "Р", "К", "А", "С", "И"];
 const LETTER_CURVE = [10, 5, 2, 0, 2, 5, 10];
 const MID = (TITLE.length - 1) / 2;
 
-const HOVER_RADIUS = 340; // px: на якій відстані від курсора літера "прокидається"
-const HOVER_LIFT = 28; // px: наскільки літера підстрибує
-const HOVER_SCALE = 0.14; // +14% до розміру
+const HOVER_RADIUS = 340; // px
+const HOVER_LIFT = 28; // px
+const HOVER_SCALE = 0.14; // +14%
 
-/* Напис "стоїть" на місті: ми читаємо прозорість PNG-панорами, знаходимо
-   лінію дахів під словом і садимо літери так, щоб їх низ ховався за будинками. */
-const SKYLINE_PERCENTILE = 0.2; // 0 = сідати на найнижчий дах, 1 = на найвищий
-const SINK_EM = 0.05; // на скільки (у висотах літери) низ літер ховається за містом
-const FALLBACK_BOTTOM = "66%"; // якщо лінію дахів визначити не вдалося
-const TITLE_SINK_VH = 22; // на скільки vh напис занурюється за місто при скролі
+const SKYLINE_PERCENTILE = 0.2;
+const SINK_EM = 0.05;
+const FALLBACK_BOTTOM = "66%";
+const TITLE_SINK_VH = 22;
 
-/* Ефект "гумки": літери відстають від скролу, а потім пружно доганяють його. */
 const SCROLL_SMOOTH = {
   stiffness: 100,
   damping: 12,
@@ -45,7 +46,6 @@ const SCROLL_SMOOTH = {
   restDelta: 0.0005,
   restSpeed: 0.0005,
 };
-/* Наскільки літери розтягуються по висоті при швидкому скролі (0 = вимкнено) */
 const STRETCH = 0.07;
 
 const BREATHE_PX = 4;
@@ -93,6 +93,13 @@ const HERO_CSS = `
   .hero-breathe, .hero-shimmer { animation: none; }
 }
 `;
+
+const cherkasyFacts = [
+  { title: "Засновано 1354 року" },
+  { title: "Місто над Дніпром" },
+  { title: "Серце Черкащини" },
+  { title: "Набережна довжиною 17 км" },
+];
 
 /* ------------------------------------------------------------------ */
 /*  Одна літера                                                       */
@@ -431,7 +438,7 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
     measureLetters();
   }, [plant, measureLetters]);
 
-  /* ---------- Курсор з Throttling (rAF) ---------- */
+  /* ---------- Курсор ---------- */
   const influences = useMemo(() => TITLE.map(() => motionValue(0)), []);
 
   useEffect(() => {
@@ -519,24 +526,54 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
           gpu-layer
         "
       >
-        {/* Контейнер підзаголовка та літер для збереження однакової ширини */}
         <div className="flex flex-col items-end">
-          {/* Підзаголовок над текстом справа */}
-          <span
+          <motion.span
+            initial={
+              reduced
+                ? { opacity: 0, y: 10 }
+                : { opacity: 0, y: 30 }
+            }
+            animate={
+              heroReady
+                ? { opacity: 1, y: 0 }
+                : {}
+            }
+            transition={{
+              type: "spring",
+              stiffness: 90,
+              damping: 14,
+              mass: 0.9,
+              delay: 0.5,
+              opacity: { duration: 0.5, delay: 0.5 },
+            }}
             className="
               mb-2 pr-1 sm:pr-2
+              flex items-center gap-2 justify-end
               text-xs sm:text-sm md:text-base
               font-extrabold
               uppercase
               tracking-[0.35em]
               text-white/95
               drop-shadow-[0_2px_6px_rgba(10,30,60,0.5)]
-              text-right
+              gpu-layer
             "
           >
-            Туристичне місто
-          </span>
-
+            <RotatingText
+              texts={['Туристичне', 'Історичне', 'Сучасне', 'Затишне']}
+              staggerFrom="last"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-120%" }}
+              staggerDuration={0.025}
+              splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 inline-flex"
+              transition={{ type: "spring", damping: 30, stiffness: 400 }}
+              rotationInterval={2500}
+              splitBy="characters"
+              auto={heroReady}
+              loop
+            />
+            <span>місто</span>
+          </motion.span>
           <h1
             ref={titleRef}
             aria-label="Черкаси"
@@ -548,7 +585,6 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
               perspective: 900,
             }}
           >
-            {/* Сяйво під написом */}
             <motion.div
               aria-hidden
               initial={{ opacity: 0 }}
@@ -626,7 +662,7 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
         </motion.div>
       </div>
 
-      {/* ШАР 4: UI */}
+      {/* ШАР 4: UI (Кнопки, Стрілка) */}
       <div
         className="
           absolute
@@ -645,7 +681,8 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
           className="flex items-center gap-4 pointer-events-auto"
         />
 
-        <div className="flex flex-col items-center gap-6 pb-4">
+        {/* Додано pb-16 для запобігання накладання на Marquee */}
+        <div className="flex flex-col items-center gap-6 pb-16 sm:pb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={heroReady ? { opacity: 1, y: 0 } : {}}
@@ -696,6 +733,16 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
             <span className="animate-bounce text-4xl">↓</span>
           </div>
         </div>
+      </div>
+
+      {/* ШАР 5: MARQUEE НА ВСЮ ШИРИНУ ЗНИЗУ */}
+      <div className="absolute bottom-0 left-0 right-0 z-50 w-full overflow-hidden bg-[oklch(0.22_0.05_250)] py-3.5 select-none">
+        <Marquee 
+          items={cherkasyFacts} 
+          speed={30}
+          pauseOnHover={false}
+          defaultLogo={<FaDiamond className="text-[#d20707] text-xs" />} 
+        />
       </div>
     </div>
   );

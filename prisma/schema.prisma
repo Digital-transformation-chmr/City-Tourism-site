@@ -66,3 +66,56 @@ model Feedback {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+model Admin {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  keyHash      String
+  role         String   @default("admin")
+  active       Boolean  @default(true)
+  firstLoginAt DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  sessions       AdminSession[]
+  resetTokens    AdminPasswordResetToken[]
+}
+
+model AdminSession {
+  id        Int      @id @default(autoincrement())
+  adminId   Int
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([expiresAt])
+}
+
+model AdminPasswordResetToken {
+  id        Int       @id @default(autoincrement())
+  adminId   Int
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  admin Admin @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  @@index([adminId])
+  @@index([expiresAt])
+}
+
+model AdminInvite {
+  id         Int      @id @default(autoincrement())
+  email      String
+  tokenHash  String   @unique
+  expiresAt  DateTime
+  usedAt     DateTime?
+  createdAt  DateTime @default(now())
+
+  @@index([email])
+  @@index([expiresAt])
+}

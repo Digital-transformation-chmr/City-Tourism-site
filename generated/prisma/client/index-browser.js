@@ -163,6 +163,44 @@ exports.Prisma.FeedbackScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.AdminScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  keyHash: 'keyHash',
+  role: 'role',
+  active: 'active',
+  firstLoginAt: 'firstLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AdminSessionScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AdminPasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  adminId: 'adminId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.AdminInviteScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -182,7 +220,11 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Place: 'Place',
   News: 'News',
-  Feedback: 'Feedback'
+  Feedback: 'Feedback',
+  Admin: 'Admin',
+  AdminSession: 'AdminSession',
+  AdminPasswordResetToken: 'AdminPasswordResetToken',
+  AdminInvite: 'AdminInvite'
 };
 
 /**

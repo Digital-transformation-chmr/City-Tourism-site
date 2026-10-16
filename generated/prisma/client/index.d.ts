@@ -28,6 +28,26 @@ export type News = $Result.DefaultSelection<Prisma.$NewsPayload>
  * 
  */
 export type Feedback = $Result.DefaultSelection<Prisma.$FeedbackPayload>
+/**
+ * Model Admin
+ * 
+ */
+export type Admin = $Result.DefaultSelection<Prisma.$AdminPayload>
+/**
+ * Model AdminSession
+ * 
+ */
+export type AdminSession = $Result.DefaultSelection<Prisma.$AdminSessionPayload>
+/**
+ * Model AdminPasswordResetToken
+ * 
+ */
+export type AdminPasswordResetToken = $Result.DefaultSelection<Prisma.$AdminPasswordResetTokenPayload>
+/**
+ * Model AdminInvite
+ * 
+ */
+export type AdminInvite = $Result.DefaultSelection<Prisma.$AdminInvitePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -179,6 +199,46 @@ export class PrismaClient<
     * ```
     */
   get feedback(): Prisma.FeedbackDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.admin`: Exposes CRUD operations for the **Admin** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Admins
+    * const admins = await prisma.admin.findMany()
+    * ```
+    */
+  get admin(): Prisma.AdminDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adminSession`: Exposes CRUD operations for the **AdminSession** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdminSessions
+    * const adminSessions = await prisma.adminSession.findMany()
+    * ```
+    */
+  get adminSession(): Prisma.AdminSessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adminPasswordResetToken`: Exposes CRUD operations for the **AdminPasswordResetToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdminPasswordResetTokens
+    * const adminPasswordResetTokens = await prisma.adminPasswordResetToken.findMany()
+    * ```
+    */
+  get adminPasswordResetToken(): Prisma.AdminPasswordResetTokenDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.adminInvite`: Exposes CRUD operations for the **AdminInvite** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AdminInvites
+    * const adminInvites = await prisma.adminInvite.findMany()
+    * ```
+    */
+  get adminInvite(): Prisma.AdminInviteDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -615,7 +675,11 @@ export namespace Prisma {
   export const ModelName: {
     Place: 'Place',
     News: 'News',
-    Feedback: 'Feedback'
+    Feedback: 'Feedback',
+    Admin: 'Admin',
+    AdminSession: 'AdminSession',
+    AdminPasswordResetToken: 'AdminPasswordResetToken',
+    AdminInvite: 'AdminInvite'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -631,7 +695,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "place" | "news" | "feedback"
+      modelProps: "place" | "news" | "feedback" | "admin" | "adminSession" | "adminPasswordResetToken" | "adminInvite"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -857,6 +921,302 @@ export namespace Prisma {
           }
         }
       }
+      Admin: {
+        payload: Prisma.$AdminPayload<ExtArgs>
+        fields: Prisma.AdminFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          findMany: {
+            args: Prisma.AdminFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>[]
+          }
+          create: {
+            args: Prisma.AdminCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          createMany: {
+            args: Prisma.AdminCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdminCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>[]
+          }
+          delete: {
+            args: Prisma.AdminDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          update: {
+            args: Prisma.AdminUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdminUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdminUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdmin>
+          }
+          groupBy: {
+            args: Prisma.AdminGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdminSession: {
+        payload: Prisma.$AdminSessionPayload<ExtArgs>
+        fields: Prisma.AdminSessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminSessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminSessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminSessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminSessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>
+          }
+          findMany: {
+            args: Prisma.AdminSessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>[]
+          }
+          create: {
+            args: Prisma.AdminSessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>
+          }
+          createMany: {
+            args: Prisma.AdminSessionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdminSessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>[]
+          }
+          delete: {
+            args: Prisma.AdminSessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>
+          }
+          update: {
+            args: Prisma.AdminSessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminSessionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminSessionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdminSessionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdminSessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminSessionPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminSessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdminSession>
+          }
+          groupBy: {
+            args: Prisma.AdminSessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminSessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminSessionCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminSessionCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdminPasswordResetToken: {
+        payload: Prisma.$AdminPasswordResetTokenPayload<ExtArgs>
+        fields: Prisma.AdminPasswordResetTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminPasswordResetTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminPasswordResetTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.AdminPasswordResetTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminPasswordResetTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>
+          }
+          findMany: {
+            args: Prisma.AdminPasswordResetTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>[]
+          }
+          create: {
+            args: Prisma.AdminPasswordResetTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>
+          }
+          createMany: {
+            args: Prisma.AdminPasswordResetTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdminPasswordResetTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.AdminPasswordResetTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>
+          }
+          update: {
+            args: Prisma.AdminPasswordResetTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminPasswordResetTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminPasswordResetTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdminPasswordResetTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.AdminPasswordResetTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminPasswordResetTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.AdminPasswordResetTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdminPasswordResetToken>
+          }
+          groupBy: {
+            args: Prisma.AdminPasswordResetTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminPasswordResetTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminPasswordResetTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminPasswordResetTokenCountAggregateOutputType> | number
+          }
+        }
+      }
+      AdminInvite: {
+        payload: Prisma.$AdminInvitePayload<ExtArgs>
+        fields: Prisma.AdminInviteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AdminInviteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AdminInviteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>
+          }
+          findFirst: {
+            args: Prisma.AdminInviteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AdminInviteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>
+          }
+          findMany: {
+            args: Prisma.AdminInviteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>[]
+          }
+          create: {
+            args: Prisma.AdminInviteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>
+          }
+          createMany: {
+            args: Prisma.AdminInviteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AdminInviteCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>[]
+          }
+          delete: {
+            args: Prisma.AdminInviteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>
+          }
+          update: {
+            args: Prisma.AdminInviteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>
+          }
+          deleteMany: {
+            args: Prisma.AdminInviteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AdminInviteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AdminInviteUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>[]
+          }
+          upsert: {
+            args: Prisma.AdminInviteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AdminInvitePayload>
+          }
+          aggregate: {
+            args: Prisma.AdminInviteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAdminInvite>
+          }
+          groupBy: {
+            args: Prisma.AdminInviteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AdminInviteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AdminInviteCountArgs<ExtArgs>
+            result: $Utils.Optional<AdminInviteCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -968,6 +1328,10 @@ export namespace Prisma {
     place?: PlaceOmit
     news?: NewsOmit
     feedback?: FeedbackOmit
+    admin?: AdminOmit
+    adminSession?: AdminSessionOmit
+    adminPasswordResetToken?: AdminPasswordResetTokenOmit
+    adminInvite?: AdminInviteOmit
   }
 
   /* Types for Logging */
@@ -1042,6 +1406,45 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type AdminCountOutputType
+   */
+
+  export type AdminCountOutputType = {
+    sessions: number
+    resetTokens: number
+  }
+
+  export type AdminCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | AdminCountOutputTypeCountSessionsArgs
+    resetTokens?: boolean | AdminCountOutputTypeCountResetTokensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminCountOutputType
+     */
+    select?: AdminCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminSessionWhereInput
+  }
+
+  /**
+   * AdminCountOutputType without action
+   */
+  export type AdminCountOutputTypeCountResetTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminPasswordResetTokenWhereInput
+  }
 
 
   /**
@@ -4402,6 +4805,4457 @@ export namespace Prisma {
 
 
   /**
+   * Model Admin
+   */
+
+  export type AggregateAdmin = {
+    _count: AdminCountAggregateOutputType | null
+    _avg: AdminAvgAggregateOutputType | null
+    _sum: AdminSumAggregateOutputType | null
+    _min: AdminMinAggregateOutputType | null
+    _max: AdminMaxAggregateOutputType | null
+  }
+
+  export type AdminAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AdminSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AdminMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    keyHash: string | null
+    role: string | null
+    active: boolean | null
+    firstLoginAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdminMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    email: string | null
+    keyHash: string | null
+    role: string | null
+    active: boolean | null
+    firstLoginAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AdminCountAggregateOutputType = {
+    id: number
+    name: number
+    email: number
+    keyHash: number
+    role: number
+    active: number
+    firstLoginAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AdminAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AdminSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AdminMinAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    keyHash?: true
+    role?: true
+    active?: true
+    firstLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdminMaxAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    keyHash?: true
+    role?: true
+    active?: true
+    firstLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AdminCountAggregateInputType = {
+    id?: true
+    name?: true
+    email?: true
+    keyHash?: true
+    role?: true
+    active?: true
+    firstLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AdminAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Admin to aggregate.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Admins
+    **/
+    _count?: true | AdminCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdminAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdminSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminMaxAggregateInputType
+  }
+
+  export type GetAdminAggregateType<T extends AdminAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdmin]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdmin[P]>
+      : GetScalarType<T[P], AggregateAdmin[P]>
+  }
+
+
+
+
+  export type AdminGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminWhereInput
+    orderBy?: AdminOrderByWithAggregationInput | AdminOrderByWithAggregationInput[]
+    by: AdminScalarFieldEnum[] | AdminScalarFieldEnum
+    having?: AdminScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminCountAggregateInputType | true
+    _avg?: AdminAvgAggregateInputType
+    _sum?: AdminSumAggregateInputType
+    _min?: AdminMinAggregateInputType
+    _max?: AdminMaxAggregateInputType
+  }
+
+  export type AdminGroupByOutputType = {
+    id: number
+    name: string
+    email: string
+    keyHash: string
+    role: string
+    active: boolean
+    firstLoginAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: AdminCountAggregateOutputType | null
+    _avg: AdminAvgAggregateOutputType | null
+    _sum: AdminSumAggregateOutputType | null
+    _min: AdminMinAggregateOutputType | null
+    _max: AdminMaxAggregateOutputType | null
+  }
+
+  type GetAdminGroupByPayload<T extends AdminGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    keyHash?: boolean
+    role?: boolean
+    active?: boolean
+    firstLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    sessions?: boolean | Admin$sessionsArgs<ExtArgs>
+    resetTokens?: boolean | Admin$resetTokensArgs<ExtArgs>
+    _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["admin"]>
+
+  export type AdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    keyHash?: boolean
+    role?: boolean
+    active?: boolean
+    firstLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["admin"]>
+
+  export type AdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    keyHash?: boolean
+    role?: boolean
+    active?: boolean
+    firstLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["admin"]>
+
+  export type AdminSelectScalar = {
+    id?: boolean
+    name?: boolean
+    email?: boolean
+    keyHash?: boolean
+    role?: boolean
+    active?: boolean
+    firstLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "keyHash" | "role" | "active" | "firstLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["admin"]>
+  export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | Admin$sessionsArgs<ExtArgs>
+    resetTokens?: boolean | Admin$resetTokensArgs<ExtArgs>
+    _count?: boolean | AdminCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type AdminIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AdminIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $AdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Admin"
+    objects: {
+      sessions: Prisma.$AdminSessionPayload<ExtArgs>[]
+      resetTokens: Prisma.$AdminPasswordResetTokenPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      email: string
+      keyHash: string
+      role: string
+      active: boolean
+      firstLoginAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["admin"]>
+    composites: {}
+  }
+
+  type AdminGetPayload<S extends boolean | null | undefined | AdminDefaultArgs> = $Result.GetResult<Prisma.$AdminPayload, S>
+
+  type AdminCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminCountAggregateInputType | true
+    }
+
+  export interface AdminDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Admin'], meta: { name: 'Admin' } }
+    /**
+     * Find zero or one Admin that matches the filter.
+     * @param {AdminFindUniqueArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminFindUniqueArgs>(args: SelectSubset<T, AdminFindUniqueArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Admin that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminFindUniqueOrThrowArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Admin that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminFindFirstArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminFindFirstArgs>(args?: SelectSubset<T, AdminFindFirstArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Admin that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminFindFirstOrThrowArgs} args - Arguments to find a Admin
+     * @example
+     * // Get one Admin
+     * const admin = await prisma.admin.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Admins that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Admins
+     * const admins = await prisma.admin.findMany()
+     * 
+     * // Get first 10 Admins
+     * const admins = await prisma.admin.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminWithIdOnly = await prisma.admin.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminFindManyArgs>(args?: SelectSubset<T, AdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Admin.
+     * @param {AdminCreateArgs} args - Arguments to create a Admin.
+     * @example
+     * // Create one Admin
+     * const Admin = await prisma.admin.create({
+     *   data: {
+     *     // ... data to create a Admin
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminCreateArgs>(args: SelectSubset<T, AdminCreateArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Admins.
+     * @param {AdminCreateManyArgs} args - Arguments to create many Admins.
+     * @example
+     * // Create many Admins
+     * const admin = await prisma.admin.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminCreateManyArgs>(args?: SelectSubset<T, AdminCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Admins and returns the data saved in the database.
+     * @param {AdminCreateManyAndReturnArgs} args - Arguments to create many Admins.
+     * @example
+     * // Create many Admins
+     * const admin = await prisma.admin.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Admins and only return the `id`
+     * const adminWithIdOnly = await prisma.admin.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdminCreateManyAndReturnArgs>(args?: SelectSubset<T, AdminCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Admin.
+     * @param {AdminDeleteArgs} args - Arguments to delete one Admin.
+     * @example
+     * // Delete one Admin
+     * const Admin = await prisma.admin.delete({
+     *   where: {
+     *     // ... filter to delete one Admin
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminDeleteArgs>(args: SelectSubset<T, AdminDeleteArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Admin.
+     * @param {AdminUpdateArgs} args - Arguments to update one Admin.
+     * @example
+     * // Update one Admin
+     * const admin = await prisma.admin.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminUpdateArgs>(args: SelectSubset<T, AdminUpdateArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Admins.
+     * @param {AdminDeleteManyArgs} args - Arguments to filter Admins to delete.
+     * @example
+     * // Delete a few Admins
+     * const { count } = await prisma.admin.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminDeleteManyArgs>(args?: SelectSubset<T, AdminDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Admins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Admins
+     * const admin = await prisma.admin.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminUpdateManyArgs>(args: SelectSubset<T, AdminUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Admins and returns the data updated in the database.
+     * @param {AdminUpdateManyAndReturnArgs} args - Arguments to update many Admins.
+     * @example
+     * // Update many Admins
+     * const admin = await prisma.admin.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Admins and only return the `id`
+     * const adminWithIdOnly = await prisma.admin.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdminUpdateManyAndReturnArgs>(args: SelectSubset<T, AdminUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Admin.
+     * @param {AdminUpsertArgs} args - Arguments to update or create a Admin.
+     * @example
+     * // Update or create a Admin
+     * const admin = await prisma.admin.upsert({
+     *   create: {
+     *     // ... data to create a Admin
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Admin we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminUpsertArgs>(args: SelectSubset<T, AdminUpsertArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Admins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminCountArgs} args - Arguments to filter Admins to count.
+     * @example
+     * // Count the number of Admins
+     * const count = await prisma.admin.count({
+     *   where: {
+     *     // ... the filter for the Admins we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminCountArgs>(
+      args?: Subset<T, AdminCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Admin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminAggregateArgs>(args: Subset<T, AdminAggregateArgs>): Prisma.PrismaPromise<GetAdminAggregateType<T>>
+
+    /**
+     * Group by Admin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminGroupByArgs['orderBy'] }
+        : { orderBy?: AdminGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Admin model
+   */
+  readonly fields: AdminFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Admin.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    sessions<T extends Admin$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, Admin$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    resetTokens<T extends Admin$resetTokensArgs<ExtArgs> = {}>(args?: Subset<T, Admin$resetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Admin model
+   */
+  interface AdminFieldRefs {
+    readonly id: FieldRef<"Admin", 'Int'>
+    readonly name: FieldRef<"Admin", 'String'>
+    readonly email: FieldRef<"Admin", 'String'>
+    readonly keyHash: FieldRef<"Admin", 'String'>
+    readonly role: FieldRef<"Admin", 'String'>
+    readonly active: FieldRef<"Admin", 'Boolean'>
+    readonly firstLoginAt: FieldRef<"Admin", 'DateTime'>
+    readonly createdAt: FieldRef<"Admin", 'DateTime'>
+    readonly updatedAt: FieldRef<"Admin", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Admin findUnique
+   */
+  export type AdminFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin findUniqueOrThrow
+   */
+  export type AdminFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin findFirst
+   */
+  export type AdminFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Admins.
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admins.
+     */
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
+   * Admin findFirstOrThrow
+   */
+  export type AdminFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * Filter, which Admin to fetch.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Admins.
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admins.
+     */
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
+   * Admin findMany
+   */
+  export type AdminFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * Filter, which Admins to fetch.
+     */
+    where?: AdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Admins to fetch.
+     */
+    orderBy?: AdminOrderByWithRelationInput | AdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Admins.
+     */
+    cursor?: AdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Admins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Admins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Admins.
+     */
+    distinct?: AdminScalarFieldEnum | AdminScalarFieldEnum[]
+  }
+
+  /**
+   * Admin create
+   */
+  export type AdminCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Admin.
+     */
+    data: XOR<AdminCreateInput, AdminUncheckedCreateInput>
+  }
+
+  /**
+   * Admin createMany
+   */
+  export type AdminCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Admins.
+     */
+    data: AdminCreateManyInput | AdminCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Admin createManyAndReturn
+   */
+  export type AdminCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * The data used to create many Admins.
+     */
+    data: AdminCreateManyInput | AdminCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Admin update
+   */
+  export type AdminUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Admin.
+     */
+    data: XOR<AdminUpdateInput, AdminUncheckedUpdateInput>
+    /**
+     * Choose, which Admin to update.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin updateMany
+   */
+  export type AdminUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Admins.
+     */
+    data: XOR<AdminUpdateManyMutationInput, AdminUncheckedUpdateManyInput>
+    /**
+     * Filter which Admins to update
+     */
+    where?: AdminWhereInput
+    /**
+     * Limit how many Admins to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admin updateManyAndReturn
+   */
+  export type AdminUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * The data used to update Admins.
+     */
+    data: XOR<AdminUpdateManyMutationInput, AdminUncheckedUpdateManyInput>
+    /**
+     * Filter which Admins to update
+     */
+    where?: AdminWhereInput
+    /**
+     * Limit how many Admins to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admin upsert
+   */
+  export type AdminUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Admin to update in case it exists.
+     */
+    where: AdminWhereUniqueInput
+    /**
+     * In case the Admin found by the `where` argument doesn't exist, create a new Admin with this data.
+     */
+    create: XOR<AdminCreateInput, AdminUncheckedCreateInput>
+    /**
+     * In case the Admin was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminUpdateInput, AdminUncheckedUpdateInput>
+  }
+
+  /**
+   * Admin delete
+   */
+  export type AdminDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+    /**
+     * Filter which Admin to delete.
+     */
+    where: AdminWhereUniqueInput
+  }
+
+  /**
+   * Admin deleteMany
+   */
+  export type AdminDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Admins to delete
+     */
+    where?: AdminWhereInput
+    /**
+     * Limit how many Admins to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Admin.sessions
+   */
+  export type Admin$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    where?: AdminSessionWhereInput
+    orderBy?: AdminSessionOrderByWithRelationInput | AdminSessionOrderByWithRelationInput[]
+    cursor?: AdminSessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminSessionScalarFieldEnum | AdminSessionScalarFieldEnum[]
+  }
+
+  /**
+   * Admin.resetTokens
+   */
+  export type Admin$resetTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    where?: AdminPasswordResetTokenWhereInput
+    orderBy?: AdminPasswordResetTokenOrderByWithRelationInput | AdminPasswordResetTokenOrderByWithRelationInput[]
+    cursor?: AdminPasswordResetTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdminPasswordResetTokenScalarFieldEnum | AdminPasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * Admin without action
+   */
+  export type AdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Admin
+     */
+    select?: AdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Admin
+     */
+    omit?: AdminOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdminSession
+   */
+
+  export type AggregateAdminSession = {
+    _count: AdminSessionCountAggregateOutputType | null
+    _avg: AdminSessionAvgAggregateOutputType | null
+    _sum: AdminSessionSumAggregateOutputType | null
+    _min: AdminSessionMinAggregateOutputType | null
+    _max: AdminSessionMaxAggregateOutputType | null
+  }
+
+  export type AdminSessionAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+  }
+
+  export type AdminSessionSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+  }
+
+  export type AdminSessionMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type AdminSessionMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type AdminSessionCountAggregateOutputType = {
+    id: number
+    adminId: number
+    tokenHash: number
+    expiresAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AdminSessionAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+  }
+
+  export type AdminSessionSumAggregateInputType = {
+    id?: true
+    adminId?: true
+  }
+
+  export type AdminSessionMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    tokenHash?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type AdminSessionMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    tokenHash?: true
+    expiresAt?: true
+    createdAt?: true
+  }
+
+  export type AdminSessionCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    tokenHash?: true
+    expiresAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AdminSessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminSession to aggregate.
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminSessions to fetch.
+     */
+    orderBy?: AdminSessionOrderByWithRelationInput | AdminSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdminSessions
+    **/
+    _count?: true | AdminSessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdminSessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdminSessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminSessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminSessionMaxAggregateInputType
+  }
+
+  export type GetAdminSessionAggregateType<T extends AdminSessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdminSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdminSession[P]>
+      : GetScalarType<T[P], AggregateAdminSession[P]>
+  }
+
+
+
+
+  export type AdminSessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminSessionWhereInput
+    orderBy?: AdminSessionOrderByWithAggregationInput | AdminSessionOrderByWithAggregationInput[]
+    by: AdminSessionScalarFieldEnum[] | AdminSessionScalarFieldEnum
+    having?: AdminSessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminSessionCountAggregateInputType | true
+    _avg?: AdminSessionAvgAggregateInputType
+    _sum?: AdminSessionSumAggregateInputType
+    _min?: AdminSessionMinAggregateInputType
+    _max?: AdminSessionMaxAggregateInputType
+  }
+
+  export type AdminSessionGroupByOutputType = {
+    id: number
+    adminId: number
+    tokenHash: string
+    expiresAt: Date
+    createdAt: Date
+    _count: AdminSessionCountAggregateOutputType | null
+    _avg: AdminSessionAvgAggregateOutputType | null
+    _sum: AdminSessionSumAggregateOutputType | null
+    _min: AdminSessionMinAggregateOutputType | null
+    _max: AdminSessionMaxAggregateOutputType | null
+  }
+
+  type GetAdminSessionGroupByPayload<T extends AdminSessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminSessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminSessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminSessionGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminSessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminSession"]>
+
+  export type AdminSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminSession"]>
+
+  export type AdminSessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminSession"]>
+
+  export type AdminSessionSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type AdminSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "tokenHash" | "expiresAt" | "createdAt", ExtArgs["result"]["adminSession"]>
+  export type AdminSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AdminSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AdminSessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $AdminSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdminSession"
+    objects: {
+      admin: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      tokenHash: string
+      expiresAt: Date
+      createdAt: Date
+    }, ExtArgs["result"]["adminSession"]>
+    composites: {}
+  }
+
+  type AdminSessionGetPayload<S extends boolean | null | undefined | AdminSessionDefaultArgs> = $Result.GetResult<Prisma.$AdminSessionPayload, S>
+
+  type AdminSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminSessionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminSessionCountAggregateInputType | true
+    }
+
+  export interface AdminSessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdminSession'], meta: { name: 'AdminSession' } }
+    /**
+     * Find zero or one AdminSession that matches the filter.
+     * @param {AdminSessionFindUniqueArgs} args - Arguments to find a AdminSession
+     * @example
+     * // Get one AdminSession
+     * const adminSession = await prisma.adminSession.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminSessionFindUniqueArgs>(args: SelectSubset<T, AdminSessionFindUniqueArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdminSession that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminSessionFindUniqueOrThrowArgs} args - Arguments to find a AdminSession
+     * @example
+     * // Get one AdminSession
+     * const adminSession = await prisma.adminSession.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminSessionFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminSessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminSession that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionFindFirstArgs} args - Arguments to find a AdminSession
+     * @example
+     * // Get one AdminSession
+     * const adminSession = await prisma.adminSession.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminSessionFindFirstArgs>(args?: SelectSubset<T, AdminSessionFindFirstArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminSession that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionFindFirstOrThrowArgs} args - Arguments to find a AdminSession
+     * @example
+     * // Get one AdminSession
+     * const adminSession = await prisma.adminSession.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminSessionFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminSessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdminSessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdminSessions
+     * const adminSessions = await prisma.adminSession.findMany()
+     * 
+     * // Get first 10 AdminSessions
+     * const adminSessions = await prisma.adminSession.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminSessionWithIdOnly = await prisma.adminSession.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminSessionFindManyArgs>(args?: SelectSubset<T, AdminSessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdminSession.
+     * @param {AdminSessionCreateArgs} args - Arguments to create a AdminSession.
+     * @example
+     * // Create one AdminSession
+     * const AdminSession = await prisma.adminSession.create({
+     *   data: {
+     *     // ... data to create a AdminSession
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminSessionCreateArgs>(args: SelectSubset<T, AdminSessionCreateArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdminSessions.
+     * @param {AdminSessionCreateManyArgs} args - Arguments to create many AdminSessions.
+     * @example
+     * // Create many AdminSessions
+     * const adminSession = await prisma.adminSession.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminSessionCreateManyArgs>(args?: SelectSubset<T, AdminSessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdminSessions and returns the data saved in the database.
+     * @param {AdminSessionCreateManyAndReturnArgs} args - Arguments to create many AdminSessions.
+     * @example
+     * // Create many AdminSessions
+     * const adminSession = await prisma.adminSession.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdminSessions and only return the `id`
+     * const adminSessionWithIdOnly = await prisma.adminSession.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdminSessionCreateManyAndReturnArgs>(args?: SelectSubset<T, AdminSessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdminSession.
+     * @param {AdminSessionDeleteArgs} args - Arguments to delete one AdminSession.
+     * @example
+     * // Delete one AdminSession
+     * const AdminSession = await prisma.adminSession.delete({
+     *   where: {
+     *     // ... filter to delete one AdminSession
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminSessionDeleteArgs>(args: SelectSubset<T, AdminSessionDeleteArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdminSession.
+     * @param {AdminSessionUpdateArgs} args - Arguments to update one AdminSession.
+     * @example
+     * // Update one AdminSession
+     * const adminSession = await prisma.adminSession.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminSessionUpdateArgs>(args: SelectSubset<T, AdminSessionUpdateArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdminSessions.
+     * @param {AdminSessionDeleteManyArgs} args - Arguments to filter AdminSessions to delete.
+     * @example
+     * // Delete a few AdminSessions
+     * const { count } = await prisma.adminSession.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminSessionDeleteManyArgs>(args?: SelectSubset<T, AdminSessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdminSessions
+     * const adminSession = await prisma.adminSession.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminSessionUpdateManyArgs>(args: SelectSubset<T, AdminSessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminSessions and returns the data updated in the database.
+     * @param {AdminSessionUpdateManyAndReturnArgs} args - Arguments to update many AdminSessions.
+     * @example
+     * // Update many AdminSessions
+     * const adminSession = await prisma.adminSession.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdminSessions and only return the `id`
+     * const adminSessionWithIdOnly = await prisma.adminSession.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdminSessionUpdateManyAndReturnArgs>(args: SelectSubset<T, AdminSessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdminSession.
+     * @param {AdminSessionUpsertArgs} args - Arguments to update or create a AdminSession.
+     * @example
+     * // Update or create a AdminSession
+     * const adminSession = await prisma.adminSession.upsert({
+     *   create: {
+     *     // ... data to create a AdminSession
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdminSession we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminSessionUpsertArgs>(args: SelectSubset<T, AdminSessionUpsertArgs<ExtArgs>>): Prisma__AdminSessionClient<$Result.GetResult<Prisma.$AdminSessionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdminSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionCountArgs} args - Arguments to filter AdminSessions to count.
+     * @example
+     * // Count the number of AdminSessions
+     * const count = await prisma.adminSession.count({
+     *   where: {
+     *     // ... the filter for the AdminSessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminSessionCountArgs>(
+      args?: Subset<T, AdminSessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminSessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdminSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminSessionAggregateArgs>(args: Subset<T, AdminSessionAggregateArgs>): Prisma.PrismaPromise<GetAdminSessionAggregateType<T>>
+
+    /**
+     * Group by AdminSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminSessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminSessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminSessionGroupByArgs['orderBy'] }
+        : { orderBy?: AdminSessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminSessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdminSession model
+   */
+  readonly fields: AdminSessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdminSession.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdminSession model
+   */
+  interface AdminSessionFieldRefs {
+    readonly id: FieldRef<"AdminSession", 'Int'>
+    readonly adminId: FieldRef<"AdminSession", 'Int'>
+    readonly tokenHash: FieldRef<"AdminSession", 'String'>
+    readonly expiresAt: FieldRef<"AdminSession", 'DateTime'>
+    readonly createdAt: FieldRef<"AdminSession", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdminSession findUnique
+   */
+  export type AdminSessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminSession to fetch.
+     */
+    where: AdminSessionWhereUniqueInput
+  }
+
+  /**
+   * AdminSession findUniqueOrThrow
+   */
+  export type AdminSessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminSession to fetch.
+     */
+    where: AdminSessionWhereUniqueInput
+  }
+
+  /**
+   * AdminSession findFirst
+   */
+  export type AdminSessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminSession to fetch.
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminSessions to fetch.
+     */
+    orderBy?: AdminSessionOrderByWithRelationInput | AdminSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminSessions.
+     */
+    cursor?: AdminSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminSessions.
+     */
+    distinct?: AdminSessionScalarFieldEnum | AdminSessionScalarFieldEnum[]
+  }
+
+  /**
+   * AdminSession findFirstOrThrow
+   */
+  export type AdminSessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminSession to fetch.
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminSessions to fetch.
+     */
+    orderBy?: AdminSessionOrderByWithRelationInput | AdminSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminSessions.
+     */
+    cursor?: AdminSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminSessions.
+     */
+    distinct?: AdminSessionScalarFieldEnum | AdminSessionScalarFieldEnum[]
+  }
+
+  /**
+   * AdminSession findMany
+   */
+  export type AdminSessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminSessions to fetch.
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminSessions to fetch.
+     */
+    orderBy?: AdminSessionOrderByWithRelationInput | AdminSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdminSessions.
+     */
+    cursor?: AdminSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminSessions.
+     */
+    distinct?: AdminSessionScalarFieldEnum | AdminSessionScalarFieldEnum[]
+  }
+
+  /**
+   * AdminSession create
+   */
+  export type AdminSessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdminSession.
+     */
+    data: XOR<AdminSessionCreateInput, AdminSessionUncheckedCreateInput>
+  }
+
+  /**
+   * AdminSession createMany
+   */
+  export type AdminSessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdminSessions.
+     */
+    data: AdminSessionCreateManyInput | AdminSessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminSession createManyAndReturn
+   */
+  export type AdminSessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdminSessions.
+     */
+    data: AdminSessionCreateManyInput | AdminSessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdminSession update
+   */
+  export type AdminSessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdminSession.
+     */
+    data: XOR<AdminSessionUpdateInput, AdminSessionUncheckedUpdateInput>
+    /**
+     * Choose, which AdminSession to update.
+     */
+    where: AdminSessionWhereUniqueInput
+  }
+
+  /**
+   * AdminSession updateMany
+   */
+  export type AdminSessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdminSessions.
+     */
+    data: XOR<AdminSessionUpdateManyMutationInput, AdminSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminSessions to update
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * Limit how many AdminSessions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminSession updateManyAndReturn
+   */
+  export type AdminSessionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * The data used to update AdminSessions.
+     */
+    data: XOR<AdminSessionUpdateManyMutationInput, AdminSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminSessions to update
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * Limit how many AdminSessions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdminSession upsert
+   */
+  export type AdminSessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdminSession to update in case it exists.
+     */
+    where: AdminSessionWhereUniqueInput
+    /**
+     * In case the AdminSession found by the `where` argument doesn't exist, create a new AdminSession with this data.
+     */
+    create: XOR<AdminSessionCreateInput, AdminSessionUncheckedCreateInput>
+    /**
+     * In case the AdminSession was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminSessionUpdateInput, AdminSessionUncheckedUpdateInput>
+  }
+
+  /**
+   * AdminSession delete
+   */
+  export type AdminSessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+    /**
+     * Filter which AdminSession to delete.
+     */
+    where: AdminSessionWhereUniqueInput
+  }
+
+  /**
+   * AdminSession deleteMany
+   */
+  export type AdminSessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminSessions to delete
+     */
+    where?: AdminSessionWhereInput
+    /**
+     * Limit how many AdminSessions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminSession without action
+   */
+  export type AdminSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminSession
+     */
+    select?: AdminSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminSession
+     */
+    omit?: AdminSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminSessionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdminPasswordResetToken
+   */
+
+  export type AggregateAdminPasswordResetToken = {
+    _count: AdminPasswordResetTokenCountAggregateOutputType | null
+    _avg: AdminPasswordResetTokenAvgAggregateOutputType | null
+    _sum: AdminPasswordResetTokenSumAggregateOutputType | null
+    _min: AdminPasswordResetTokenMinAggregateOutputType | null
+    _max: AdminPasswordResetTokenMaxAggregateOutputType | null
+  }
+
+  export type AdminPasswordResetTokenAvgAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+  }
+
+  export type AdminPasswordResetTokenSumAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+  }
+
+  export type AdminPasswordResetTokenMinAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type AdminPasswordResetTokenMaxAggregateOutputType = {
+    id: number | null
+    adminId: number | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type AdminPasswordResetTokenCountAggregateOutputType = {
+    id: number
+    adminId: number
+    tokenHash: number
+    expiresAt: number
+    usedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AdminPasswordResetTokenAvgAggregateInputType = {
+    id?: true
+    adminId?: true
+  }
+
+  export type AdminPasswordResetTokenSumAggregateInputType = {
+    id?: true
+    adminId?: true
+  }
+
+  export type AdminPasswordResetTokenMinAggregateInputType = {
+    id?: true
+    adminId?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+  }
+
+  export type AdminPasswordResetTokenMaxAggregateInputType = {
+    id?: true
+    adminId?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+  }
+
+  export type AdminPasswordResetTokenCountAggregateInputType = {
+    id?: true
+    adminId?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AdminPasswordResetTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminPasswordResetToken to aggregate.
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminPasswordResetTokens to fetch.
+     */
+    orderBy?: AdminPasswordResetTokenOrderByWithRelationInput | AdminPasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminPasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminPasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminPasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdminPasswordResetTokens
+    **/
+    _count?: true | AdminPasswordResetTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdminPasswordResetTokenAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdminPasswordResetTokenSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminPasswordResetTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminPasswordResetTokenMaxAggregateInputType
+  }
+
+  export type GetAdminPasswordResetTokenAggregateType<T extends AdminPasswordResetTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdminPasswordResetToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdminPasswordResetToken[P]>
+      : GetScalarType<T[P], AggregateAdminPasswordResetToken[P]>
+  }
+
+
+
+
+  export type AdminPasswordResetTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminPasswordResetTokenWhereInput
+    orderBy?: AdminPasswordResetTokenOrderByWithAggregationInput | AdminPasswordResetTokenOrderByWithAggregationInput[]
+    by: AdminPasswordResetTokenScalarFieldEnum[] | AdminPasswordResetTokenScalarFieldEnum
+    having?: AdminPasswordResetTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminPasswordResetTokenCountAggregateInputType | true
+    _avg?: AdminPasswordResetTokenAvgAggregateInputType
+    _sum?: AdminPasswordResetTokenSumAggregateInputType
+    _min?: AdminPasswordResetTokenMinAggregateInputType
+    _max?: AdminPasswordResetTokenMaxAggregateInputType
+  }
+
+  export type AdminPasswordResetTokenGroupByOutputType = {
+    id: number
+    adminId: number
+    tokenHash: string
+    expiresAt: Date
+    usedAt: Date | null
+    createdAt: Date
+    _count: AdminPasswordResetTokenCountAggregateOutputType | null
+    _avg: AdminPasswordResetTokenAvgAggregateOutputType | null
+    _sum: AdminPasswordResetTokenSumAggregateOutputType | null
+    _min: AdminPasswordResetTokenMinAggregateOutputType | null
+    _max: AdminPasswordResetTokenMaxAggregateOutputType | null
+  }
+
+  type GetAdminPasswordResetTokenGroupByPayload<T extends AdminPasswordResetTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminPasswordResetTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminPasswordResetTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminPasswordResetTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminPasswordResetTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminPasswordResetTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminPasswordResetToken"]>
+
+  export type AdminPasswordResetTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminPasswordResetToken"]>
+
+  export type AdminPasswordResetTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["adminPasswordResetToken"]>
+
+  export type AdminPasswordResetTokenSelectScalar = {
+    id?: boolean
+    adminId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type AdminPasswordResetTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "adminId" | "tokenHash" | "expiresAt" | "usedAt" | "createdAt", ExtArgs["result"]["adminPasswordResetToken"]>
+  export type AdminPasswordResetTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AdminPasswordResetTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+  export type AdminPasswordResetTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    admin?: boolean | AdminDefaultArgs<ExtArgs>
+  }
+
+  export type $AdminPasswordResetTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdminPasswordResetToken"
+    objects: {
+      admin: Prisma.$AdminPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      adminId: number
+      tokenHash: string
+      expiresAt: Date
+      usedAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["adminPasswordResetToken"]>
+    composites: {}
+  }
+
+  type AdminPasswordResetTokenGetPayload<S extends boolean | null | undefined | AdminPasswordResetTokenDefaultArgs> = $Result.GetResult<Prisma.$AdminPasswordResetTokenPayload, S>
+
+  type AdminPasswordResetTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminPasswordResetTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminPasswordResetTokenCountAggregateInputType | true
+    }
+
+  export interface AdminPasswordResetTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdminPasswordResetToken'], meta: { name: 'AdminPasswordResetToken' } }
+    /**
+     * Find zero or one AdminPasswordResetToken that matches the filter.
+     * @param {AdminPasswordResetTokenFindUniqueArgs} args - Arguments to find a AdminPasswordResetToken
+     * @example
+     * // Get one AdminPasswordResetToken
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminPasswordResetTokenFindUniqueArgs>(args: SelectSubset<T, AdminPasswordResetTokenFindUniqueArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdminPasswordResetToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminPasswordResetTokenFindUniqueOrThrowArgs} args - Arguments to find a AdminPasswordResetToken
+     * @example
+     * // Get one AdminPasswordResetToken
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminPasswordResetTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminPasswordResetTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminPasswordResetToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenFindFirstArgs} args - Arguments to find a AdminPasswordResetToken
+     * @example
+     * // Get one AdminPasswordResetToken
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminPasswordResetTokenFindFirstArgs>(args?: SelectSubset<T, AdminPasswordResetTokenFindFirstArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminPasswordResetToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenFindFirstOrThrowArgs} args - Arguments to find a AdminPasswordResetToken
+     * @example
+     * // Get one AdminPasswordResetToken
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminPasswordResetTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminPasswordResetTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdminPasswordResetTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdminPasswordResetTokens
+     * const adminPasswordResetTokens = await prisma.adminPasswordResetToken.findMany()
+     * 
+     * // Get first 10 AdminPasswordResetTokens
+     * const adminPasswordResetTokens = await prisma.adminPasswordResetToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminPasswordResetTokenWithIdOnly = await prisma.adminPasswordResetToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminPasswordResetTokenFindManyArgs>(args?: SelectSubset<T, AdminPasswordResetTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdminPasswordResetToken.
+     * @param {AdminPasswordResetTokenCreateArgs} args - Arguments to create a AdminPasswordResetToken.
+     * @example
+     * // Create one AdminPasswordResetToken
+     * const AdminPasswordResetToken = await prisma.adminPasswordResetToken.create({
+     *   data: {
+     *     // ... data to create a AdminPasswordResetToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminPasswordResetTokenCreateArgs>(args: SelectSubset<T, AdminPasswordResetTokenCreateArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdminPasswordResetTokens.
+     * @param {AdminPasswordResetTokenCreateManyArgs} args - Arguments to create many AdminPasswordResetTokens.
+     * @example
+     * // Create many AdminPasswordResetTokens
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminPasswordResetTokenCreateManyArgs>(args?: SelectSubset<T, AdminPasswordResetTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdminPasswordResetTokens and returns the data saved in the database.
+     * @param {AdminPasswordResetTokenCreateManyAndReturnArgs} args - Arguments to create many AdminPasswordResetTokens.
+     * @example
+     * // Create many AdminPasswordResetTokens
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdminPasswordResetTokens and only return the `id`
+     * const adminPasswordResetTokenWithIdOnly = await prisma.adminPasswordResetToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdminPasswordResetTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, AdminPasswordResetTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdminPasswordResetToken.
+     * @param {AdminPasswordResetTokenDeleteArgs} args - Arguments to delete one AdminPasswordResetToken.
+     * @example
+     * // Delete one AdminPasswordResetToken
+     * const AdminPasswordResetToken = await prisma.adminPasswordResetToken.delete({
+     *   where: {
+     *     // ... filter to delete one AdminPasswordResetToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminPasswordResetTokenDeleteArgs>(args: SelectSubset<T, AdminPasswordResetTokenDeleteArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdminPasswordResetToken.
+     * @param {AdminPasswordResetTokenUpdateArgs} args - Arguments to update one AdminPasswordResetToken.
+     * @example
+     * // Update one AdminPasswordResetToken
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminPasswordResetTokenUpdateArgs>(args: SelectSubset<T, AdminPasswordResetTokenUpdateArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdminPasswordResetTokens.
+     * @param {AdminPasswordResetTokenDeleteManyArgs} args - Arguments to filter AdminPasswordResetTokens to delete.
+     * @example
+     * // Delete a few AdminPasswordResetTokens
+     * const { count } = await prisma.adminPasswordResetToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminPasswordResetTokenDeleteManyArgs>(args?: SelectSubset<T, AdminPasswordResetTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminPasswordResetTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdminPasswordResetTokens
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminPasswordResetTokenUpdateManyArgs>(args: SelectSubset<T, AdminPasswordResetTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminPasswordResetTokens and returns the data updated in the database.
+     * @param {AdminPasswordResetTokenUpdateManyAndReturnArgs} args - Arguments to update many AdminPasswordResetTokens.
+     * @example
+     * // Update many AdminPasswordResetTokens
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdminPasswordResetTokens and only return the `id`
+     * const adminPasswordResetTokenWithIdOnly = await prisma.adminPasswordResetToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdminPasswordResetTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, AdminPasswordResetTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdminPasswordResetToken.
+     * @param {AdminPasswordResetTokenUpsertArgs} args - Arguments to update or create a AdminPasswordResetToken.
+     * @example
+     * // Update or create a AdminPasswordResetToken
+     * const adminPasswordResetToken = await prisma.adminPasswordResetToken.upsert({
+     *   create: {
+     *     // ... data to create a AdminPasswordResetToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdminPasswordResetToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminPasswordResetTokenUpsertArgs>(args: SelectSubset<T, AdminPasswordResetTokenUpsertArgs<ExtArgs>>): Prisma__AdminPasswordResetTokenClient<$Result.GetResult<Prisma.$AdminPasswordResetTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdminPasswordResetTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenCountArgs} args - Arguments to filter AdminPasswordResetTokens to count.
+     * @example
+     * // Count the number of AdminPasswordResetTokens
+     * const count = await prisma.adminPasswordResetToken.count({
+     *   where: {
+     *     // ... the filter for the AdminPasswordResetTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminPasswordResetTokenCountArgs>(
+      args?: Subset<T, AdminPasswordResetTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminPasswordResetTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdminPasswordResetToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminPasswordResetTokenAggregateArgs>(args: Subset<T, AdminPasswordResetTokenAggregateArgs>): Prisma.PrismaPromise<GetAdminPasswordResetTokenAggregateType<T>>
+
+    /**
+     * Group by AdminPasswordResetToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminPasswordResetTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminPasswordResetTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminPasswordResetTokenGroupByArgs['orderBy'] }
+        : { orderBy?: AdminPasswordResetTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminPasswordResetTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminPasswordResetTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdminPasswordResetToken model
+   */
+  readonly fields: AdminPasswordResetTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdminPasswordResetToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminPasswordResetTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    admin<T extends AdminDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdminDefaultArgs<ExtArgs>>): Prisma__AdminClient<$Result.GetResult<Prisma.$AdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdminPasswordResetToken model
+   */
+  interface AdminPasswordResetTokenFieldRefs {
+    readonly id: FieldRef<"AdminPasswordResetToken", 'Int'>
+    readonly adminId: FieldRef<"AdminPasswordResetToken", 'Int'>
+    readonly tokenHash: FieldRef<"AdminPasswordResetToken", 'String'>
+    readonly expiresAt: FieldRef<"AdminPasswordResetToken", 'DateTime'>
+    readonly usedAt: FieldRef<"AdminPasswordResetToken", 'DateTime'>
+    readonly createdAt: FieldRef<"AdminPasswordResetToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdminPasswordResetToken findUnique
+   */
+  export type AdminPasswordResetTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminPasswordResetToken to fetch.
+     */
+    where: AdminPasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * AdminPasswordResetToken findUniqueOrThrow
+   */
+  export type AdminPasswordResetTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminPasswordResetToken to fetch.
+     */
+    where: AdminPasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * AdminPasswordResetToken findFirst
+   */
+  export type AdminPasswordResetTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminPasswordResetToken to fetch.
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminPasswordResetTokens to fetch.
+     */
+    orderBy?: AdminPasswordResetTokenOrderByWithRelationInput | AdminPasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminPasswordResetTokens.
+     */
+    cursor?: AdminPasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminPasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminPasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminPasswordResetTokens.
+     */
+    distinct?: AdminPasswordResetTokenScalarFieldEnum | AdminPasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * AdminPasswordResetToken findFirstOrThrow
+   */
+  export type AdminPasswordResetTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminPasswordResetToken to fetch.
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminPasswordResetTokens to fetch.
+     */
+    orderBy?: AdminPasswordResetTokenOrderByWithRelationInput | AdminPasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminPasswordResetTokens.
+     */
+    cursor?: AdminPasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminPasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminPasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminPasswordResetTokens.
+     */
+    distinct?: AdminPasswordResetTokenScalarFieldEnum | AdminPasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * AdminPasswordResetToken findMany
+   */
+  export type AdminPasswordResetTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which AdminPasswordResetTokens to fetch.
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminPasswordResetTokens to fetch.
+     */
+    orderBy?: AdminPasswordResetTokenOrderByWithRelationInput | AdminPasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdminPasswordResetTokens.
+     */
+    cursor?: AdminPasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminPasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminPasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminPasswordResetTokens.
+     */
+    distinct?: AdminPasswordResetTokenScalarFieldEnum | AdminPasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * AdminPasswordResetToken create
+   */
+  export type AdminPasswordResetTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AdminPasswordResetToken.
+     */
+    data: XOR<AdminPasswordResetTokenCreateInput, AdminPasswordResetTokenUncheckedCreateInput>
+  }
+
+  /**
+   * AdminPasswordResetToken createMany
+   */
+  export type AdminPasswordResetTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdminPasswordResetTokens.
+     */
+    data: AdminPasswordResetTokenCreateManyInput | AdminPasswordResetTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminPasswordResetToken createManyAndReturn
+   */
+  export type AdminPasswordResetTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdminPasswordResetTokens.
+     */
+    data: AdminPasswordResetTokenCreateManyInput | AdminPasswordResetTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdminPasswordResetToken update
+   */
+  export type AdminPasswordResetTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AdminPasswordResetToken.
+     */
+    data: XOR<AdminPasswordResetTokenUpdateInput, AdminPasswordResetTokenUncheckedUpdateInput>
+    /**
+     * Choose, which AdminPasswordResetToken to update.
+     */
+    where: AdminPasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * AdminPasswordResetToken updateMany
+   */
+  export type AdminPasswordResetTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdminPasswordResetTokens.
+     */
+    data: XOR<AdminPasswordResetTokenUpdateManyMutationInput, AdminPasswordResetTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminPasswordResetTokens to update
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * Limit how many AdminPasswordResetTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminPasswordResetToken updateManyAndReturn
+   */
+  export type AdminPasswordResetTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update AdminPasswordResetTokens.
+     */
+    data: XOR<AdminPasswordResetTokenUpdateManyMutationInput, AdminPasswordResetTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminPasswordResetTokens to update
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * Limit how many AdminPasswordResetTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * AdminPasswordResetToken upsert
+   */
+  export type AdminPasswordResetTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AdminPasswordResetToken to update in case it exists.
+     */
+    where: AdminPasswordResetTokenWhereUniqueInput
+    /**
+     * In case the AdminPasswordResetToken found by the `where` argument doesn't exist, create a new AdminPasswordResetToken with this data.
+     */
+    create: XOR<AdminPasswordResetTokenCreateInput, AdminPasswordResetTokenUncheckedCreateInput>
+    /**
+     * In case the AdminPasswordResetToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminPasswordResetTokenUpdateInput, AdminPasswordResetTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * AdminPasswordResetToken delete
+   */
+  export type AdminPasswordResetTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter which AdminPasswordResetToken to delete.
+     */
+    where: AdminPasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * AdminPasswordResetToken deleteMany
+   */
+  export type AdminPasswordResetTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminPasswordResetTokens to delete
+     */
+    where?: AdminPasswordResetTokenWhereInput
+    /**
+     * Limit how many AdminPasswordResetTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminPasswordResetToken without action
+   */
+  export type AdminPasswordResetTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminPasswordResetToken
+     */
+    select?: AdminPasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminPasswordResetToken
+     */
+    omit?: AdminPasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdminPasswordResetTokenInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AdminInvite
+   */
+
+  export type AggregateAdminInvite = {
+    _count: AdminInviteCountAggregateOutputType | null
+    _avg: AdminInviteAvgAggregateOutputType | null
+    _sum: AdminInviteSumAggregateOutputType | null
+    _min: AdminInviteMinAggregateOutputType | null
+    _max: AdminInviteMaxAggregateOutputType | null
+  }
+
+  export type AdminInviteAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AdminInviteSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type AdminInviteMinAggregateOutputType = {
+    id: number | null
+    email: string | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type AdminInviteMaxAggregateOutputType = {
+    id: number | null
+    email: string | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type AdminInviteCountAggregateOutputType = {
+    id: number
+    email: number
+    tokenHash: number
+    expiresAt: number
+    usedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type AdminInviteAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type AdminInviteSumAggregateInputType = {
+    id?: true
+  }
+
+  export type AdminInviteMinAggregateInputType = {
+    id?: true
+    email?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+  }
+
+  export type AdminInviteMaxAggregateInputType = {
+    id?: true
+    email?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+  }
+
+  export type AdminInviteCountAggregateInputType = {
+    id?: true
+    email?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type AdminInviteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminInvite to aggregate.
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminInvites to fetch.
+     */
+    orderBy?: AdminInviteOrderByWithRelationInput | AdminInviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AdminInviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminInvites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminInvites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AdminInvites
+    **/
+    _count?: true | AdminInviteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AdminInviteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AdminInviteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AdminInviteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AdminInviteMaxAggregateInputType
+  }
+
+  export type GetAdminInviteAggregateType<T extends AdminInviteAggregateArgs> = {
+        [P in keyof T & keyof AggregateAdminInvite]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAdminInvite[P]>
+      : GetScalarType<T[P], AggregateAdminInvite[P]>
+  }
+
+
+
+
+  export type AdminInviteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdminInviteWhereInput
+    orderBy?: AdminInviteOrderByWithAggregationInput | AdminInviteOrderByWithAggregationInput[]
+    by: AdminInviteScalarFieldEnum[] | AdminInviteScalarFieldEnum
+    having?: AdminInviteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AdminInviteCountAggregateInputType | true
+    _avg?: AdminInviteAvgAggregateInputType
+    _sum?: AdminInviteSumAggregateInputType
+    _min?: AdminInviteMinAggregateInputType
+    _max?: AdminInviteMaxAggregateInputType
+  }
+
+  export type AdminInviteGroupByOutputType = {
+    id: number
+    email: string
+    tokenHash: string
+    expiresAt: Date
+    usedAt: Date | null
+    createdAt: Date
+    _count: AdminInviteCountAggregateOutputType | null
+    _avg: AdminInviteAvgAggregateOutputType | null
+    _sum: AdminInviteSumAggregateOutputType | null
+    _min: AdminInviteMinAggregateOutputType | null
+    _max: AdminInviteMaxAggregateOutputType | null
+  }
+
+  type GetAdminInviteGroupByPayload<T extends AdminInviteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AdminInviteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AdminInviteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AdminInviteGroupByOutputType[P]>
+            : GetScalarType<T[P], AdminInviteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AdminInviteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["adminInvite"]>
+
+  export type AdminInviteSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["adminInvite"]>
+
+  export type AdminInviteSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["adminInvite"]>
+
+  export type AdminInviteSelectScalar = {
+    id?: boolean
+    email?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type AdminInviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "tokenHash" | "expiresAt" | "usedAt" | "createdAt", ExtArgs["result"]["adminInvite"]>
+
+  export type $AdminInvitePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AdminInvite"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      email: string
+      tokenHash: string
+      expiresAt: Date
+      usedAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["adminInvite"]>
+    composites: {}
+  }
+
+  type AdminInviteGetPayload<S extends boolean | null | undefined | AdminInviteDefaultArgs> = $Result.GetResult<Prisma.$AdminInvitePayload, S>
+
+  type AdminInviteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AdminInviteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AdminInviteCountAggregateInputType | true
+    }
+
+  export interface AdminInviteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AdminInvite'], meta: { name: 'AdminInvite' } }
+    /**
+     * Find zero or one AdminInvite that matches the filter.
+     * @param {AdminInviteFindUniqueArgs} args - Arguments to find a AdminInvite
+     * @example
+     * // Get one AdminInvite
+     * const adminInvite = await prisma.adminInvite.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AdminInviteFindUniqueArgs>(args: SelectSubset<T, AdminInviteFindUniqueArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AdminInvite that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AdminInviteFindUniqueOrThrowArgs} args - Arguments to find a AdminInvite
+     * @example
+     * // Get one AdminInvite
+     * const adminInvite = await prisma.adminInvite.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AdminInviteFindUniqueOrThrowArgs>(args: SelectSubset<T, AdminInviteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminInvite that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteFindFirstArgs} args - Arguments to find a AdminInvite
+     * @example
+     * // Get one AdminInvite
+     * const adminInvite = await prisma.adminInvite.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AdminInviteFindFirstArgs>(args?: SelectSubset<T, AdminInviteFindFirstArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AdminInvite that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteFindFirstOrThrowArgs} args - Arguments to find a AdminInvite
+     * @example
+     * // Get one AdminInvite
+     * const adminInvite = await prisma.adminInvite.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AdminInviteFindFirstOrThrowArgs>(args?: SelectSubset<T, AdminInviteFindFirstOrThrowArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AdminInvites that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AdminInvites
+     * const adminInvites = await prisma.adminInvite.findMany()
+     * 
+     * // Get first 10 AdminInvites
+     * const adminInvites = await prisma.adminInvite.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const adminInviteWithIdOnly = await prisma.adminInvite.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AdminInviteFindManyArgs>(args?: SelectSubset<T, AdminInviteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AdminInvite.
+     * @param {AdminInviteCreateArgs} args - Arguments to create a AdminInvite.
+     * @example
+     * // Create one AdminInvite
+     * const AdminInvite = await prisma.adminInvite.create({
+     *   data: {
+     *     // ... data to create a AdminInvite
+     *   }
+     * })
+     * 
+     */
+    create<T extends AdminInviteCreateArgs>(args: SelectSubset<T, AdminInviteCreateArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AdminInvites.
+     * @param {AdminInviteCreateManyArgs} args - Arguments to create many AdminInvites.
+     * @example
+     * // Create many AdminInvites
+     * const adminInvite = await prisma.adminInvite.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AdminInviteCreateManyArgs>(args?: SelectSubset<T, AdminInviteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many AdminInvites and returns the data saved in the database.
+     * @param {AdminInviteCreateManyAndReturnArgs} args - Arguments to create many AdminInvites.
+     * @example
+     * // Create many AdminInvites
+     * const adminInvite = await prisma.adminInvite.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many AdminInvites and only return the `id`
+     * const adminInviteWithIdOnly = await prisma.adminInvite.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AdminInviteCreateManyAndReturnArgs>(args?: SelectSubset<T, AdminInviteCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a AdminInvite.
+     * @param {AdminInviteDeleteArgs} args - Arguments to delete one AdminInvite.
+     * @example
+     * // Delete one AdminInvite
+     * const AdminInvite = await prisma.adminInvite.delete({
+     *   where: {
+     *     // ... filter to delete one AdminInvite
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AdminInviteDeleteArgs>(args: SelectSubset<T, AdminInviteDeleteArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AdminInvite.
+     * @param {AdminInviteUpdateArgs} args - Arguments to update one AdminInvite.
+     * @example
+     * // Update one AdminInvite
+     * const adminInvite = await prisma.adminInvite.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AdminInviteUpdateArgs>(args: SelectSubset<T, AdminInviteUpdateArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AdminInvites.
+     * @param {AdminInviteDeleteManyArgs} args - Arguments to filter AdminInvites to delete.
+     * @example
+     * // Delete a few AdminInvites
+     * const { count } = await prisma.adminInvite.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AdminInviteDeleteManyArgs>(args?: SelectSubset<T, AdminInviteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminInvites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AdminInvites
+     * const adminInvite = await prisma.adminInvite.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AdminInviteUpdateManyArgs>(args: SelectSubset<T, AdminInviteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AdminInvites and returns the data updated in the database.
+     * @param {AdminInviteUpdateManyAndReturnArgs} args - Arguments to update many AdminInvites.
+     * @example
+     * // Update many AdminInvites
+     * const adminInvite = await prisma.adminInvite.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more AdminInvites and only return the `id`
+     * const adminInviteWithIdOnly = await prisma.adminInvite.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AdminInviteUpdateManyAndReturnArgs>(args: SelectSubset<T, AdminInviteUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one AdminInvite.
+     * @param {AdminInviteUpsertArgs} args - Arguments to update or create a AdminInvite.
+     * @example
+     * // Update or create a AdminInvite
+     * const adminInvite = await prisma.adminInvite.upsert({
+     *   create: {
+     *     // ... data to create a AdminInvite
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AdminInvite we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AdminInviteUpsertArgs>(args: SelectSubset<T, AdminInviteUpsertArgs<ExtArgs>>): Prisma__AdminInviteClient<$Result.GetResult<Prisma.$AdminInvitePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AdminInvites.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteCountArgs} args - Arguments to filter AdminInvites to count.
+     * @example
+     * // Count the number of AdminInvites
+     * const count = await prisma.adminInvite.count({
+     *   where: {
+     *     // ... the filter for the AdminInvites we want to count
+     *   }
+     * })
+    **/
+    count<T extends AdminInviteCountArgs>(
+      args?: Subset<T, AdminInviteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AdminInviteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AdminInvite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AdminInviteAggregateArgs>(args: Subset<T, AdminInviteAggregateArgs>): Prisma.PrismaPromise<GetAdminInviteAggregateType<T>>
+
+    /**
+     * Group by AdminInvite.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AdminInviteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AdminInviteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AdminInviteGroupByArgs['orderBy'] }
+        : { orderBy?: AdminInviteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AdminInviteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAdminInviteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AdminInvite model
+   */
+  readonly fields: AdminInviteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AdminInvite.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AdminInviteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AdminInvite model
+   */
+  interface AdminInviteFieldRefs {
+    readonly id: FieldRef<"AdminInvite", 'Int'>
+    readonly email: FieldRef<"AdminInvite", 'String'>
+    readonly tokenHash: FieldRef<"AdminInvite", 'String'>
+    readonly expiresAt: FieldRef<"AdminInvite", 'DateTime'>
+    readonly usedAt: FieldRef<"AdminInvite", 'DateTime'>
+    readonly createdAt: FieldRef<"AdminInvite", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AdminInvite findUnique
+   */
+  export type AdminInviteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminInvite to fetch.
+     */
+    where: AdminInviteWhereUniqueInput
+  }
+
+  /**
+   * AdminInvite findUniqueOrThrow
+   */
+  export type AdminInviteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminInvite to fetch.
+     */
+    where: AdminInviteWhereUniqueInput
+  }
+
+  /**
+   * AdminInvite findFirst
+   */
+  export type AdminInviteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminInvite to fetch.
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminInvites to fetch.
+     */
+    orderBy?: AdminInviteOrderByWithRelationInput | AdminInviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminInvites.
+     */
+    cursor?: AdminInviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminInvites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminInvites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminInvites.
+     */
+    distinct?: AdminInviteScalarFieldEnum | AdminInviteScalarFieldEnum[]
+  }
+
+  /**
+   * AdminInvite findFirstOrThrow
+   */
+  export type AdminInviteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminInvite to fetch.
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminInvites to fetch.
+     */
+    orderBy?: AdminInviteOrderByWithRelationInput | AdminInviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AdminInvites.
+     */
+    cursor?: AdminInviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminInvites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminInvites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminInvites.
+     */
+    distinct?: AdminInviteScalarFieldEnum | AdminInviteScalarFieldEnum[]
+  }
+
+  /**
+   * AdminInvite findMany
+   */
+  export type AdminInviteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * Filter, which AdminInvites to fetch.
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AdminInvites to fetch.
+     */
+    orderBy?: AdminInviteOrderByWithRelationInput | AdminInviteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AdminInvites.
+     */
+    cursor?: AdminInviteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AdminInvites from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AdminInvites.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AdminInvites.
+     */
+    distinct?: AdminInviteScalarFieldEnum | AdminInviteScalarFieldEnum[]
+  }
+
+  /**
+   * AdminInvite create
+   */
+  export type AdminInviteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * The data needed to create a AdminInvite.
+     */
+    data: XOR<AdminInviteCreateInput, AdminInviteUncheckedCreateInput>
+  }
+
+  /**
+   * AdminInvite createMany
+   */
+  export type AdminInviteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AdminInvites.
+     */
+    data: AdminInviteCreateManyInput | AdminInviteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminInvite createManyAndReturn
+   */
+  export type AdminInviteCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * The data used to create many AdminInvites.
+     */
+    data: AdminInviteCreateManyInput | AdminInviteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AdminInvite update
+   */
+  export type AdminInviteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * The data needed to update a AdminInvite.
+     */
+    data: XOR<AdminInviteUpdateInput, AdminInviteUncheckedUpdateInput>
+    /**
+     * Choose, which AdminInvite to update.
+     */
+    where: AdminInviteWhereUniqueInput
+  }
+
+  /**
+   * AdminInvite updateMany
+   */
+  export type AdminInviteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AdminInvites.
+     */
+    data: XOR<AdminInviteUpdateManyMutationInput, AdminInviteUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminInvites to update
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * Limit how many AdminInvites to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminInvite updateManyAndReturn
+   */
+  export type AdminInviteUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * The data used to update AdminInvites.
+     */
+    data: XOR<AdminInviteUpdateManyMutationInput, AdminInviteUncheckedUpdateManyInput>
+    /**
+     * Filter which AdminInvites to update
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * Limit how many AdminInvites to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminInvite upsert
+   */
+  export type AdminInviteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * The filter to search for the AdminInvite to update in case it exists.
+     */
+    where: AdminInviteWhereUniqueInput
+    /**
+     * In case the AdminInvite found by the `where` argument doesn't exist, create a new AdminInvite with this data.
+     */
+    create: XOR<AdminInviteCreateInput, AdminInviteUncheckedCreateInput>
+    /**
+     * In case the AdminInvite was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AdminInviteUpdateInput, AdminInviteUncheckedUpdateInput>
+  }
+
+  /**
+   * AdminInvite delete
+   */
+  export type AdminInviteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+    /**
+     * Filter which AdminInvite to delete.
+     */
+    where: AdminInviteWhereUniqueInput
+  }
+
+  /**
+   * AdminInvite deleteMany
+   */
+  export type AdminInviteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AdminInvites to delete
+     */
+    where?: AdminInviteWhereInput
+    /**
+     * Limit how many AdminInvites to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AdminInvite without action
+   */
+  export type AdminInviteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AdminInvite
+     */
+    select?: AdminInviteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AdminInvite
+     */
+    omit?: AdminInviteOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4465,6 +9319,56 @@ export namespace Prisma {
   };
 
   export type FeedbackScalarFieldEnum = (typeof FeedbackScalarFieldEnum)[keyof typeof FeedbackScalarFieldEnum]
+
+
+  export const AdminScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    keyHash: 'keyHash',
+    role: 'role',
+    active: 'active',
+    firstLoginAt: 'firstLoginAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AdminScalarFieldEnum = (typeof AdminScalarFieldEnum)[keyof typeof AdminScalarFieldEnum]
+
+
+  export const AdminSessionScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    tokenHash: 'tokenHash',
+    expiresAt: 'expiresAt',
+    createdAt: 'createdAt'
+  };
+
+  export type AdminSessionScalarFieldEnum = (typeof AdminSessionScalarFieldEnum)[keyof typeof AdminSessionScalarFieldEnum]
+
+
+  export const AdminPasswordResetTokenScalarFieldEnum: {
+    id: 'id',
+    adminId: 'adminId',
+    tokenHash: 'tokenHash',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type AdminPasswordResetTokenScalarFieldEnum = (typeof AdminPasswordResetTokenScalarFieldEnum)[keyof typeof AdminPasswordResetTokenScalarFieldEnum]
+
+
+  export const AdminInviteScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    tokenHash: 'tokenHash',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type AdminInviteScalarFieldEnum = (typeof AdminInviteScalarFieldEnum)[keyof typeof AdminInviteScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4549,6 +9453,13 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -4810,6 +9721,264 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"Feedback"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Feedback"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Feedback"> | Date | string
+  }
+
+  export type AdminWhereInput = {
+    AND?: AdminWhereInput | AdminWhereInput[]
+    OR?: AdminWhereInput[]
+    NOT?: AdminWhereInput | AdminWhereInput[]
+    id?: IntFilter<"Admin"> | number
+    name?: StringFilter<"Admin"> | string
+    email?: StringFilter<"Admin"> | string
+    keyHash?: StringFilter<"Admin"> | string
+    role?: StringFilter<"Admin"> | string
+    active?: BoolFilter<"Admin"> | boolean
+    firstLoginAt?: DateTimeNullableFilter<"Admin"> | Date | string | null
+    createdAt?: DateTimeFilter<"Admin"> | Date | string
+    updatedAt?: DateTimeFilter<"Admin"> | Date | string
+    sessions?: AdminSessionListRelationFilter
+    resetTokens?: AdminPasswordResetTokenListRelationFilter
+  }
+
+  export type AdminOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    keyHash?: SortOrder
+    role?: SortOrder
+    active?: SortOrder
+    firstLoginAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    sessions?: AdminSessionOrderByRelationAggregateInput
+    resetTokens?: AdminPasswordResetTokenOrderByRelationAggregateInput
+  }
+
+  export type AdminWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: AdminWhereInput | AdminWhereInput[]
+    OR?: AdminWhereInput[]
+    NOT?: AdminWhereInput | AdminWhereInput[]
+    name?: StringFilter<"Admin"> | string
+    keyHash?: StringFilter<"Admin"> | string
+    role?: StringFilter<"Admin"> | string
+    active?: BoolFilter<"Admin"> | boolean
+    firstLoginAt?: DateTimeNullableFilter<"Admin"> | Date | string | null
+    createdAt?: DateTimeFilter<"Admin"> | Date | string
+    updatedAt?: DateTimeFilter<"Admin"> | Date | string
+    sessions?: AdminSessionListRelationFilter
+    resetTokens?: AdminPasswordResetTokenListRelationFilter
+  }, "id" | "email">
+
+  export type AdminOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    keyHash?: SortOrder
+    role?: SortOrder
+    active?: SortOrder
+    firstLoginAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AdminCountOrderByAggregateInput
+    _avg?: AdminAvgOrderByAggregateInput
+    _max?: AdminMaxOrderByAggregateInput
+    _min?: AdminMinOrderByAggregateInput
+    _sum?: AdminSumOrderByAggregateInput
+  }
+
+  export type AdminScalarWhereWithAggregatesInput = {
+    AND?: AdminScalarWhereWithAggregatesInput | AdminScalarWhereWithAggregatesInput[]
+    OR?: AdminScalarWhereWithAggregatesInput[]
+    NOT?: AdminScalarWhereWithAggregatesInput | AdminScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Admin"> | number
+    name?: StringWithAggregatesFilter<"Admin"> | string
+    email?: StringWithAggregatesFilter<"Admin"> | string
+    keyHash?: StringWithAggregatesFilter<"Admin"> | string
+    role?: StringWithAggregatesFilter<"Admin"> | string
+    active?: BoolWithAggregatesFilter<"Admin"> | boolean
+    firstLoginAt?: DateTimeNullableWithAggregatesFilter<"Admin"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
+  }
+
+  export type AdminSessionWhereInput = {
+    AND?: AdminSessionWhereInput | AdminSessionWhereInput[]
+    OR?: AdminSessionWhereInput[]
+    NOT?: AdminSessionWhereInput | AdminSessionWhereInput[]
+    id?: IntFilter<"AdminSession"> | number
+    adminId?: IntFilter<"AdminSession"> | number
+    tokenHash?: StringFilter<"AdminSession"> | string
+    expiresAt?: DateTimeFilter<"AdminSession"> | Date | string
+    createdAt?: DateTimeFilter<"AdminSession"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type AdminSessionOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    admin?: AdminOrderByWithRelationInput
+  }
+
+  export type AdminSessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    tokenHash?: string
+    AND?: AdminSessionWhereInput | AdminSessionWhereInput[]
+    OR?: AdminSessionWhereInput[]
+    NOT?: AdminSessionWhereInput | AdminSessionWhereInput[]
+    adminId?: IntFilter<"AdminSession"> | number
+    expiresAt?: DateTimeFilter<"AdminSession"> | Date | string
+    createdAt?: DateTimeFilter<"AdminSession"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "tokenHash">
+
+  export type AdminSessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+    _count?: AdminSessionCountOrderByAggregateInput
+    _avg?: AdminSessionAvgOrderByAggregateInput
+    _max?: AdminSessionMaxOrderByAggregateInput
+    _min?: AdminSessionMinOrderByAggregateInput
+    _sum?: AdminSessionSumOrderByAggregateInput
+  }
+
+  export type AdminSessionScalarWhereWithAggregatesInput = {
+    AND?: AdminSessionScalarWhereWithAggregatesInput | AdminSessionScalarWhereWithAggregatesInput[]
+    OR?: AdminSessionScalarWhereWithAggregatesInput[]
+    NOT?: AdminSessionScalarWhereWithAggregatesInput | AdminSessionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AdminSession"> | number
+    adminId?: IntWithAggregatesFilter<"AdminSession"> | number
+    tokenHash?: StringWithAggregatesFilter<"AdminSession"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"AdminSession"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"AdminSession"> | Date | string
+  }
+
+  export type AdminPasswordResetTokenWhereInput = {
+    AND?: AdminPasswordResetTokenWhereInput | AdminPasswordResetTokenWhereInput[]
+    OR?: AdminPasswordResetTokenWhereInput[]
+    NOT?: AdminPasswordResetTokenWhereInput | AdminPasswordResetTokenWhereInput[]
+    id?: IntFilter<"AdminPasswordResetToken"> | number
+    adminId?: IntFilter<"AdminPasswordResetToken"> | number
+    tokenHash?: StringFilter<"AdminPasswordResetToken"> | string
+    expiresAt?: DateTimeFilter<"AdminPasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"AdminPasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdminPasswordResetToken"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }
+
+  export type AdminPasswordResetTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    admin?: AdminOrderByWithRelationInput
+  }
+
+  export type AdminPasswordResetTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    tokenHash?: string
+    AND?: AdminPasswordResetTokenWhereInput | AdminPasswordResetTokenWhereInput[]
+    OR?: AdminPasswordResetTokenWhereInput[]
+    NOT?: AdminPasswordResetTokenWhereInput | AdminPasswordResetTokenWhereInput[]
+    adminId?: IntFilter<"AdminPasswordResetToken"> | number
+    expiresAt?: DateTimeFilter<"AdminPasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"AdminPasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdminPasswordResetToken"> | Date | string
+    admin?: XOR<AdminScalarRelationFilter, AdminWhereInput>
+  }, "id" | "tokenHash">
+
+  export type AdminPasswordResetTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: AdminPasswordResetTokenCountOrderByAggregateInput
+    _avg?: AdminPasswordResetTokenAvgOrderByAggregateInput
+    _max?: AdminPasswordResetTokenMaxOrderByAggregateInput
+    _min?: AdminPasswordResetTokenMinOrderByAggregateInput
+    _sum?: AdminPasswordResetTokenSumOrderByAggregateInput
+  }
+
+  export type AdminPasswordResetTokenScalarWhereWithAggregatesInput = {
+    AND?: AdminPasswordResetTokenScalarWhereWithAggregatesInput | AdminPasswordResetTokenScalarWhereWithAggregatesInput[]
+    OR?: AdminPasswordResetTokenScalarWhereWithAggregatesInput[]
+    NOT?: AdminPasswordResetTokenScalarWhereWithAggregatesInput | AdminPasswordResetTokenScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AdminPasswordResetToken"> | number
+    adminId?: IntWithAggregatesFilter<"AdminPasswordResetToken"> | number
+    tokenHash?: StringWithAggregatesFilter<"AdminPasswordResetToken"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"AdminPasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"AdminPasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AdminPasswordResetToken"> | Date | string
+  }
+
+  export type AdminInviteWhereInput = {
+    AND?: AdminInviteWhereInput | AdminInviteWhereInput[]
+    OR?: AdminInviteWhereInput[]
+    NOT?: AdminInviteWhereInput | AdminInviteWhereInput[]
+    id?: IntFilter<"AdminInvite"> | number
+    email?: StringFilter<"AdminInvite"> | string
+    tokenHash?: StringFilter<"AdminInvite"> | string
+    expiresAt?: DateTimeFilter<"AdminInvite"> | Date | string
+    usedAt?: DateTimeNullableFilter<"AdminInvite"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdminInvite"> | Date | string
+  }
+
+  export type AdminInviteOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminInviteWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    tokenHash?: string
+    AND?: AdminInviteWhereInput | AdminInviteWhereInput[]
+    OR?: AdminInviteWhereInput[]
+    NOT?: AdminInviteWhereInput | AdminInviteWhereInput[]
+    email?: StringFilter<"AdminInvite"> | string
+    expiresAt?: DateTimeFilter<"AdminInvite"> | Date | string
+    usedAt?: DateTimeNullableFilter<"AdminInvite"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdminInvite"> | Date | string
+  }, "id" | "tokenHash">
+
+  export type AdminInviteOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: AdminInviteCountOrderByAggregateInput
+    _avg?: AdminInviteAvgOrderByAggregateInput
+    _max?: AdminInviteMaxOrderByAggregateInput
+    _min?: AdminInviteMinOrderByAggregateInput
+    _sum?: AdminInviteSumOrderByAggregateInput
+  }
+
+  export type AdminInviteScalarWhereWithAggregatesInput = {
+    AND?: AdminInviteScalarWhereWithAggregatesInput | AdminInviteScalarWhereWithAggregatesInput[]
+    OR?: AdminInviteScalarWhereWithAggregatesInput[]
+    NOT?: AdminInviteScalarWhereWithAggregatesInput | AdminInviteScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AdminInvite"> | number
+    email?: StringWithAggregatesFilter<"AdminInvite"> | string
+    tokenHash?: StringWithAggregatesFilter<"AdminInvite"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"AdminInvite"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"AdminInvite"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"AdminInvite"> | Date | string
   }
 
   export type PlaceCreateInput = {
@@ -5102,6 +10271,266 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminCreateInput = {
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: AdminSessionCreateNestedManyWithoutAdminInput
+    resetTokens?: AdminPasswordResetTokenCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateInput = {
+    id?: number
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: AdminSessionUncheckedCreateNestedManyWithoutAdminInput
+    resetTokens?: AdminPasswordResetTokenUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: AdminSessionUpdateManyWithoutAdminNestedInput
+    resetTokens?: AdminPasswordResetTokenUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: AdminSessionUncheckedUpdateManyWithoutAdminNestedInput
+    resetTokens?: AdminPasswordResetTokenUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminCreateManyInput = {
+    id?: number
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AdminUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminSessionCreateInput = {
+    tokenHash: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+    admin: AdminCreateNestedOneWithoutSessionsInput
+  }
+
+  export type AdminSessionUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    tokenHash: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type AdminSessionUpdateInput = {
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutSessionsNestedInput
+  }
+
+  export type AdminSessionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminSessionCreateManyInput = {
+    id?: number
+    adminId: number
+    tokenHash: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type AdminSessionUpdateManyMutationInput = {
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminSessionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminPasswordResetTokenCreateInput = {
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+    admin: AdminCreateNestedOneWithoutResetTokensInput
+  }
+
+  export type AdminPasswordResetTokenUncheckedCreateInput = {
+    id?: number
+    adminId: number
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminPasswordResetTokenUpdateInput = {
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    admin?: AdminUpdateOneRequiredWithoutResetTokensNestedInput
+  }
+
+  export type AdminPasswordResetTokenUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminPasswordResetTokenCreateManyInput = {
+    id?: number
+    adminId: number
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminPasswordResetTokenUpdateManyMutationInput = {
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminPasswordResetTokenUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    adminId?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminInviteCreateInput = {
+    email: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminInviteUncheckedCreateInput = {
+    id?: number
+    email: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminInviteUpdateInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminInviteUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminInviteCreateManyInput = {
+    id?: number
+    email: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminInviteUpdateManyMutationInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminInviteUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5442,6 +10871,194 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type AdminSessionListRelationFilter = {
+    every?: AdminSessionWhereInput
+    some?: AdminSessionWhereInput
+    none?: AdminSessionWhereInput
+  }
+
+  export type AdminPasswordResetTokenListRelationFilter = {
+    every?: AdminPasswordResetTokenWhereInput
+    some?: AdminPasswordResetTokenWhereInput
+    none?: AdminPasswordResetTokenWhereInput
+  }
+
+  export type AdminSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdminPasswordResetTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AdminCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    keyHash?: SortOrder
+    role?: SortOrder
+    active?: SortOrder
+    firstLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdminAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AdminMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    keyHash?: SortOrder
+    role?: SortOrder
+    active?: SortOrder
+    firstLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdminMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    email?: SortOrder
+    keyHash?: SortOrder
+    role?: SortOrder
+    active?: SortOrder
+    firstLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AdminSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type AdminScalarRelationFilter = {
+    is?: AdminWhereInput
+    isNot?: AdminWhereInput
+  }
+
+  export type AdminSessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminSessionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+  }
+
+  export type AdminSessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminSessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminSessionSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+  }
+
+  export type AdminPasswordResetTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminPasswordResetTokenAvgOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+  }
+
+  export type AdminPasswordResetTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminPasswordResetTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminPasswordResetTokenSumOrderByAggregateInput = {
+    id?: SortOrder
+    adminId?: SortOrder
+  }
+
+  export type AdminInviteCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminInviteAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type AdminInviteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminInviteMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type AdminInviteSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
   export type PlaceCreateimagesInput = {
     set: string[]
   }
@@ -5499,6 +11116,122 @@ export namespace Prisma {
   export type FeedbackUpdateimagesInput = {
     set?: string[]
     push?: string | string[]
+  }
+
+  export type AdminSessionCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminSessionCreateWithoutAdminInput, AdminSessionUncheckedCreateWithoutAdminInput> | AdminSessionCreateWithoutAdminInput[] | AdminSessionUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminSessionCreateOrConnectWithoutAdminInput | AdminSessionCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminSessionCreateManyAdminInputEnvelope
+    connect?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+  }
+
+  export type AdminPasswordResetTokenCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminPasswordResetTokenCreateWithoutAdminInput, AdminPasswordResetTokenUncheckedCreateWithoutAdminInput> | AdminPasswordResetTokenCreateWithoutAdminInput[] | AdminPasswordResetTokenUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminPasswordResetTokenCreateOrConnectWithoutAdminInput | AdminPasswordResetTokenCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminPasswordResetTokenCreateManyAdminInputEnvelope
+    connect?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+  }
+
+  export type AdminSessionUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminSessionCreateWithoutAdminInput, AdminSessionUncheckedCreateWithoutAdminInput> | AdminSessionCreateWithoutAdminInput[] | AdminSessionUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminSessionCreateOrConnectWithoutAdminInput | AdminSessionCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminSessionCreateManyAdminInputEnvelope
+    connect?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+  }
+
+  export type AdminPasswordResetTokenUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<AdminPasswordResetTokenCreateWithoutAdminInput, AdminPasswordResetTokenUncheckedCreateWithoutAdminInput> | AdminPasswordResetTokenCreateWithoutAdminInput[] | AdminPasswordResetTokenUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminPasswordResetTokenCreateOrConnectWithoutAdminInput | AdminPasswordResetTokenCreateOrConnectWithoutAdminInput[]
+    createMany?: AdminPasswordResetTokenCreateManyAdminInputEnvelope
+    connect?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type AdminSessionUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminSessionCreateWithoutAdminInput, AdminSessionUncheckedCreateWithoutAdminInput> | AdminSessionCreateWithoutAdminInput[] | AdminSessionUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminSessionCreateOrConnectWithoutAdminInput | AdminSessionCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminSessionUpsertWithWhereUniqueWithoutAdminInput | AdminSessionUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminSessionCreateManyAdminInputEnvelope
+    set?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    disconnect?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    delete?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    connect?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    update?: AdminSessionUpdateWithWhereUniqueWithoutAdminInput | AdminSessionUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminSessionUpdateManyWithWhereWithoutAdminInput | AdminSessionUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminSessionScalarWhereInput | AdminSessionScalarWhereInput[]
+  }
+
+  export type AdminPasswordResetTokenUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminPasswordResetTokenCreateWithoutAdminInput, AdminPasswordResetTokenUncheckedCreateWithoutAdminInput> | AdminPasswordResetTokenCreateWithoutAdminInput[] | AdminPasswordResetTokenUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminPasswordResetTokenCreateOrConnectWithoutAdminInput | AdminPasswordResetTokenCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminPasswordResetTokenUpsertWithWhereUniqueWithoutAdminInput | AdminPasswordResetTokenUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminPasswordResetTokenCreateManyAdminInputEnvelope
+    set?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    disconnect?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    delete?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    connect?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    update?: AdminPasswordResetTokenUpdateWithWhereUniqueWithoutAdminInput | AdminPasswordResetTokenUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminPasswordResetTokenUpdateManyWithWhereWithoutAdminInput | AdminPasswordResetTokenUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminPasswordResetTokenScalarWhereInput | AdminPasswordResetTokenScalarWhereInput[]
+  }
+
+  export type AdminSessionUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminSessionCreateWithoutAdminInput, AdminSessionUncheckedCreateWithoutAdminInput> | AdminSessionCreateWithoutAdminInput[] | AdminSessionUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminSessionCreateOrConnectWithoutAdminInput | AdminSessionCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminSessionUpsertWithWhereUniqueWithoutAdminInput | AdminSessionUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminSessionCreateManyAdminInputEnvelope
+    set?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    disconnect?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    delete?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    connect?: AdminSessionWhereUniqueInput | AdminSessionWhereUniqueInput[]
+    update?: AdminSessionUpdateWithWhereUniqueWithoutAdminInput | AdminSessionUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminSessionUpdateManyWithWhereWithoutAdminInput | AdminSessionUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminSessionScalarWhereInput | AdminSessionScalarWhereInput[]
+  }
+
+  export type AdminPasswordResetTokenUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<AdminPasswordResetTokenCreateWithoutAdminInput, AdminPasswordResetTokenUncheckedCreateWithoutAdminInput> | AdminPasswordResetTokenCreateWithoutAdminInput[] | AdminPasswordResetTokenUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: AdminPasswordResetTokenCreateOrConnectWithoutAdminInput | AdminPasswordResetTokenCreateOrConnectWithoutAdminInput[]
+    upsert?: AdminPasswordResetTokenUpsertWithWhereUniqueWithoutAdminInput | AdminPasswordResetTokenUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: AdminPasswordResetTokenCreateManyAdminInputEnvelope
+    set?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    disconnect?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    delete?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    connect?: AdminPasswordResetTokenWhereUniqueInput | AdminPasswordResetTokenWhereUniqueInput[]
+    update?: AdminPasswordResetTokenUpdateWithWhereUniqueWithoutAdminInput | AdminPasswordResetTokenUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: AdminPasswordResetTokenUpdateManyWithWhereWithoutAdminInput | AdminPasswordResetTokenUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: AdminPasswordResetTokenScalarWhereInput | AdminPasswordResetTokenScalarWhereInput[]
+  }
+
+  export type AdminCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<AdminCreateWithoutSessionsInput, AdminUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutSessionsInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type AdminUpdateOneRequiredWithoutSessionsNestedInput = {
+    create?: XOR<AdminCreateWithoutSessionsInput, AdminUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutSessionsInput
+    upsert?: AdminUpsertWithoutSessionsInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutSessionsInput, AdminUpdateWithoutSessionsInput>, AdminUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type AdminCreateNestedOneWithoutResetTokensInput = {
+    create?: XOR<AdminCreateWithoutResetTokensInput, AdminUncheckedCreateWithoutResetTokensInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutResetTokensInput
+    connect?: AdminWhereUniqueInput
+  }
+
+  export type AdminUpdateOneRequiredWithoutResetTokensNestedInput = {
+    create?: XOR<AdminCreateWithoutResetTokensInput, AdminUncheckedCreateWithoutResetTokensInput>
+    connectOrCreate?: AdminCreateOrConnectWithoutResetTokensInput
+    upsert?: AdminUpsertWithoutResetTokensInput
+    connect?: AdminWhereUniqueInput
+    update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutResetTokensInput, AdminUpdateWithoutResetTokensInput>, AdminUncheckedUpdateWithoutResetTokensInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -5676,6 +11409,312 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type AdminSessionCreateWithoutAdminInput = {
+    tokenHash: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type AdminSessionUncheckedCreateWithoutAdminInput = {
+    id?: number
+    tokenHash: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type AdminSessionCreateOrConnectWithoutAdminInput = {
+    where: AdminSessionWhereUniqueInput
+    create: XOR<AdminSessionCreateWithoutAdminInput, AdminSessionUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminSessionCreateManyAdminInputEnvelope = {
+    data: AdminSessionCreateManyAdminInput | AdminSessionCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdminPasswordResetTokenCreateWithoutAdminInput = {
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminPasswordResetTokenUncheckedCreateWithoutAdminInput = {
+    id?: number
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminPasswordResetTokenCreateOrConnectWithoutAdminInput = {
+    where: AdminPasswordResetTokenWhereUniqueInput
+    create: XOR<AdminPasswordResetTokenCreateWithoutAdminInput, AdminPasswordResetTokenUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminPasswordResetTokenCreateManyAdminInputEnvelope = {
+    data: AdminPasswordResetTokenCreateManyAdminInput | AdminPasswordResetTokenCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AdminSessionUpsertWithWhereUniqueWithoutAdminInput = {
+    where: AdminSessionWhereUniqueInput
+    update: XOR<AdminSessionUpdateWithoutAdminInput, AdminSessionUncheckedUpdateWithoutAdminInput>
+    create: XOR<AdminSessionCreateWithoutAdminInput, AdminSessionUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminSessionUpdateWithWhereUniqueWithoutAdminInput = {
+    where: AdminSessionWhereUniqueInput
+    data: XOR<AdminSessionUpdateWithoutAdminInput, AdminSessionUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type AdminSessionUpdateManyWithWhereWithoutAdminInput = {
+    where: AdminSessionScalarWhereInput
+    data: XOR<AdminSessionUpdateManyMutationInput, AdminSessionUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type AdminSessionScalarWhereInput = {
+    AND?: AdminSessionScalarWhereInput | AdminSessionScalarWhereInput[]
+    OR?: AdminSessionScalarWhereInput[]
+    NOT?: AdminSessionScalarWhereInput | AdminSessionScalarWhereInput[]
+    id?: IntFilter<"AdminSession"> | number
+    adminId?: IntFilter<"AdminSession"> | number
+    tokenHash?: StringFilter<"AdminSession"> | string
+    expiresAt?: DateTimeFilter<"AdminSession"> | Date | string
+    createdAt?: DateTimeFilter<"AdminSession"> | Date | string
+  }
+
+  export type AdminPasswordResetTokenUpsertWithWhereUniqueWithoutAdminInput = {
+    where: AdminPasswordResetTokenWhereUniqueInput
+    update: XOR<AdminPasswordResetTokenUpdateWithoutAdminInput, AdminPasswordResetTokenUncheckedUpdateWithoutAdminInput>
+    create: XOR<AdminPasswordResetTokenCreateWithoutAdminInput, AdminPasswordResetTokenUncheckedCreateWithoutAdminInput>
+  }
+
+  export type AdminPasswordResetTokenUpdateWithWhereUniqueWithoutAdminInput = {
+    where: AdminPasswordResetTokenWhereUniqueInput
+    data: XOR<AdminPasswordResetTokenUpdateWithoutAdminInput, AdminPasswordResetTokenUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type AdminPasswordResetTokenUpdateManyWithWhereWithoutAdminInput = {
+    where: AdminPasswordResetTokenScalarWhereInput
+    data: XOR<AdminPasswordResetTokenUpdateManyMutationInput, AdminPasswordResetTokenUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type AdminPasswordResetTokenScalarWhereInput = {
+    AND?: AdminPasswordResetTokenScalarWhereInput | AdminPasswordResetTokenScalarWhereInput[]
+    OR?: AdminPasswordResetTokenScalarWhereInput[]
+    NOT?: AdminPasswordResetTokenScalarWhereInput | AdminPasswordResetTokenScalarWhereInput[]
+    id?: IntFilter<"AdminPasswordResetToken"> | number
+    adminId?: IntFilter<"AdminPasswordResetToken"> | number
+    tokenHash?: StringFilter<"AdminPasswordResetToken"> | string
+    expiresAt?: DateTimeFilter<"AdminPasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"AdminPasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"AdminPasswordResetToken"> | Date | string
+  }
+
+  export type AdminCreateWithoutSessionsInput = {
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetTokens?: AdminPasswordResetTokenCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateWithoutSessionsInput = {
+    id?: number
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    resetTokens?: AdminPasswordResetTokenUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminCreateOrConnectWithoutSessionsInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutSessionsInput, AdminUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type AdminUpsertWithoutSessionsInput = {
+    update: XOR<AdminUpdateWithoutSessionsInput, AdminUncheckedUpdateWithoutSessionsInput>
+    create: XOR<AdminCreateWithoutSessionsInput, AdminUncheckedCreateWithoutSessionsInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutSessionsInput, AdminUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type AdminUpdateWithoutSessionsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetTokens?: AdminPasswordResetTokenUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutSessionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    resetTokens?: AdminPasswordResetTokenUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminCreateWithoutResetTokensInput = {
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: AdminSessionCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminUncheckedCreateWithoutResetTokensInput = {
+    id?: number
+    name: string
+    email: string
+    keyHash: string
+    role?: string
+    active?: boolean
+    firstLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: AdminSessionUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type AdminCreateOrConnectWithoutResetTokensInput = {
+    where: AdminWhereUniqueInput
+    create: XOR<AdminCreateWithoutResetTokensInput, AdminUncheckedCreateWithoutResetTokensInput>
+  }
+
+  export type AdminUpsertWithoutResetTokensInput = {
+    update: XOR<AdminUpdateWithoutResetTokensInput, AdminUncheckedUpdateWithoutResetTokensInput>
+    create: XOR<AdminCreateWithoutResetTokensInput, AdminUncheckedCreateWithoutResetTokensInput>
+    where?: AdminWhereInput
+  }
+
+  export type AdminUpdateToOneWithWhereWithoutResetTokensInput = {
+    where?: AdminWhereInput
+    data: XOR<AdminUpdateWithoutResetTokensInput, AdminUncheckedUpdateWithoutResetTokensInput>
+  }
+
+  export type AdminUpdateWithoutResetTokensInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: AdminSessionUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminUncheckedUpdateWithoutResetTokensInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    keyHash?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    active?: BoolFieldUpdateOperationsInput | boolean
+    firstLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: AdminSessionUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type AdminSessionCreateManyAdminInput = {
+    id?: number
+    tokenHash: string
+    expiresAt: Date | string
+    createdAt?: Date | string
+  }
+
+  export type AdminPasswordResetTokenCreateManyAdminInput = {
+    id?: number
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type AdminSessionUpdateWithoutAdminInput = {
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminSessionUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminSessionUncheckedUpdateManyWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminPasswordResetTokenUpdateWithoutAdminInput = {
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminPasswordResetTokenUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdminPasswordResetTokenUncheckedUpdateManyWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

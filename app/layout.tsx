@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+
 import {
   Inter,
   Poppins,
   JetBrains_Mono,
   Playfair_Display,
+  Montserrat,
 } from "next/font/google";
-import "./globals.css";
-import AccessibilityMenu from "./accsesability";
-import { cn } from "@/lib/utils";
 
-import { Montserrat } from "next/font/google";
+import "./globals.css";
+
+import AccessibilityMenu from "./accsesability";
+import AdminBar from "./admin/components/AdminBar";
+import { cn } from "@/lib/utils";
 
 const montserrat = Montserrat({
   subsets: ["latin", "cyrillic"],
@@ -28,16 +31,18 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="ua"
+      lang="uk"
       className={cn(
         "h-full",
         "antialiased",
         montserrat.variable
-
       )}
     >
-      <body className="flex flex-col font-sans">
+      <body className="flex min-h-full flex-col font-sans">
+
         {children}
+        <AdminBar />
+
         <AccessibilityMenu />
       </body>
     </html>
