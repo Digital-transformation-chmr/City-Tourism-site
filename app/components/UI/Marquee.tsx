@@ -31,7 +31,7 @@ export const Marquee: React.FC<MarqueeProps> = ({
         {listItems.map((item, index) => (
           <div
             key={index}
-            className="flex items-center gap-7 shrink-0 font-['Unbounded',sans-serif] text-[14px] font-semibold tracking-[0.06em] uppercase text-[oklch(0.97_0.012_75_/_0.7)]"
+            className="flex items-center gap-7 shrink-0 text-[14px] font-semibold tracking-[0.06em] uppercase text-[oklch(0.97_0.012_75_/_0.7)]"
           >
             {item.customNode ? (
               item.customNode

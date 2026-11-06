@@ -15,7 +15,7 @@ import LogoLoop from "@/components/LogoLoop";
 import Marquee from "../components/UI/Marquee";
 import { CategoriesSection } from "../components/UI/category";
 
-import {HeroSection} from "../components/UI/heroMain";
+import {HeroSection} from "./heroMain";
 import { FaDiamond } from "react-icons/fa6";
 import { motion } from "motion/react";
 
@@ -30,14 +30,6 @@ const HEADLINE: { text: string; accent?: boolean }[] = [
   { text: "Черкаси", accent: true },
   { text: "по-новому" },
 ];
-
-const cherkasyFacts = [
-    { title: "Засновано 1354 року" },
-    { title: "Місто над Дніпром" },
-    { title: "Серце Черкащини" },
-    { title: "Набережна довжиною 17 км" },
-  ];
-
 export default function Home() {
   const [places, setPlaces] = useState<Place[]>([]);
   const [news, setNews] = useState<any[]>([]);
@@ -203,7 +195,6 @@ return (
                 }}
                 style={{ color: "oklch(0.22 0.05 250)" }}
                 className="
-                  font-['Unbounded']
                   text-4xl
                   md:text-5xl
                   font-bold

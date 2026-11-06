@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
 
-import {
-  Inter,
-  Poppins,
-  JetBrains_Mono,
-  Playfair_Display,
+import {  
   Montserrat,
+  Philosopher
 } from "next/font/google";
 
 import "./globals.css";
@@ -19,6 +16,15 @@ const montserrat = Montserrat({
   variable: "--font-main",
 });
 
+
+const philosopher = Philosopher({
+  weight: ["700"],
+  style: ["normal", "italic"],
+  subsets: ["cyrillic", "latin"],
+  variable: "--font-main",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Туристичний сайт",
   description: "Туристичний сайт Черкас",
@@ -30,12 +36,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <html
       lang="uk"
       className={cn(
         "h-full",
         "antialiased",
-        montserrat.variable
+        philosopher.variable
       )}
     >
       <body className="flex min-h-full flex-col font-sans">

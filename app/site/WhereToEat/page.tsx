@@ -172,21 +172,19 @@ export default function Attraction() {
   return (
     <div
       className="min-h-screen md:h-screen w-full pt-12 flex flex-col bg-[#e8e2d4]"
-      style={{ fontFamily: "'Lora', serif" }}
     >
       {/* ── Running header / title bar ── */}
       <div className="flex-shrink-0 flex flex-wrap items-center justify-between gap-3 px-4 sm:px-6 md:px-10 py-3 border-b border-[var(--rule)] bg-[var(--paper-l)]">
         <div className="flex items-center gap-3 sm:gap-6 flex-shrink-0 order-1">
           <span
             className="text-3xl uppercase text-[var(--muted)]"
-            style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.2em" }}
+            style={{ letterSpacing: "0.2em" }}
           >
             Черкаси
           </span>
           <span className="hidden sm:inline text-[var(--rule)]">·</span>
           <span
             className="hidden sm:inline text-[20px] italic text-[var(--muted)]"
-            style={{ fontFamily: "'Playfair Display', serif" }}
           >
             Гастрономічний путівник
           </span>
@@ -278,7 +276,7 @@ export default function Attraction() {
           <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 md:pt-8 pb-3 sm:pb-4 md:pb-6 flex-shrink-0 border-b border-[var(--rule)]">
             <p
               className="text-lg uppercase text-[var(--muted)]"
-              style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.3em" }}
+              style={{ letterSpacing: "0.3em" }}
             >
               {chapterInfo.chapter}
             </p>
@@ -290,7 +288,6 @@ export default function Attraction() {
                 exit={{ opacity: 0, y: -6 }}
                 transition={{ duration: 0.3, ease }}
                 className="text-3xl font-bold text-[var(--ink)] mt-1 leading-tight"
-                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 <SplitText
                   text={activeCategory}
@@ -314,7 +311,7 @@ export default function Attraction() {
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Пошук по назві…"
                 className="order-3 sm:order-2 w-full sm:w-auto sm:flex-1 sm:max-w-xs mt-2 px-3 py-1.5 outline-none text-lg text-[var(--ink)] bg-[var(--paper-r)] border border-[var(--rule)]"
-                style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.04em" }}
+                style={{  letterSpacing: "0.04em" }}
               />
           </div>
 
@@ -327,7 +324,6 @@ export default function Attraction() {
             {filtered.length === 0 && (
               <p
                 className="px-4 sm:px-8 py-4 text-lg italic text-[var(--muted)]"
-                style={{ fontFamily: "'EB Garamond', serif" }}
               >
                 Нічого не знайдено
               </p>
@@ -361,7 +357,6 @@ export default function Attraction() {
                       >
                         <span
                           className="text-lg text-[var(--muted)] pt-[3px] min-w-[16px] text-right hidden md:inline"
-                          style={{ fontFamily: "'EB Garamond', serif" }}
                         >
                           {String(i + 1).padStart(2, "0")}
                         </span>
@@ -370,14 +365,12 @@ export default function Attraction() {
                             className={`text-lg leading-tight ${
                               isActive ? "font-bold text-[var(--ink)]" : "font-normal text-[var(--muted)]"
                             }`}
-                            style={{ fontFamily: "'Playfair Display', serif" }}
                           >
                             {place.title}
                           </p>
                           {place.subtitle && (
                             <p
                               className="text-lg italic text-[var(--muted)] mt-0.5 truncate"
-                              style={{ fontFamily: "'EB Garamond', serif" }}
                             >
                               {place.subtitle}
                             </p>
@@ -386,7 +379,7 @@ export default function Attraction() {
                         {place.status && (
                           <span
                             className="flex-shrink-0 text-sm uppercase text-[var(--accent)] border border-[var(--accent)]/[0.27] px-1.5 py-0.5 mt-0.5 hidden md:inline-block"
-                            style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.08em" }}
+                            style={{ letterSpacing: "0.08em" }}
                           >
                             {place.status}
                           </span>
@@ -406,13 +399,11 @@ export default function Attraction() {
           <div className="hidden md:flex flex-shrink-0 px-8 py-4 items-center justify-between border-t border-[var(--rule)]">
             <span
               className="text-lg italic text-[var(--muted)]"
-              style={{ fontFamily: "'EB Garamond', serif" }}
             >
               Де поїсти
             </span>
             <span
               className="text-lg text-[var(--muted)]"
-              style={{ fontFamily: "'EB Garamond', serif" }}
             >
               {filtered.length}
             </span>
@@ -448,11 +439,11 @@ export default function Attraction() {
                     <div className="flex-shrink-0 px-4 sm:px-6 md:px-7 py-3 flex items-center justify-between border-b border-[var(--rule)]">
                       <span
                         className="text-lg uppercase italic text-[var(--muted)]"
-                        style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.22em" }}
+                        style={{  letterSpacing: "0.22em" }}
                       >
                         {activeCategory}
                       </span>
-                      <span className="text-lg text-[var(--muted)]" style={{ fontFamily: "'EB Garamond', serif" }}>✦</span>
+                      <span className="text-lg text-[var(--muted)]">✦</span>
                     </div>
 
                     {selected.images?.[0] && (
@@ -466,7 +457,7 @@ export default function Attraction() {
                         </div>
                         <p
                           className="mt-2 text-center text-lg italic text-[var(--muted)]"
-                          style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.04em" }}
+                          style={{ letterSpacing: "0.04em" }}
                         >
                           {selected.title}{selected.subtitle ? ` — ${selected.subtitle}` : ""}
                         </p>
@@ -477,19 +468,19 @@ export default function Attraction() {
                       {selected.address && (
                         <div className="flex items-center gap-2 text-[var(--muted)]">
                           <MapPin size={10} className="flex-shrink-0" />
-                          <span className="text-lg" style={{ fontFamily: "'EB Garamond', serif" }}>{selected.address}</span>
+                          <span className="text-lg" >{selected.address}</span>
                         </div>
                       )}
                       {selected.openingHours && (
                         <div className="flex items-center gap-2 text-[var(--muted)]">
                           <Clock size={10} className="flex-shrink-0" />
-                          <span className="text-lg" style={{ fontFamily: "'EB Garamond', serif" }}>{selected.openingHours}</span>
+                          <span className="text-lg" >{selected.openingHours}</span>
                         </div>
                       )}
                       {selected.phone && (
                         <div className="flex items-center gap-2 text-[var(--muted)]">
                           <Phone size={10} className="flex-shrink-0" />
-                          <span className="text-lg" style={{ fontFamily: "'EB Garamond', serif" }}>{selected.phone}</span>
+                          <span className="text-lg">{selected.phone}</span>
                         </div>
                       )}
                       {selected.website && (
@@ -500,18 +491,18 @@ export default function Attraction() {
                           className="flex items-center gap-2 text-[var(--accent)] no-underline"
                         >
                           <Globe size={10} className="flex-shrink-0" />
-                          <span className="text-lg" style={{ fontFamily: "'EB Garamond', serif" }}>Сайт закладу</span>
+                          <span className="text-lg">Сайт закладу</span>
                         </a>
                       )}
                       {(selected.yearBuilt || selected.visiting) && (
                         <div className="flex items-center justify-between mt-1">
                           {selected.yearBuilt && (
-                            <span className="text-lg text-[var(--muted)]" style={{ fontFamily: "'EB Garamond', serif" }}>
+                            <span className="text-lg text-[var(--muted)]">
                               Засновано {selected.yearBuilt}
                             </span>
                           )}
                           {selected.visiting && (
-                            <span className="text-[12px] text-[var(--muted)]" style={{ fontFamily: "'Playfair Display', serif" }}>
+                            <span className="text-[12px] text-[var(--muted)]">
                               {selected.visiting}
                             </span>
                           )}
@@ -525,25 +516,24 @@ export default function Attraction() {
                       <div className="flex-shrink-0 flex items-center justify-between mb-4 md:mb-6 pb-3 border-b border-[var(--rule)]">
                         <span
                           className="text-[9px] sm:text-lg uppercase text-[var(--muted)]"
-                          style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.18em" }}
+                          style={{ letterSpacing: "0.18em" }}
                         >
                           Гастрономічний путівник
                         </span>
-                        <span className="text-lg text-[var(--muted)]" style={{ fontFamily: "'EB Garamond', serif" }}>
+                        <span className="text-lg text-[var(--muted)]">
                           {String(selectedIndex + 1).padStart(2, "0")} / {String(filtered.length).padStart(2, "0")}
                         </span>
                       </div>
 
                       <h1
                         className="font-bold text-[var(--ink)] leading-[1.15] mb-2"
-                        style={{ fontFamily: "'Playfair Display', serif", fontSize: "clamp(1.5rem, 5vw, 2.8rem)" }}
+                        style={{ fontSize: "clamp(1.5rem, 5vw, 2.8rem)" }}
                       >
                         {selected.title}
                       </h1>
                       {selected.subtitle && (
                         <p
                           className="text-lg italic text-[var(--muted)] mb-1"
-                          style={{ fontFamily: "'EB Garamond', serif" }}
                         >
                           {selected.subtitle}
                         </p>
@@ -559,11 +549,10 @@ export default function Attraction() {
                         {selected.description && (
                           <p
                             className=" leading-[1.75] md:leading-[1.85] text-[var(--ink)] text-justify"
-                            style={{ fontFamily: "'Lora', serif" }}
                           > 
                             <span
-                              className="font-bold text-[var(--accent)] float-left mr-1.5 mt-1"
-                              style={{ fontFamily: "'Playfair Display', serif", fontSize: "3.2em", lineHeight: 0.78 }}
+                              className="font-bold text-[var(--accent)] float-left mr-2 mt-1"
+                              style={{  fontSize: "3.2em", lineHeight: 1 }}
                             >
                               {selected.description[0]}
                             </span>
@@ -578,7 +567,7 @@ export default function Attraction() {
                               <span
                                 key={tag}
                                 className="flex items-center gap-1 text-lg text-[var(--muted)] border border-[var(--rule)] px-2.5 py-[3px]"
-                                style={{ fontFamily: "'EB Garamond', serif", letterSpacing: "0.04em" }}
+                                style={{ letterSpacing: "0.04em" }}
                               >
                                 <Tag size={9} />
                                 {tag}
@@ -595,7 +584,6 @@ export default function Attraction() {
                             <button
                               className="w-full sm:w-auto cursor-pointer transition-colors duration-200 text-[var(--paper-r)] bg-[var(--accent)]"
                               style={{
-                                fontFamily: "'EB Garamond', serif",
                                 fontSize: 14,
                                 letterSpacing: "0.22em",
                                 textTransform: "uppercase",
@@ -614,12 +602,11 @@ export default function Attraction() {
                   <div className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 md:px-10 py-3 md:py-4 border-t border-[var(--rule)]">
                     <span
                       className="text-lg italic text-[var(--muted)] truncate"
-                      style={{ fontFamily: "'EB Garamond', serif" }}
                     >
                       {selected.title}
                     </span>
                     {selected.type && (
-                      <span className="text-lg text-[var(--muted)] flex-shrink-0 ml-2" style={{ fontFamily: "'EB Garamond', serif" }}>
+                      <span className="text-lg text-[var(--muted)] flex-shrink-0 ml-2">
                         {selected.type}
                       </span>
                     )}
@@ -630,7 +617,6 @@ export default function Attraction() {
               <div className="h-40 md:h-full flex items-center justify-center bg-[var(--paper-r)]">
                 <p
                   className="text-lg italic text-[var(--muted)]"
-                  style={{ fontFamily: "'EB Garamond', serif" }}
                 >
                   Нічого не знайдено за твоїм запитом
                 </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import RotatingText from "@/components/RotatingText";
-import Marquee from "./Marquee";
+import Marquee from "../components/UI/Marquee";
 import { FaDiamond } from "react-icons/fa6";
 
 import React, {
@@ -186,9 +186,10 @@ function Letter({
         >
           {/* Задній шар */}
           <span
-            className="block"
+            className="block font-black"
             style={{
               color: "#fff",
+              WebkitTextStroke: "1.5px rgba(255,255,255,0.9)",
               textShadow: `
                 0 3px 0 #ffffff,
                 0 8px 0 rgba(170,195,220,0.85),
@@ -577,9 +578,8 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
           <h1
             ref={titleRef}
             aria-label="Черкаси"
-            className="relative flex items-end justify-center font-black leading-none"
+            className="relative flex translate-y-3 items-end justify-center font-black leading-none"
             style={{
-              fontFamily: "Unbounded, sans-serif",
               fontSize: "clamp(4rem, 15vw, 13rem)",
               gap: "0.04em",
               perspective: 900,
@@ -690,7 +690,7 @@ export function HeroSection({ heroReady = true }: { heroReady?: boolean }) {
             className="flex flex-wrap justify-center gap-4 pointer-events-auto"
           >
             <a
-              href="/site/Attractions"
+              href="/site/Excursions"
               className="
                 rounded-xl
                 bg-white

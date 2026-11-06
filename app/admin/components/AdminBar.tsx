@@ -42,7 +42,7 @@ export default async function AdminBar() {
 
   return (
     <div className="fixed bottom-4 left-1/2 z-[9999] -translate-x-1/2">
-      <div className="flex items-center gap-1 rounded-full border bg-background/80 p-1 shadow-lg backdrop-blur-md">
+      <div className="flex items-center gap-1 rounded-full border bg-white p-1 shadow-lg">
         <Link
           href="/site"
           className="rounded-full px-4 py-2 text-sm transition hover:bg-black/10"

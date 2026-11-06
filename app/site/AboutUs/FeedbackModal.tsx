@@ -1,6 +1,7 @@
 
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   X,
@@ -36,6 +37,22 @@ type FeedbackModalProps = {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
+const STORAGE_KEY = "feedback-draft-v1";
+
+type SavedFile = {
+  name: string;
+  type: string;
+  lastModified: number;
+  data: string;
+};
+
+type SavedDraft = {
+  email: string;
+  category: FeedbackType;
+  message: string;
+  files: SavedFile[];
+};
+
 export default function FeedbackModal({
   open,
   email,
@@ -53,6 +70,159 @@ export default function FeedbackModal({
   onRemoveFile,
   onSubmit,
 }: FeedbackModalProps) {
+  const restored = useRef(false);
+  const restoring = useRef(false);
+  const previousStatus = useRef(sendStatus);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Відновлення чернетки після першого відкриття
+  useEffect(() => {
+    if (!open || restored.current) return;
+
+    restored.current = true;
+    restoring.current = true;
+
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+
+      if (raw) {
+        const draft = JSON.parse(raw) as SavedDraft;
+
+        onEmailChange(draft.email ?? "");
+        onCategoryChange(draft.category ?? "review");
+        onMessageChange(draft.message ?? "");
+
+        const restoredFiles = (draft.files ?? []).map((file) => {
+          const binary = atob(file.data);
+          const bytes = new Uint8Array(binary.length);
+
+          for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+          }
+
+          return new File([bytes], file.name, {
+            type: file.type,
+            lastModified: file.lastModified,
+          });
+        });
+
+        if (restoredFiles.length > 0) {
+          const transfer = new DataTransfer();
+
+          restoredFiles.forEach((file) => transfer.items.add(file));
+          onFiles(transfer.files);
+        }
+      }
+    } catch (error) {
+      console.error("Помилка відновлення чернетки:", error);
+    }
+
+    // Даємо React застосувати відновлені значення
+    const timeout = window.setTimeout(() => {
+      restoring.current = false;
+    }, 300);
+
+    return () => window.clearTimeout(timeout);
+  }, [
+    open,
+    onEmailChange,
+    onCategoryChange,
+    onMessageChange,
+    onFiles,
+  ]);
+
+  // Автоматичне збереження полів та файлів
+  useEffect(() => {
+    if (!open || !restored.current || restoring.current) return;
+
+    const timeout = window.setTimeout(async () => {
+      try {
+        const savedFiles = await Promise.all(
+          files.map(
+            (file) =>
+              new Promise<SavedFile>((resolve, reject) => {
+                const reader = new FileReader();
+
+                reader.onload = () => {
+                  const result = String(reader.result);
+                  const data = result.split(",")[1];
+
+                  if (!data) {
+                    reject(new Error("Не вдалося прочитати файл"));
+                    return;
+                  }
+
+                  resolve({
+                    name: file.name,
+                    type: file.type,
+                    lastModified: file.lastModified,
+                    data,
+                  });
+                };
+
+                reader.onerror = () => {
+                  reject(new Error("Помилка читання файлу"));
+                };
+
+                reader.readAsDataURL(file);
+              }),
+          ),
+        );
+
+        const draft: SavedDraft = {
+          email,
+          category,
+          message,
+          files: savedFiles,
+        };
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+      } catch (error) {
+        console.error("Не вдалося зберегти чернетку:", error);
+      }
+    }, 500);
+
+    return () => window.clearTimeout(timeout);
+  }, [open, email, category, message, files]);
+
+  // Видалення чернетки після успішного відправлення
+  useEffect(() => {
+    if (
+      previousStatus.current !== "success" &&
+      sendStatus === "success"
+    ) {
+      localStorage.removeItem(STORAGE_KEY);
+
+      onEmailChange("");
+      onCategoryChange("review");
+      onMessageChange("");
+
+      // Очищення файлів через наявний callback
+      if (files.length > 0) {
+        const emptyFiles = new DataTransfer();
+        onFiles(emptyFiles.files);
+      }
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
+
+    previousStatus.current = sendStatus;
+  }, [
+    sendStatus,
+    files,
+    onEmailChange,
+    onCategoryChange,
+    onMessageChange,
+    onFiles,
+  ]);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSubmit(e);
+  };
+
   return (
     <AnimatePresence>
       {open && (
@@ -62,7 +232,7 @@ export default function FeedbackModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onMouseDown={(e) => {
-            if (e.target === e.currentTarget) {
+            if (e.target === e.currentTarget && !isSending) {
               onClose();
             }
           }}
@@ -82,7 +252,7 @@ export default function FeedbackModal({
             <div className="flex shrink-0 items-center justify-between border-b border-[var(--rule)] bg-[var(--paper-r)] px-5 py-5 sm:px-8">
               <div>
                 <div className="mb-1 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                  Зворотній зв'язок
+                  Зворотний зв'язок
                 </div>
 
                 <h2
@@ -105,10 +275,11 @@ export default function FeedbackModal({
             </div>
 
             {/* SCROLL AREA */}
-            <div className="feedback-scrollbar min-h-0 overflow-y-auto"
-                style={{ margin: "0 4px 4px 0" }}>
-              {/* FORM */}
-              <form onSubmit={onSubmit} className="p-5 sm:p-8">
+            <div
+              className="feedback-scrollbar min-h-0 overflow-y-auto"
+              style={{ margin: "0 4px 4px 0" }}
+            >
+              <form onSubmit={handleSubmit} className="p-5 sm:p-8">
                 <div className="grid gap-6">
                   {/* EMAIL */}
                   <div>
@@ -205,6 +376,7 @@ export default function FeedbackModal({
                       </p>
 
                       <input
+                        ref={fileInputRef}
                         id="feedback-images"
                         type="file"
                         accept="image/png,image/jpeg,image/webp"
@@ -292,7 +464,6 @@ export default function FeedbackModal({
                     className="flex cursor-pointer items-center justify-center gap-2 rounded-xl bg-[var(--accent)] px-6 py-3 text-sm font-medium text-[var(--paper-r)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     <Send size={16} />
-
                     {isSending ? "Відправлення..." : "Надіслати"}
                   </button>
                 </div>

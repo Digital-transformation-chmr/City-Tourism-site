@@ -73,9 +73,9 @@ export default function AdminHome() {
         {/* Main actions */}
         <section className="mb-12">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {/* Створити */}
+            {/* Екскурсії */}
             <Link
-              href="/admin/edit"
+              href="/admin/tableexc"
               className="group relative overflow-hidden rounded-2xl border border-[var(--rule)] bg-[var(--paper-r)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-lg"
             >
               <div className="flex items-start justify-between">
@@ -89,10 +89,10 @@ export default function AdminHome() {
                 />
               </div>
 
-              <h2 className="mt-6 text-xl font-semibold">Створити</h2>
+              <h2 className="mt-6 text-xl font-semibold">Екскурсії</h2>
 
               <p className="mt-2 text-sm leading-6 text-[var(--ink)]/55">
-                Додати нове туристичне місце до системи
+                Перейти до керування туристичними екскурсіями
               </p>
             </Link>
 

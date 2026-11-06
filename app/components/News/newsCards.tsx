@@ -73,7 +73,7 @@ export default function TelegramEventsSection({ items }: { items: NewsItem[] }) 
             Telegram-канал
           </div>
           
-          <h2 className="font-['Unbounded',sans-serif] text-4xl font-bold text-[oklch(0.99_0.002_90)] mb-4 leading-snug">
+          <h2 className=" text-4xl font-bold text-[oklch(0.99_0.002_90)] mb-4 leading-snug">
             «Куди піти?» — щодня свіжі події
           </h2>
           

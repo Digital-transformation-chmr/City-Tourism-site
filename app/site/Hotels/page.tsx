@@ -41,17 +41,7 @@ export default function Attraction() {
       <div className="relative overflow-hidden bg-black/10">
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-[var(--accent)] opacity-80" />
 
-        <div className="py-20 px-12 flex flex-col items-start">
-
-          <h1 className="text-5xl sm:text-6xl font-bold text-[var(--text-light)] leading-tight max-w-xl">
-            <span className="italic text-[var(--accent)]">
-              Готелі
-            </span>
-          </h1>
-
-          <p className="mt-4 text-[var(--gray-text)] text-base max-w-md leading-relaxed">
-            Місце де можна відпочити та зупинитися на нічліг
-          </p>
+        <div className="py-20 px-12 flex flex-col items-start justify-around">
 
           {/* 🔎 SEARCH */}
           <input
@@ -60,6 +50,13 @@ export default function Attraction() {
             placeholder="Пошук готелю..."
             className="mt-6 w-full max-w-md px-4 py-2 bg-black/30 border border-white/10 rounded text-white"
           />
+
+          <h1 className="text-5xl mt-10 font-bold text-[var(--text-light)] leading-tight max-w-xl">
+            <span className="italic text-[var(--accent)]">
+              Готелі
+            </span>
+          </h1>
+
         </div>
       </div>
 

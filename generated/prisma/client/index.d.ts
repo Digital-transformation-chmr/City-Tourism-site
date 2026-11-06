@@ -48,6 +48,11 @@ export type AdminPasswordResetToken = $Result.DefaultSelection<Prisma.$AdminPass
  * 
  */
 export type AdminInvite = $Result.DefaultSelection<Prisma.$AdminInvitePayload>
+/**
+ * Model Excursion
+ * 
+ */
+export type Excursion = $Result.DefaultSelection<Prisma.$ExcursionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -239,6 +244,16 @@ export class PrismaClient<
     * ```
     */
   get adminInvite(): Prisma.AdminInviteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.excursion`: Exposes CRUD operations for the **Excursion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Excursions
+    * const excursions = await prisma.excursion.findMany()
+    * ```
+    */
+  get excursion(): Prisma.ExcursionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -679,7 +694,8 @@ export namespace Prisma {
     Admin: 'Admin',
     AdminSession: 'AdminSession',
     AdminPasswordResetToken: 'AdminPasswordResetToken',
-    AdminInvite: 'AdminInvite'
+    AdminInvite: 'AdminInvite',
+    Excursion: 'Excursion'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -695,7 +711,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "place" | "news" | "feedback" | "admin" | "adminSession" | "adminPasswordResetToken" | "adminInvite"
+      modelProps: "place" | "news" | "feedback" | "admin" | "adminSession" | "adminPasswordResetToken" | "adminInvite" | "excursion"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1217,6 +1233,80 @@ export namespace Prisma {
           }
         }
       }
+      Excursion: {
+        payload: Prisma.$ExcursionPayload<ExtArgs>
+        fields: Prisma.ExcursionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ExcursionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ExcursionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>
+          }
+          findFirst: {
+            args: Prisma.ExcursionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ExcursionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>
+          }
+          findMany: {
+            args: Prisma.ExcursionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>[]
+          }
+          create: {
+            args: Prisma.ExcursionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>
+          }
+          createMany: {
+            args: Prisma.ExcursionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ExcursionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>[]
+          }
+          delete: {
+            args: Prisma.ExcursionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>
+          }
+          update: {
+            args: Prisma.ExcursionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ExcursionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ExcursionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ExcursionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ExcursionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ExcursionPayload>
+          }
+          aggregate: {
+            args: Prisma.ExcursionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateExcursion>
+          }
+          groupBy: {
+            args: Prisma.ExcursionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ExcursionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ExcursionCountArgs<ExtArgs>
+            result: $Utils.Optional<ExcursionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1332,6 +1422,7 @@ export namespace Prisma {
     adminSession?: AdminSessionOmit
     adminPasswordResetToken?: AdminPasswordResetTokenOmit
     adminInvite?: AdminInviteOmit
+    excursion?: ExcursionOmit
   }
 
   /* Types for Logging */
@@ -9256,6 +9347,1122 @@ export namespace Prisma {
 
 
   /**
+   * Model Excursion
+   */
+
+  export type AggregateExcursion = {
+    _count: ExcursionCountAggregateOutputType | null
+    _avg: ExcursionAvgAggregateOutputType | null
+    _sum: ExcursionSumAggregateOutputType | null
+    _min: ExcursionMinAggregateOutputType | null
+    _max: ExcursionMaxAggregateOutputType | null
+  }
+
+  export type ExcursionAvgAggregateOutputType = {
+    id: number | null
+    duration: number | null
+    placeIds: number | null
+  }
+
+  export type ExcursionSumAggregateOutputType = {
+    id: number | null
+    duration: number | null
+    placeIds: number[]
+  }
+
+  export type ExcursionMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+    slug: string | null
+    subtitle: string | null
+    description: string | null
+    coverImage: string | null
+    duration: number | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExcursionMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+    slug: string | null
+    subtitle: string | null
+    description: string | null
+    coverImage: string | null
+    duration: number | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ExcursionCountAggregateOutputType = {
+    id: number
+    title: number
+    slug: number
+    subtitle: number
+    description: number
+    coverImage: number
+    duration: number
+    placeIds: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ExcursionAvgAggregateInputType = {
+    id?: true
+    duration?: true
+    placeIds?: true
+  }
+
+  export type ExcursionSumAggregateInputType = {
+    id?: true
+    duration?: true
+    placeIds?: true
+  }
+
+  export type ExcursionMinAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    description?: true
+    coverImage?: true
+    duration?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExcursionMaxAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    description?: true
+    coverImage?: true
+    duration?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ExcursionCountAggregateInputType = {
+    id?: true
+    title?: true
+    slug?: true
+    subtitle?: true
+    description?: true
+    coverImage?: true
+    duration?: true
+    placeIds?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ExcursionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Excursion to aggregate.
+     */
+    where?: ExcursionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Excursions to fetch.
+     */
+    orderBy?: ExcursionOrderByWithRelationInput | ExcursionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ExcursionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Excursions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Excursions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Excursions
+    **/
+    _count?: true | ExcursionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ExcursionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ExcursionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ExcursionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ExcursionMaxAggregateInputType
+  }
+
+  export type GetExcursionAggregateType<T extends ExcursionAggregateArgs> = {
+        [P in keyof T & keyof AggregateExcursion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateExcursion[P]>
+      : GetScalarType<T[P], AggregateExcursion[P]>
+  }
+
+
+
+
+  export type ExcursionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ExcursionWhereInput
+    orderBy?: ExcursionOrderByWithAggregationInput | ExcursionOrderByWithAggregationInput[]
+    by: ExcursionScalarFieldEnum[] | ExcursionScalarFieldEnum
+    having?: ExcursionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ExcursionCountAggregateInputType | true
+    _avg?: ExcursionAvgAggregateInputType
+    _sum?: ExcursionSumAggregateInputType
+    _min?: ExcursionMinAggregateInputType
+    _max?: ExcursionMaxAggregateInputType
+  }
+
+  export type ExcursionGroupByOutputType = {
+    id: number
+    title: string
+    slug: string
+    subtitle: string | null
+    description: string
+    coverImage: string | null
+    duration: number
+    placeIds: number[]
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ExcursionCountAggregateOutputType | null
+    _avg: ExcursionAvgAggregateOutputType | null
+    _sum: ExcursionSumAggregateOutputType | null
+    _min: ExcursionMinAggregateOutputType | null
+    _max: ExcursionMaxAggregateOutputType | null
+  }
+
+  type GetExcursionGroupByPayload<T extends ExcursionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ExcursionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ExcursionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ExcursionGroupByOutputType[P]>
+            : GetScalarType<T[P], ExcursionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ExcursionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    coverImage?: boolean
+    duration?: boolean
+    placeIds?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["excursion"]>
+
+  export type ExcursionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    coverImage?: boolean
+    duration?: boolean
+    placeIds?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["excursion"]>
+
+  export type ExcursionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    coverImage?: boolean
+    duration?: boolean
+    placeIds?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["excursion"]>
+
+  export type ExcursionSelectScalar = {
+    id?: boolean
+    title?: boolean
+    slug?: boolean
+    subtitle?: boolean
+    description?: boolean
+    coverImage?: boolean
+    duration?: boolean
+    placeIds?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ExcursionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "slug" | "subtitle" | "description" | "coverImage" | "duration" | "placeIds" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["excursion"]>
+
+  export type $ExcursionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Excursion"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      title: string
+      slug: string
+      subtitle: string | null
+      description: string
+      coverImage: string | null
+      duration: number
+      placeIds: number[]
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["excursion"]>
+    composites: {}
+  }
+
+  type ExcursionGetPayload<S extends boolean | null | undefined | ExcursionDefaultArgs> = $Result.GetResult<Prisma.$ExcursionPayload, S>
+
+  type ExcursionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ExcursionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ExcursionCountAggregateInputType | true
+    }
+
+  export interface ExcursionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Excursion'], meta: { name: 'Excursion' } }
+    /**
+     * Find zero or one Excursion that matches the filter.
+     * @param {ExcursionFindUniqueArgs} args - Arguments to find a Excursion
+     * @example
+     * // Get one Excursion
+     * const excursion = await prisma.excursion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ExcursionFindUniqueArgs>(args: SelectSubset<T, ExcursionFindUniqueArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Excursion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ExcursionFindUniqueOrThrowArgs} args - Arguments to find a Excursion
+     * @example
+     * // Get one Excursion
+     * const excursion = await prisma.excursion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ExcursionFindUniqueOrThrowArgs>(args: SelectSubset<T, ExcursionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Excursion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionFindFirstArgs} args - Arguments to find a Excursion
+     * @example
+     * // Get one Excursion
+     * const excursion = await prisma.excursion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ExcursionFindFirstArgs>(args?: SelectSubset<T, ExcursionFindFirstArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Excursion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionFindFirstOrThrowArgs} args - Arguments to find a Excursion
+     * @example
+     * // Get one Excursion
+     * const excursion = await prisma.excursion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ExcursionFindFirstOrThrowArgs>(args?: SelectSubset<T, ExcursionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Excursions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Excursions
+     * const excursions = await prisma.excursion.findMany()
+     * 
+     * // Get first 10 Excursions
+     * const excursions = await prisma.excursion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const excursionWithIdOnly = await prisma.excursion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ExcursionFindManyArgs>(args?: SelectSubset<T, ExcursionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Excursion.
+     * @param {ExcursionCreateArgs} args - Arguments to create a Excursion.
+     * @example
+     * // Create one Excursion
+     * const Excursion = await prisma.excursion.create({
+     *   data: {
+     *     // ... data to create a Excursion
+     *   }
+     * })
+     * 
+     */
+    create<T extends ExcursionCreateArgs>(args: SelectSubset<T, ExcursionCreateArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Excursions.
+     * @param {ExcursionCreateManyArgs} args - Arguments to create many Excursions.
+     * @example
+     * // Create many Excursions
+     * const excursion = await prisma.excursion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ExcursionCreateManyArgs>(args?: SelectSubset<T, ExcursionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Excursions and returns the data saved in the database.
+     * @param {ExcursionCreateManyAndReturnArgs} args - Arguments to create many Excursions.
+     * @example
+     * // Create many Excursions
+     * const excursion = await prisma.excursion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Excursions and only return the `id`
+     * const excursionWithIdOnly = await prisma.excursion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ExcursionCreateManyAndReturnArgs>(args?: SelectSubset<T, ExcursionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Excursion.
+     * @param {ExcursionDeleteArgs} args - Arguments to delete one Excursion.
+     * @example
+     * // Delete one Excursion
+     * const Excursion = await prisma.excursion.delete({
+     *   where: {
+     *     // ... filter to delete one Excursion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ExcursionDeleteArgs>(args: SelectSubset<T, ExcursionDeleteArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Excursion.
+     * @param {ExcursionUpdateArgs} args - Arguments to update one Excursion.
+     * @example
+     * // Update one Excursion
+     * const excursion = await prisma.excursion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ExcursionUpdateArgs>(args: SelectSubset<T, ExcursionUpdateArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Excursions.
+     * @param {ExcursionDeleteManyArgs} args - Arguments to filter Excursions to delete.
+     * @example
+     * // Delete a few Excursions
+     * const { count } = await prisma.excursion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ExcursionDeleteManyArgs>(args?: SelectSubset<T, ExcursionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Excursions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Excursions
+     * const excursion = await prisma.excursion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ExcursionUpdateManyArgs>(args: SelectSubset<T, ExcursionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Excursions and returns the data updated in the database.
+     * @param {ExcursionUpdateManyAndReturnArgs} args - Arguments to update many Excursions.
+     * @example
+     * // Update many Excursions
+     * const excursion = await prisma.excursion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Excursions and only return the `id`
+     * const excursionWithIdOnly = await prisma.excursion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ExcursionUpdateManyAndReturnArgs>(args: SelectSubset<T, ExcursionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Excursion.
+     * @param {ExcursionUpsertArgs} args - Arguments to update or create a Excursion.
+     * @example
+     * // Update or create a Excursion
+     * const excursion = await prisma.excursion.upsert({
+     *   create: {
+     *     // ... data to create a Excursion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Excursion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ExcursionUpsertArgs>(args: SelectSubset<T, ExcursionUpsertArgs<ExtArgs>>): Prisma__ExcursionClient<$Result.GetResult<Prisma.$ExcursionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Excursions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionCountArgs} args - Arguments to filter Excursions to count.
+     * @example
+     * // Count the number of Excursions
+     * const count = await prisma.excursion.count({
+     *   where: {
+     *     // ... the filter for the Excursions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ExcursionCountArgs>(
+      args?: Subset<T, ExcursionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ExcursionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Excursion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ExcursionAggregateArgs>(args: Subset<T, ExcursionAggregateArgs>): Prisma.PrismaPromise<GetExcursionAggregateType<T>>
+
+    /**
+     * Group by Excursion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ExcursionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ExcursionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ExcursionGroupByArgs['orderBy'] }
+        : { orderBy?: ExcursionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ExcursionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetExcursionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Excursion model
+   */
+  readonly fields: ExcursionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Excursion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ExcursionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Excursion model
+   */
+  interface ExcursionFieldRefs {
+    readonly id: FieldRef<"Excursion", 'Int'>
+    readonly title: FieldRef<"Excursion", 'String'>
+    readonly slug: FieldRef<"Excursion", 'String'>
+    readonly subtitle: FieldRef<"Excursion", 'String'>
+    readonly description: FieldRef<"Excursion", 'String'>
+    readonly coverImage: FieldRef<"Excursion", 'String'>
+    readonly duration: FieldRef<"Excursion", 'Int'>
+    readonly placeIds: FieldRef<"Excursion", 'Int[]'>
+    readonly status: FieldRef<"Excursion", 'String'>
+    readonly createdAt: FieldRef<"Excursion", 'DateTime'>
+    readonly updatedAt: FieldRef<"Excursion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Excursion findUnique
+   */
+  export type ExcursionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * Filter, which Excursion to fetch.
+     */
+    where: ExcursionWhereUniqueInput
+  }
+
+  /**
+   * Excursion findUniqueOrThrow
+   */
+  export type ExcursionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * Filter, which Excursion to fetch.
+     */
+    where: ExcursionWhereUniqueInput
+  }
+
+  /**
+   * Excursion findFirst
+   */
+  export type ExcursionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * Filter, which Excursion to fetch.
+     */
+    where?: ExcursionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Excursions to fetch.
+     */
+    orderBy?: ExcursionOrderByWithRelationInput | ExcursionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Excursions.
+     */
+    cursor?: ExcursionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Excursions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Excursions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Excursions.
+     */
+    distinct?: ExcursionScalarFieldEnum | ExcursionScalarFieldEnum[]
+  }
+
+  /**
+   * Excursion findFirstOrThrow
+   */
+  export type ExcursionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * Filter, which Excursion to fetch.
+     */
+    where?: ExcursionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Excursions to fetch.
+     */
+    orderBy?: ExcursionOrderByWithRelationInput | ExcursionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Excursions.
+     */
+    cursor?: ExcursionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Excursions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Excursions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Excursions.
+     */
+    distinct?: ExcursionScalarFieldEnum | ExcursionScalarFieldEnum[]
+  }
+
+  /**
+   * Excursion findMany
+   */
+  export type ExcursionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * Filter, which Excursions to fetch.
+     */
+    where?: ExcursionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Excursions to fetch.
+     */
+    orderBy?: ExcursionOrderByWithRelationInput | ExcursionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Excursions.
+     */
+    cursor?: ExcursionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Excursions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Excursions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Excursions.
+     */
+    distinct?: ExcursionScalarFieldEnum | ExcursionScalarFieldEnum[]
+  }
+
+  /**
+   * Excursion create
+   */
+  export type ExcursionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Excursion.
+     */
+    data: XOR<ExcursionCreateInput, ExcursionUncheckedCreateInput>
+  }
+
+  /**
+   * Excursion createMany
+   */
+  export type ExcursionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Excursions.
+     */
+    data: ExcursionCreateManyInput | ExcursionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Excursion createManyAndReturn
+   */
+  export type ExcursionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Excursions.
+     */
+    data: ExcursionCreateManyInput | ExcursionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Excursion update
+   */
+  export type ExcursionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Excursion.
+     */
+    data: XOR<ExcursionUpdateInput, ExcursionUncheckedUpdateInput>
+    /**
+     * Choose, which Excursion to update.
+     */
+    where: ExcursionWhereUniqueInput
+  }
+
+  /**
+   * Excursion updateMany
+   */
+  export type ExcursionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Excursions.
+     */
+    data: XOR<ExcursionUpdateManyMutationInput, ExcursionUncheckedUpdateManyInput>
+    /**
+     * Filter which Excursions to update
+     */
+    where?: ExcursionWhereInput
+    /**
+     * Limit how many Excursions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Excursion updateManyAndReturn
+   */
+  export type ExcursionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * The data used to update Excursions.
+     */
+    data: XOR<ExcursionUpdateManyMutationInput, ExcursionUncheckedUpdateManyInput>
+    /**
+     * Filter which Excursions to update
+     */
+    where?: ExcursionWhereInput
+    /**
+     * Limit how many Excursions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Excursion upsert
+   */
+  export type ExcursionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Excursion to update in case it exists.
+     */
+    where: ExcursionWhereUniqueInput
+    /**
+     * In case the Excursion found by the `where` argument doesn't exist, create a new Excursion with this data.
+     */
+    create: XOR<ExcursionCreateInput, ExcursionUncheckedCreateInput>
+    /**
+     * In case the Excursion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ExcursionUpdateInput, ExcursionUncheckedUpdateInput>
+  }
+
+  /**
+   * Excursion delete
+   */
+  export type ExcursionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+    /**
+     * Filter which Excursion to delete.
+     */
+    where: ExcursionWhereUniqueInput
+  }
+
+  /**
+   * Excursion deleteMany
+   */
+  export type ExcursionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Excursions to delete
+     */
+    where?: ExcursionWhereInput
+    /**
+     * Limit how many Excursions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Excursion without action
+   */
+  export type ExcursionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Excursion
+     */
+    select?: ExcursionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Excursion
+     */
+    omit?: ExcursionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9369,6 +10576,23 @@ export namespace Prisma {
   };
 
   export type AdminInviteScalarFieldEnum = (typeof AdminInviteScalarFieldEnum)[keyof typeof AdminInviteScalarFieldEnum]
+
+
+  export const ExcursionScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    slug: 'slug',
+    subtitle: 'subtitle',
+    description: 'description',
+    coverImage: 'coverImage',
+    duration: 'duration',
+    placeIds: 'placeIds',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ExcursionScalarFieldEnum = (typeof ExcursionScalarFieldEnum)[keyof typeof ExcursionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9981,6 +11205,90 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AdminInvite"> | Date | string
   }
 
+  export type ExcursionWhereInput = {
+    AND?: ExcursionWhereInput | ExcursionWhereInput[]
+    OR?: ExcursionWhereInput[]
+    NOT?: ExcursionWhereInput | ExcursionWhereInput[]
+    id?: IntFilter<"Excursion"> | number
+    title?: StringFilter<"Excursion"> | string
+    slug?: StringFilter<"Excursion"> | string
+    subtitle?: StringNullableFilter<"Excursion"> | string | null
+    description?: StringFilter<"Excursion"> | string
+    coverImage?: StringNullableFilter<"Excursion"> | string | null
+    duration?: IntFilter<"Excursion"> | number
+    placeIds?: IntNullableListFilter<"Excursion">
+    status?: StringFilter<"Excursion"> | string
+    createdAt?: DateTimeFilter<"Excursion"> | Date | string
+    updatedAt?: DateTimeFilter<"Excursion"> | Date | string
+  }
+
+  export type ExcursionOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    description?: SortOrder
+    coverImage?: SortOrderInput | SortOrder
+    duration?: SortOrder
+    placeIds?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExcursionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    slug?: string
+    AND?: ExcursionWhereInput | ExcursionWhereInput[]
+    OR?: ExcursionWhereInput[]
+    NOT?: ExcursionWhereInput | ExcursionWhereInput[]
+    title?: StringFilter<"Excursion"> | string
+    subtitle?: StringNullableFilter<"Excursion"> | string | null
+    description?: StringFilter<"Excursion"> | string
+    coverImage?: StringNullableFilter<"Excursion"> | string | null
+    duration?: IntFilter<"Excursion"> | number
+    placeIds?: IntNullableListFilter<"Excursion">
+    status?: StringFilter<"Excursion"> | string
+    createdAt?: DateTimeFilter<"Excursion"> | Date | string
+    updatedAt?: DateTimeFilter<"Excursion"> | Date | string
+  }, "id" | "slug">
+
+  export type ExcursionOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrderInput | SortOrder
+    description?: SortOrder
+    coverImage?: SortOrderInput | SortOrder
+    duration?: SortOrder
+    placeIds?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ExcursionCountOrderByAggregateInput
+    _avg?: ExcursionAvgOrderByAggregateInput
+    _max?: ExcursionMaxOrderByAggregateInput
+    _min?: ExcursionMinOrderByAggregateInput
+    _sum?: ExcursionSumOrderByAggregateInput
+  }
+
+  export type ExcursionScalarWhereWithAggregatesInput = {
+    AND?: ExcursionScalarWhereWithAggregatesInput | ExcursionScalarWhereWithAggregatesInput[]
+    OR?: ExcursionScalarWhereWithAggregatesInput[]
+    NOT?: ExcursionScalarWhereWithAggregatesInput | ExcursionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Excursion"> | number
+    title?: StringWithAggregatesFilter<"Excursion"> | string
+    slug?: StringWithAggregatesFilter<"Excursion"> | string
+    subtitle?: StringNullableWithAggregatesFilter<"Excursion"> | string | null
+    description?: StringWithAggregatesFilter<"Excursion"> | string
+    coverImage?: StringNullableWithAggregatesFilter<"Excursion"> | string | null
+    duration?: IntWithAggregatesFilter<"Excursion"> | number
+    placeIds?: IntNullableListFilter<"Excursion">
+    status?: StringWithAggregatesFilter<"Excursion"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Excursion"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Excursion"> | Date | string
+  }
+
   export type PlaceCreateInput = {
     title: string
     subtitle: string
@@ -10533,6 +11841,101 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ExcursionCreateInput = {
+    title: string
+    slug: string
+    subtitle?: string | null
+    description: string
+    coverImage?: string | null
+    duration?: number
+    placeIds?: ExcursionCreateplaceIdsInput | number[]
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExcursionUncheckedCreateInput = {
+    id?: number
+    title: string
+    slug: string
+    subtitle?: string | null
+    description: string
+    coverImage?: string | null
+    duration?: number
+    placeIds?: ExcursionCreateplaceIdsInput | number[]
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExcursionUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    placeIds?: ExcursionUpdateplaceIdsInput | number[]
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExcursionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    placeIds?: ExcursionUpdateplaceIdsInput | number[]
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExcursionCreateManyInput = {
+    id?: number
+    title: string
+    slug: string
+    subtitle?: string | null
+    description: string
+    coverImage?: string | null
+    duration?: number
+    placeIds?: ExcursionCreateplaceIdsInput | number[]
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ExcursionUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    placeIds?: ExcursionUpdateplaceIdsInput | number[]
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ExcursionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    subtitle?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: StringFieldUpdateOperationsInput | string
+    coverImage?: NullableStringFieldUpdateOperationsInput | string | null
+    duration?: IntFieldUpdateOperationsInput | number
+    placeIds?: ExcursionUpdateplaceIdsInput | number[]
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -11059,6 +12462,66 @@ export namespace Prisma {
     id?: SortOrder
   }
 
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type ExcursionCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    coverImage?: SortOrder
+    duration?: SortOrder
+    placeIds?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExcursionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    duration?: SortOrder
+    placeIds?: SortOrder
+  }
+
+  export type ExcursionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    coverImage?: SortOrder
+    duration?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExcursionMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    subtitle?: SortOrder
+    description?: SortOrder
+    coverImage?: SortOrder
+    duration?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ExcursionSumOrderByAggregateInput = {
+    id?: SortOrder
+    duration?: SortOrder
+    placeIds?: SortOrder
+  }
+
   export type PlaceCreateimagesInput = {
     set: string[]
   }
@@ -11232,6 +12695,15 @@ export namespace Prisma {
     upsert?: AdminUpsertWithoutResetTokensInput
     connect?: AdminWhereUniqueInput
     update?: XOR<XOR<AdminUpdateToOneWithWhereWithoutResetTokensInput, AdminUpdateWithoutResetTokensInput>, AdminUncheckedUpdateWithoutResetTokensInput>
+  }
+
+  export type ExcursionCreateplaceIdsInput = {
+    set: number[]
+  }
+
+  export type ExcursionUpdateplaceIdsInput = {
+    set?: number[]
+    push?: number | number[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {

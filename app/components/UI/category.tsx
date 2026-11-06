@@ -79,7 +79,7 @@ export function CategoriesSection() {
               hidden: { opacity: 0, y: 25 },
               show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
             }}
-            className="font-['Unbounded',sans-serif] text-5xl font-bold text-[oklch(0.22_0.05_250)] mb-3"
+            className=" text-5xl font-bold text-[oklch(0.22_0.05_250)] mb-3"
           >
             Обери свій формат
           </motion.h2>
@@ -109,7 +109,7 @@ export function CategoriesSection() {
               <button
                 key={tabKey}
                 onClick={() => setActiveTab(tabKey)}
-                className={`px-6 py-3 rounded-full border-2 font-semibold text-lg transition-all duration-300 font-['Golos_Text',sans-serif] cursor-pointer relative overflow-hidden ${
+                className={`px-6 py-3 rounded-full border-2 font-semibold text-lg transition-all duration-300 cursor-pointer relative overflow-hidden ${
                   isActive
                     ? "border-[oklch(0.42_0.13_250)] bg-[oklch(0.42_0.13_250)] text-[oklch(0.99_0.002_90)]"
                     : "border-[oklch(0.42_0.13_250)] bg-transparent text-[oklch(0.32_0.11_250)] hover:bg-[oklch(0.42_0.13_250)]/5"
@@ -149,7 +149,7 @@ export function CategoriesSection() {
                   <div className="w-11 h-11 rounded-xl bg-[oklch(0.93_0.03_250)] flex items-center justify-center text-2xl mb-3.5 select-none">
                     <span>{item.icon}</span>
                   </div>
-                  <h4 className="font-['Unbounded',sans-serif] text-2xl font-semibold text-[oklch(0.22_0.05_250)] mb-1.5">
+                  <h4 className=" text-2xl font-semibold text-[oklch(0.22_0.05_250)] mb-1.5">
                     {item.title}
                   </h4>
                   <p className="text-lg text-[oklch(0.42_0.04_250)] leading-relaxed">

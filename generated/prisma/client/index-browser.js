@@ -201,6 +201,20 @@ exports.Prisma.AdminInviteScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ExcursionScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  slug: 'slug',
+  subtitle: 'subtitle',
+  description: 'description',
+  coverImage: 'coverImage',
+  duration: 'duration',
+  placeIds: 'placeIds',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -224,7 +238,8 @@ exports.Prisma.ModelName = {
   Admin: 'Admin',
   AdminSession: 'AdminSession',
   AdminPasswordResetToken: 'AdminPasswordResetToken',
-  AdminInvite: 'AdminInvite'
+  AdminInvite: 'AdminInvite',
+  Excursion: 'Excursion'
 };
 
 /**
